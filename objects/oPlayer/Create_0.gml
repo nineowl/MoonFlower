@@ -12,9 +12,19 @@ function setOnGround(_val=true){
 //control setup
 controlsSetup();
 
+//Sprites
+maskSpr=sPlayerIdle;
+idleSpr=sPlayerIdle;
+walkSpr=sPlayerWalk;
+runSpr=sPlayerRun;
+jumpSpr=sPlayerJump;
+
 //Moving
+face = 1; //-1 left, 1 right
 moveDir = 0; //-1 left, 0, 1 right
-moveSpd = 2;
+runType = 0;
+moveSpd[0] = 2;
+moveSpd[1] = 3.5;
 xspd = 0;
 yspd = 0;
 
