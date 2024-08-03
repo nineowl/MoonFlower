@@ -27,15 +27,25 @@ getControls();
 
 //Y Movement
 	//Gravity
-	yspd+=grav;
+	if coyoteHangTimer>0{
+		//count the timer down
+		coyoteHangTimer--;  //is it possible we actually get 1 less frame because of where this is?
+	}else{
+		//Apply gravity to the player
+		yspd+=grav;
+		//We're no longer on the ground
+		setOnGround(false);
+	}
+	
 	
 	//Rest/Prepare Jump Variables
 	 if onGround{
 		 jumpCount=0;
-		 jumpHoldTimer=0;
+		 coyoteJumpTimer=coyoteJumpFrames;
 	 }else{
 		//if player is in the air make sure they can't do an extra jump
-		if jumpCount==0{jumpCount=1;};
+		coyoteJumpTimer--;
+		if jumpCount==0&&coyoteJumpTimer<=0{jumpCount=1;};
 	 }
 	
 	//initiate Jump
@@ -49,6 +59,8 @@ getControls();
 		jumpCount++;
 		//Set the jump hold timer
 		jumpHoldTimer=jumpHoldFrames[jumpCount-1];
+		//Tell ourself we're no longer on the ground
+		setOnGround(false);
 	}
 	//Cut off the jump by releasing the button
 	if !jumpKey{
@@ -85,10 +97,8 @@ getControls();
 	}
 	//Set if on ground
 	if yspd>=0 && place_meeting(x,y+1,oWall){
-		onGround=true;
-	}else{
-		onGround=false;
-	}
+		setOnGround(true);
+	} 
 	
 	
 	//Move
