@@ -15,15 +15,29 @@ getControls();
 	//X collision
 	var _subPixel = .5;
 	if place_meeting(x+xspd,y,oWall){
-		//Scoot up to wall precisley
-		var _pixelCheck = _subPixel * sign(xspd);
-		while !place_meeting(x+_pixelCheck,y,oWall){
-			x+=_pixelCheck;
-		}
+		
+		//First Check if there is a slope to go up
+		if !place_meeting(x+xspd,y-abs(xspd)-1,oWall){  //the -1 is a little bit of padding
+			while place_meeting(x+xspd,y,oWall){y-=_subPixel;};
+		} else { //Next, check for ceiling slopes, otherwise, do a regular collision	
+			//Ceiling Slopes
+			if !place_meeting(x+xspd,y+abs(xspd)+1,oWall){
+				while place_meeting(x+xspd,y,oWall){y+=_subPixel;};
+			} else { //Normal X collision
+				//Scoot up to wall preciseley
+				var _pixelCheck = _subPixel * sign(xspd);
+				while !place_meeting(x+_pixelCheck,y,oWall){x+=_pixelCheck;};
 	
-		//Set xpsd to zero to collide
-		xspd=0;
+				//Set xpsd to zero to collide
+				xspd=0;
+			}
+		}
 	} 
+	
+	//Go Down Slops
+	if yspd>=0 && !place_meeting(x+xspd,y+1,oWall) && place_meeting(x+xspd,y+abs(xspd)+1,oWall){
+		while !place_meeting(x+xspd,y+_subPixel,oWall){y+=_subPixel;};
+	}
 
 	//Move
 	x += xspd;
@@ -77,32 +91,60 @@ getControls();
 		jumpHoldTimer--;
 	}
 	
-	
+	//Y Collision and movement
 	//Terminal velocity
 	if yspd>termVel{yspd=termVel;};
 	
 	//Y Collision
 	var _subPixel=.5;
-	if place_meeting(x,y+yspd,oWall){
-		//Scoot up to the wall precisely
-		var _pixelCheck = _subPixel * sign(yspd);
-		while !place_meeting(x,y+_pixelCheck,oWall){
-			y+=_pixelCheck;
-		}
-		//bonk code
-		if yspd<0{
-			jumpHoldTimer=0;
-		}
-		
-		//Set yspd to 0 to collide
-		yspd = 0;
-		
-	}
-	//Set if on ground
-	if yspd>=0 && place_meeting(x,y+1,oWall){
-		setOnGround(true);
-	} 
 	
+	//Upwards Y Collision (with ceiling slopes)
+	if yspd<0 && place_meeting(x,y+yspd,oWall){
+		//jump into sloped ceilings
+		var _slopeSlide=false;
+		//Slide upleft slope
+		if moveDir ==0 && !place_meeting(x-abs(yspd)-1,y+yspd,oWall){
+			while place_meeting(x,y+yspd,oWall){x-=1;}; //use 1 instead of subpixel experiment with this. the slide feels too fast
+			_slopeSlide=true;
+			jumpHoldTimer-=.5;//friction against slope. Change .5 to a variable
+		}
+		//Slide upright slopes ceiling
+		if moveDir ==0 && !place_meeting(x+abs(yspd)+1,y+yspd,oWall){
+			while place_meeting(x,y+yspd,oWall){x+=1;}; //use 1 instead of subpixel
+			_slopeSlide=true;
+			jumpHoldTimer-=.5;//friction against slope. Change .5 to a variable
+		}
+		if !_slopeSlide{
+			//Scoot up to the wall precisely
+			var _pixelCheck = _subPixel * sign(yspd);
+			while !place_meeting(x,y+_pixelCheck,oWall){
+				y+=_pixelCheck;
+			}
+			//bonk code(OPTIONAL)
+			//if yspd<0{jumpHoldTimer=0;};
+		
+			//Set yspd to 0 to collide
+			yspd = 0;
+		}
+	}
+	
+	//Downwards Y Collision
+	if yspd >=0 {
+		if place_meeting(x,y+yspd,oWall){
+			//Scoot up to the wall precisely
+			var _pixelCheck = _subPixel * sign(yspd);
+			while !place_meeting(x,y+_pixelCheck,oWall){
+				y+=_pixelCheck;
+			}
+			//Set yspd to 0 to collide
+			yspd = 0;
+		
+		}
+		//Set if on ground
+		if place_meeting(x,y+1,oWall){
+			setOnGround(true);
+		} 
+	}
 	
 	//Move
 	y+=yspd;
