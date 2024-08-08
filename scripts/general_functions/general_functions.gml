@@ -10,6 +10,8 @@ function getControls(){
 		rightKey = clamp(rightKey,0,1);
 	leftKey = keyboard_check((ord("A"))) + gamepad_button_check(0,gp_padl);
 		leftKey = clamp(leftKey,0,1);
+	downKey = keyboard_check((ord("S"))) + gamepad_button_check(0,gp_padd);
+		downKey = clamp(downKey,0,1);
 	
 	
 	//Action Inputs
