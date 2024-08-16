@@ -80,7 +80,10 @@ yspd = 0;
 
 //Moving Platforms
 myFloorPlat=noone;
+earlyMoveplatXspd=false;
 downSlopeSemiSolid=noone;
 forgetSemiSolid=noone;
 moveplatXspd=0;
 moveplatMaxYspd=termVel; //feel free to change if needed.
+crushTimer=0;
+crushDeathTime=3;
