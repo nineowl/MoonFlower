@@ -84,6 +84,32 @@ if instance_exists(myFloorPlat) && myFloorPlat.xspd != 0 && !place_meeting(x,y+m
 	}
 }
 
+//Crouching
+	//Transition to crouch
+		//Manual = onGround / Auto = placemeeting
+		if onGround && (downKey || place_meeting(x,y,oWall)) {
+			crouching=true;
+		}
+		/*//Forced / Automatic
+		if onGround && place_meeting(x,y,oWall){
+			crouching=true;
+		} //*/
+		//Change collision mask
+		if crouching {mask_index=crouchSpr;};
+		
+	//Transition out of crouch
+		//Manual !downKey / Auto = !onGround
+		if crouching && (!downKey || !onGround) {
+			//check if i CAN uncrouch
+			mask_index = idleSpr;
+			if !place_meeting(x,y,oWall){
+				crouching=false;
+			} else { //go back to crouching mask index if we can't uncrouch
+				mask_index=crouchSpr;
+			}
+		}
+	
+
 
 //X Movement
 	//Direction
@@ -94,6 +120,10 @@ if instance_exists(myFloorPlat) && myFloorPlat.xspd != 0 && !place_meeting(x,y+m
 	//Get xspd
 	runType=runKey;
 	xspd = moveDir * moveSpd[runType];
+	
+	/*//Stop xspd if crouching
+	if crouching {xspd=0;}; // You may set a crouch speed
+	//*/
 
 	//X collision
 	var _subPixel = .5;
@@ -409,6 +439,7 @@ if place_meeting(x,y,oWall){
 	image_blend=c_blue;
 }
 
+/*
 //Crushed death or damage code
 if place_meeting(x,y,oWall){
 	crushTimer++;
@@ -417,7 +448,7 @@ if place_meeting(x,y,oWall){
 	}
 } else {
 	crushTimer=0;
-}
+} //*/
 
 
 
@@ -432,5 +463,8 @@ if place_meeting(x,y,oWall){
 	if xspd==0{sprite_index=idleSpr;};
 	//in the air
 	if !onGround{sprite_index=jumpSpr;};
+	//Crouching
+	if crouching{sprite_index=crouchSpr;};
 		//set the collision mask
 		mask_index=maskSpr;
+		if crouching{mask_index=crouchSpr;};

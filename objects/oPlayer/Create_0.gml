@@ -46,6 +46,7 @@ idleSpr=sPlayerIdle;
 walkSpr=sPlayerWalk;
 runSpr=sPlayerRun;
 jumpSpr=sPlayerJump;
+crouchSpr=sPlayerCrouch;
 
 //Moving
 face = 1; //-1 left, 1 right
@@ -55,6 +56,9 @@ moveSpd[0] = 2;
 moveSpd[1] = 3.5;
 xspd = 0;
 yspd = 0;
+
+//State Variables
+crouching=false;
 
 	//Jumping
 	grav = .275;
