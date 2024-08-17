@@ -51,6 +51,7 @@
     {"id":{"name":"bg01","path":"sprites/bg01/bg01.yy",},},
     {"id":{"name":"sMovePlat","path":"sprites/sMovePlat/sMovePlat.yy",},},
     {"id":{"name":"sPlayer","path":"sprites/sPlayer/sPlayer.yy",},},
+    {"id":{"name":"sPlayerCrouch","path":"sprites/sPlayerCrouch/sPlayerCrouch.yy",},},
     {"id":{"name":"sPlayerIdle","path":"sprites/sPlayerIdle/sPlayerIdle.yy",},},
     {"id":{"name":"sPlayerJump","path":"sprites/sPlayerJump/sPlayerJump.yy",},},
     {"id":{"name":"sPlayerRun","path":"sprites/sPlayerRun/sPlayerRun.yy",},},

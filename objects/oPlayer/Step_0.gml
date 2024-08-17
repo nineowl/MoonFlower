@@ -75,9 +75,11 @@ getControls();
 //Don't get left behind by my moveplat !
 earlyMoveplatXspd=false;
 if instance_exists(myFloorPlat) && myFloorPlat.xspd != 0 && !place_meeting(x,y+moveplatMaxYspd+1, myFloorPlat){
+	
+	var _xCheck = myFloorPlat.xspd;
 	//Go ahead and move ourselves back onto the platform if there is no wall in the way
-	if !place_meeting(x+myFloorPlat.xspd,y,oWall){
-		x+= myFloorPlat.xspd;
+	if !place_meeting(x+_xCheck,y,oWall){
+		x+= _xCheck;
 		earlyMoveplatXspd=true;
 	}
 }
@@ -393,7 +395,7 @@ if instance_exists(myFloorPlat) && myFloorPlat.xspd != 0 && !place_meeting(x,y+m
 			_pushedDist++;
 		}
 		//forget my floorplat
-		myFloorPlat=false; //or set on ground false, or noone?
+		myFloorPlat=noone; //or set on ground false, or noone?
 		
 		//if i'm still in a wall at this point, I've been crushed regardless, take me back to my start y to avoid the funk
 		if _pushedDist > _maxPushDist {y=_startY;};
