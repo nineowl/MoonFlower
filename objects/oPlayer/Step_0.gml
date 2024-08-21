@@ -191,6 +191,8 @@ if instance_exists(myFloorPlat) && myFloorPlat.xspd != 0 && !place_meeting(x,y+m
 		_floorIsSolid=true;
 	}
 	
+	
+	
 	if jumpKeyBuffered && jumpCount<jumpMax && (!downKey||_floorIsSolid){
 		
 		//Reset Buffer
@@ -204,6 +206,9 @@ if instance_exists(myFloorPlat) && myFloorPlat.xspd != 0 && !place_meeting(x,y+m
 		//Tell ourself we're no longer on the ground
 		setOnGround(false);
 	}
+	
+	#region //option A jump cut off
+	/*
 	//Cut off the jump by releasing the button
 	if !jumpKey{
 		jumpHoldTimer=0;
@@ -214,8 +219,23 @@ if instance_exists(myFloorPlat) && myFloorPlat.xspd != 0 && !place_meeting(x,y+m
 		yspd = jspd[jumpCount-1];
 		//count down timer
 		jumpHoldTimer--;
+	} //*/
+	#endregion
+	//Jump based on the timer/holding the button
+	if jumpHoldTimer > 0 {
+
+		//Constantly set the yspd to be jumping speed
+		yspd = jspd[clamp(jumpCount-1, 0, 2)];
+		//Count down the timer
+		jumpHoldTimer--;
+	}
+	//Cut off the jump by releasing the jump button
+
+	if !jumpKey{
+		jumpHoldTimer=0;
 	}
 	
+
 	//Y Collision and movement
 	//Terminal velocity
 	if yspd>termVel{yspd=termVel;};
@@ -341,6 +361,9 @@ if instance_exists(myFloorPlat) && myFloorPlat.xspd != 0 && !place_meeting(x,y+m
 				//forget this platform for a broef time so we don't get caught again
 				forgetSemiSolid = myFloorPlat;
 				
+				//reset jump buffer ******
+				jumpKeyBuffered=false;
+				
 				//no more floor platform
 				setOnGround(false);
 			}
@@ -429,6 +452,9 @@ if instance_exists(myFloorPlat) && myFloorPlat.xspd != 0 && !place_meeting(x,y+m
 		
 		//if i'm still in a wall at this point, I've been crushed regardless, take me back to my start y to avoid the funk
 		if _pushedDist > _maxPushDist {y=_startY;};
+		
+		//Reset jump buffer *****
+		jumpKeyBuffered=false;
 			
 	}
 	
