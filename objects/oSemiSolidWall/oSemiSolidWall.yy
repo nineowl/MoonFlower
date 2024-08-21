@@ -8,8 +8,8 @@
   "name":"oSemiSolidWall",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objects",
-    "path":"folders/Objects.yy",
+    "name":"Walls Collisions",
+    "path":"folders/Objects/Environment/Walls Collisions.yy",
   },
   "parentObjectId":null,
   "persistent":false,

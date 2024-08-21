@@ -1,15 +1,16 @@
 {
   "$GMObject":"",
-  "%Name":"oWall",
+  "%Name":"oParallaxBG00",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"oWall",
+  "name":"oParallaxBG00",
   "overriddenProperties":[],
   "parent":{
-    "name":"Walls Collisions",
-    "path":"folders/Objects/Environment/Walls Collisions.yy",
+    "name":"Camera Background",
+    "path":"folders/Objects/Environment/Camera Background.yy",
   },
   "parentObjectId":null,
   "persistent":false,
@@ -29,10 +30,7 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":{
-    "name":"sWall",
-    "path":"sprites/sWall/sWall.yy",
-  },
+  "spriteId":null,
   "spriteMaskId":null,
   "visible":true,
 }

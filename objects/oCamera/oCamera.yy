@@ -10,8 +10,8 @@
   "name":"oCamera",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objects",
-    "path":"folders/Objects.yy",
+    "name":"Camera Background",
+    "path":"folders/Objects/Environment/Camera Background.yy",
   },
   "parentObjectId":null,
   "persistent":true,

@@ -9,8 +9,8 @@
   "name":"oMovePlat",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objects",
-    "path":"folders/Objects.yy",
+    "name":"Walls Collisions",
+    "path":"folders/Objects/Environment/Walls Collisions.yy",
   },
   "parentObjectId":{
     "name":"oWall",
