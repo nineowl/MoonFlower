@@ -8,8 +8,8 @@
   "name":"oSemiSolidWall",
   "overriddenProperties":[],
   "parent":{
-    "name":"Walls Collisions",
-    "path":"folders/Objects/Environment/Walls Collisions.yy",
+    "name":"Platforms",
+    "path":"folders/Objects/Environment/Walls Collisions/Platforms.yy",
   },
   "parentObjectId":null,
   "persistent":false,
@@ -34,5 +34,5 @@
     "path":"sprites/sSemiSolidWall/sSemiSolidWall.yy",
   },
   "spriteMaskId":null,
-  "visible":true,
+  "visible":false,
 }

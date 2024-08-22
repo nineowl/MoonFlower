@@ -9,8 +9,8 @@
   "name":"oSemiSolidMovePlat",
   "overriddenProperties":[],
   "parent":{
-    "name":"Walls Collisions",
-    "path":"folders/Objects/Environment/Walls Collisions.yy",
+    "name":"Platforms",
+    "path":"folders/Objects/Environment/Walls Collisions/Platforms.yy",
   },
   "parentObjectId":{
     "name":"oSemiSolidWall",
