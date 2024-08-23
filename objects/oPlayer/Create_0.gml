@@ -69,9 +69,9 @@ crouching=false;
 	jumpHoldTimer=0;
 		//Jump values for each successive jump
 		jumpHoldFrames[0]=18;
-		jspd[0] =  -2.85;
+		jspd[0] =  -3.05;
 		jumpHoldFrames[1]=10;
-		jspd[1] =  -1.85;
+		jspd[1] =  -2.05;
 		
 	//Coyote Time
 	//Hang Time
