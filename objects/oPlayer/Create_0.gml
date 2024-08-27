@@ -47,6 +47,7 @@ walkSpr=sPlayerWalk;
 runSpr=sPlayerRun;
 jumpSpr=sPlayerJump;
 crouchSpr=sPlayerCrouch;
+crawlSpr=sPlayerCrawl
 
 //Moving
 face = 1; //-1 left, 1 right

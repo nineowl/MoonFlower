@@ -177,6 +177,7 @@ if instance_exists(myFloorPlat) && myFloorPlat.xspd != 0 && !place_meeting(x,y+m
 	//Rest/Prepare Jump Variables
 	 if onGround{
 		 jumpCount=0;
+		 jumpHoldTimer=0;
 		 coyoteJumpTimer=coyoteJumpFrames;
 	 }else{
 		//if player is in the air make sure they can't do an extra jump
@@ -225,7 +226,8 @@ if instance_exists(myFloorPlat) && myFloorPlat.xspd != 0 && !place_meeting(x,y+m
 	if jumpHoldTimer > 0 {
 
 		//Constantly set the yspd to be jumping speed
-		yspd = jspd[clamp(jumpCount-1, 0, 2)];
+		//yspd = jspd[clamp(jumpCount-1, 0, 2)];
+		yspd = jspd[jumpCount-1];
 		//Count down the timer
 		jumpHoldTimer--;
 	}
@@ -494,3 +496,4 @@ if place_meeting(x,y,oWall){
 		//set the collision mask
 		mask_index=maskSpr;
 		if crouching{mask_index=crouchSpr;};
+		if crouching && xspd !=0 {sprite_index=crawlSpr;};
