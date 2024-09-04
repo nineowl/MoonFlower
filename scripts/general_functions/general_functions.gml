@@ -12,6 +12,13 @@ function getControls(){
 		leftKey = clamp(leftKey,0,1);
 	downKey = keyboard_check((ord("S"))) + gamepad_button_check(0,gp_padd);
 		downKey = clamp(downKey,0,1);
+	upKey = keyboard_check((ord("W"))) + gamepad_button_check(0,gp_padu);
+		upKey = clamp(upKey,0,1);
+	
+	downKeyPressed = keyboard_check_pressed((ord("S"))) + gamepad_button_check_pressed(0,gp_padd);
+		downKeyPressed = clamp(downKeyPressed,0,1);
+	upKeyPressed = keyboard_check_pressed((ord("W"))) + gamepad_button_check_pressed(0,gp_padu);
+		upKeyPressed = clamp(upKeyPressed,0,1);
 	
 	
 	//Action Inputs
@@ -21,7 +28,13 @@ function getControls(){
 		jumpKey = clamp(jumpKey,0,1);
 		
 	runKey = keyboard_check(vk_lshift)+gamepad_button_check(0,gp_face3);
-		runKey = clamp(runKey,0,1)
+		runKey = clamp(runKey,0,1);
+		
+	
+	//Menu Inputs
+	enterKey = keyboard_check(vk_enter) + gamepad_button_check(0,gp_start);
+		enterKey = clamp(enterKey,0,1);
+	
 		
 	//Jump Key Buffering
 	if jumpKeyPressed{

@@ -11,3 +11,5 @@ while(xStart<xEnd){
 	});
 	xStart+=irandom_range(1,setVariance);
 }
+
+audio_play_sound(ambRain00,0,true,1.5);//play rain sounds
