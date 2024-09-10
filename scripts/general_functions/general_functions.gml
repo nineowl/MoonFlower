@@ -34,6 +34,8 @@ function getControls(){
 	//Menu Inputs
 	enterKey = keyboard_check(vk_enter) + gamepad_button_check(0,gp_start);
 		enterKey = clamp(enterKey,0,1);
+	enterKeyPressed = keyboard_check_pressed(vk_enter) + gamepad_button_check_pressed(0,gp_start);
+		enterKeyPressed = clamp(enterKeyPressed,0,1);
 	
 		
 	//Jump Key Buffering

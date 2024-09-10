@@ -492,8 +492,15 @@ if place_meeting(x,y,oWall){
 	//in the air
 	if !onGround{sprite_index=jumpSpr;};
 	//Crouching
-	if crouching{sprite_index=crouchSpr;};
+	if crouching && crouchStart==false{
+		sprite_index=idleCrouchSpr
+		if image_index >=image_number-1 {crouchStart=true;};
+	}
+	
+	if crouching && crouchStart==true{sprite_index=crouchSpr;};
 		//set the collision mask
 		mask_index=maskSpr;
 		if crouching{mask_index=crouchSpr;};
 		if crouching && xspd !=0 {sprite_index=crawlSpr;};
+		
+	if !crouching {crouchStart=false;};
