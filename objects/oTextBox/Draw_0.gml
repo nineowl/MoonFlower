@@ -20,7 +20,7 @@ if setup==false {
 	for (var p=0;p<page_number;p++){
 		
 		//find how many characters are on each page and store that number in the "text_length" array
-		text_length[p] = string_length(text[0]);
+		text_length[p] = string_length(text[p]);
 		
 		//get the x position of the text box
 		text_x_offset[p]=48;
