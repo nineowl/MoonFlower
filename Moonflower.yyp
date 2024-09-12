@@ -45,6 +45,8 @@
   "name":"Moonflower",
   "resources":[
     {"id":{"name":"f34r","path":"fonts/f34r/f34r.yy",},},
+    {"id":{"name":"fDirectMessage","path":"fonts/fDirectMessage/fDirectMessage.yy",},},
+    {"id":{"name":"fFontFantasy","path":"fonts/fFontFantasy/fFontFantasy.yy",},},
     {"id":{"name":"oCamera","path":"objects/oCamera/oCamera.yy",},},
     {"id":{"name":"oGame","path":"objects/oGame/oGame.yy",},},
     {"id":{"name":"oMovePlat","path":"objects/oMovePlat/oMovePlat.yy",},},
@@ -70,6 +72,7 @@
     {"id":{"name":"rmTitle","path":"rooms/rmTitle/rmTitle.yy",},},
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
     {"id":{"name":"general_functions","path":"scripts/general_functions/general_functions.yy",},},
+    {"id":{"name":"textbox_functions","path":"scripts/textbox_functions/textbox_functions.yy",},},
     {"id":{"name":"ambRain00","path":"sounds/ambRain00/ambRain00.yy",},},
     {"id":{"name":"bgmusic00","path":"sounds/bgmusic00/bgmusic00.yy",},},
     {"id":{"name":"bg01","path":"sprites/bg01/bg01.yy",},},

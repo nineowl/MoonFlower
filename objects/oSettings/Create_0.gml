@@ -1,1 +1,1 @@
-global.font_main = f34r;
+global.font_main = fDirectMessage;

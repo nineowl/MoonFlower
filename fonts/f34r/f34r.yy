@@ -1,7 +1,7 @@
 {
   "$GMFont":"",
   "%Name":"f34r",
-  "AntiAlias":1,
+  "AntiAlias":0,
   "applyKerning":0,
   "ascender":15,
   "ascenderOffset":0,
@@ -75,7 +75,7 @@
     "120":{"character":120,"h":17,"offset":3,"shift":14,"w":8,"x":12,"y":40,},
     "121":{"character":121,"h":17,"offset":3,"shift":14,"w":8,"x":22,"y":40,},
     "122":{"character":122,"h":17,"offset":3,"shift":13,"w":5,"x":112,"y":78,},
-    "9647":{"character":9647,"h":17,"offset":3,"shift":16,"w":10,"x":2,"y":97,},
+    "9647":{"character":9647,"h":17,"offset":3,"shift":16,"w":9,"x":2,"y":97,},
   },
   "hinting":0,
   "includeTTF":false,
