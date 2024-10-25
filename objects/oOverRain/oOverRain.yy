@@ -1,12 +1,12 @@
 {
   "$GMObject":"",
-  "%Name":"oRain",
+  "%Name":"oOverRain",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"oRain",
+  "name":"oOverRain",
   "overriddenProperties":[],
   "parent":{
     "name":"Weather",
@@ -28,7 +28,6 @@
   "physicsStartAwake":true,
   "properties":[
     {"$GMObjectProperty":"v1","%Name":"fallSpd","filters":[],"listItems":[],"multiselect":false,"name":"fallSpd","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"9","varType":1,},
-    {"$GMObjectProperty":"v1","%Name":"rainLayer","filters":[],"listItems":[],"multiselect":false,"name":"rainLayer","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"0","varType":1,},
   ],
   "resourceType":"GMObject",
   "resourceVersion":"2.0",

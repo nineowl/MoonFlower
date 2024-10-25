@@ -7,7 +7,8 @@ while(xStart<xEnd){
 	freqMin,
 	freqMax,
 	variance,
-	fallSpd
+	fallSpd,
+	outside
 	});
 	xStart+=irandom_range(1,setVariance);
 }

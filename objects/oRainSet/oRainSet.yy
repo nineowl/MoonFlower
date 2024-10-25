@@ -30,6 +30,7 @@
     {"$GMObjectProperty":"v1","%Name":"freqMax","filters":[],"listItems":[],"multiselect":false,"name":"freqMax","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"10","varType":0,},
     {"$GMObjectProperty":"v1","%Name":"variance","filters":[],"listItems":[],"multiselect":false,"name":"variance","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"10","varType":0,},
     {"$GMObjectProperty":"v1","%Name":"fallSpd","filters":[],"listItems":[],"multiselect":false,"name":"fallSpd","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"9","varType":0,},
+    {"$GMObjectProperty":"v1","%Name":"outside","filters":[],"listItems":[],"multiselect":false,"name":"outside","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"true","varType":0,},
   ],
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
