@@ -1,21 +1,21 @@
-function player_collisions_movement() {
+// Script assets have changed for v2.3.0 see
+// https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
+function player_state_scripts(){
 
-	#region player movement and collision
-	//X Movement
-		//Direction
-		moveDir = rightKey - leftKey; //can likely be organizeed outside of states
-		//Get my face
-		if moveDir!=0{face=moveDir;}; //this too
+}
 
-		//Get xspd
-		runType=runKey;  //can possibly be organized outside of the states
-		xspd = moveDir * moveSpd[runType];
-	
-		/*//Stop xspd if crouching
-		if crouching {xspd=0;}; // You may set a crouch speed
-		//*/
+function player_movement_collisions(){
+	player_x_collision()
+	player_y_collision()
+	player_x_movement()
+	player_y_movement()
 
-		//X collision
+}
+
+
+
+function player_x_collision(){
+	//X collision
 		var _subPixel = .5;
 		if place_meeting(x+xspd,y,oWall){
 		
@@ -47,12 +47,15 @@ function player_collisions_movement() {
 				while !place_meeting(x+xspd,y+_subPixel,oWall){y+=_subPixel;};
 			}
 		}
+}
 
-		//Move
+function player_x_movement(){
+	//Move
 		x += xspd;
+}
 
-	//Y Movement
-		//Gravity
+function player_y_movement(){
+	//Gravity
 		if coyoteHangTimer>0{
 			//count the timer down
 			coyoteHangTimer--;  //is it possible we actually get 1 less frame because of where this is?
@@ -62,9 +65,10 @@ function player_collisions_movement() {
 			//We're no longer on the ground
 			setOnGround(false); //need to get surgical with how we replace this
 		}
-	
-	
-		//Rest/Prepare Jump Variables
+		
+	// Jumping
+		
+	//Rest/Prepare Jump Variables
 		 if onGround{
 			 jumpCount=0;
 			 jumpHoldTimer=0;
@@ -74,14 +78,13 @@ function player_collisions_movement() {
 			coyoteJumpTimer--;
 			if jumpCount==0&&coyoteJumpTimer<=0{jumpCount=1;};
 		 }
-	
-		//initiate Jump
+		 
+	//Prepare to Jump, check if on a platform first
 		var _floorIsSolid=false;
 		if instance_exists(myFloorPlat)
 		&&(myFloorPlat.object_index=oWall||object_is_ancestor(myFloorPlat.object_index,oWall)){
 			_floorIsSolid=true;
 		}
-	
 	
 	
 		if jumpKeyBuffered && jumpCount<jumpMax && (!downKey||_floorIsSolid){
@@ -97,22 +100,8 @@ function player_collisions_movement() {
 			//Tell ourself we're no longer on the ground
 			setOnGround(false);
 		}
-	
-		#region //option A jump cut off
-		/*
-		//Cut off the jump by releasing the button
-		if !jumpKey{
-			jumpHoldTimer=0;
-		} 
-		//Jump based on the time/holding the button
-		if jumpHoldTimer>0{
-			//constantly st the yspd to be jumping speed
-			yspd = jspd[jumpCount-1];
-			//count down timer
-			jumpHoldTimer--;
-		} //*/
-		#endregion
-		//Jump based on the timer/holding the button
+		
+	//Jump based on the timer/holding the button
 		if jumpHoldTimer > 0 {
 
 			//Constantly set the yspd to be jumping speed
@@ -126,13 +115,19 @@ function player_collisions_movement() {
 		if !jumpKey{
 			jumpHoldTimer=0;
 		}
-	
-
-		//Y Collision and movement
+		
 		//Terminal velocity
 		if yspd>termVel{yspd=termVel;};
+		
+		//Move
+		if !place_meeting(x,y+yspd,oWall){y+=yspd;};
+}
+
+//consider breaking Y movement into jumping and gravity
+
+function player_y_collision(){
 	
-		//Y Collision
+	//Y Collision
 		var _subPixel=.5;
 	
 		//Upwards Y Collision (with ceiling slopes)
@@ -262,8 +257,7 @@ function player_collisions_movement() {
 			}
 		}
  
-		//Move
-		if !place_meeting(x,y+yspd,oWall){y+=yspd;};
+		
 	
 		//rest forgetSemiSolid variable
 		if instance_exists(forgetSemiSolid) && !place_meeting(x,y,forgetSemiSolid){
@@ -305,23 +299,7 @@ function player_collisions_movement() {
 				y=myFloorPlat.bbox_top;
 			}
 		
-			#region old redunadant code
-			/*/Going up into a solid wall while on a semisolid platform
-			if myFloorPlat.yspd < 0 && place_meeting(x,y+myFloorPlat.yspd,oWall){
-				//Get Pushed down through the semisolid floor platform
-				if myFloorPlat.object_index==oSemiSolidWall || object_is_ancestor(myFloorPlat.object_index,oSemiSolidWall){
-					//Get pushed down
-					var _subPixel=.25;
-					while place_meeting(x,y+myFloorPlat.yspd,oWall){y+=_subPixel;};
-					//IF we got pushed into a solid wall while going downwards, ppush ourselves back out
-					while place_meeting(x,y,oWall){y-=_subPixel;};
-					y=round(y);
-				}
-			
-				//Cancel Semi Solid Platform
-				setOnGround(false);
-			} */ //tis now redundant
-			#endregion
+
 		}
 
 		//Get pushed down through a semisolid by a moving platform
@@ -350,5 +328,6 @@ function player_collisions_movement() {
 			
 		}
 	
-	#endregion
 }
+
+function player_damage_buffer(){}

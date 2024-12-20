@@ -49,6 +49,7 @@ jumpSpr=sPlayerJump;
 crouchSpr=sPlayerCrouch;
 crawlSpr=sPlayerCrawl
 idleCrouchSpr=sPlayerIdleCrouch;
+crouchIdleSpr=sPlayerCrouchIdle;
 
 crouchStart = false;
 
@@ -62,7 +63,26 @@ xspd = 0;
 yspd = 0;
 
 //State Variables
-crouching=false;
+crouching=false;//about to be retired
+
+state = "free";
+
+/*
+enum STATE {
+	
+	idle,
+	walk,
+	run,
+	crouch,
+	crawl,
+	jump,
+	airborne,
+	attack,
+
+}
+
+*/
+
 
 	//Jumping
 	grav = .275;

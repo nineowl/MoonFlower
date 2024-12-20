@@ -84,32 +84,137 @@ if instance_exists(myFloorPlat) && myFloorPlat.xspd != 0 && !place_meeting(x,y+m
 	}
 }
 
-//Crouching
+
+
+	//Direction
+		moveDir = rightKey - leftKey; //can likely be organizeed outside of states
+		//Get my face
+		if moveDir!=0{face=moveDir;}; //this too
+
+		//Get xspd
+		runType=runKey;  //can possibly be organized outside of the states
+		xspd = moveDir * moveSpd[runType];	
+
+
+
+
+switch (state) {
+	case "free":
+	player_movement_collisions();
+	//Sprite Control
+	//Walking
+	if abs(xspd)>0{sprite_index=walkSpr;};
+	//Running
+	if abs(xspd)>=moveSpd[1]{sprite_index=runSpr;};
+	//Not moving
+	if xspd==0{sprite_index=idleSpr;};
+	//in the air
+	if !onGround{sprite_index=jumpSpr;};
+
+	//Crouching
 	//Transition to crouch
 		//Manual = onGround / Auto = placemeeting
 		if onGround && (downKey || place_meeting(x,y,oWall)) {
-			crouching=true;
+			state = "crouch_start";
+			image_index=0;
 		}
-		/*//Forced / Automatic
-		if onGround && place_meeting(x,y,oWall){
-			crouching=true;
-		} //*/
-		//Change collision mask
-		if crouching {mask_index=crouchSpr;};
-		
-	//Transition out of crouch
+
+
+
+
+
+	break;
+	case "attack":
+	break;
+	case "hurt":
+	break;
+	case "crouch_start":
+		mask_index=crouchSpr;
+		sprite_index=idleCrouchSpr
+		if image_index >=image_number-1 {state="crouch";};
+		//Transition out of crouch
 		//Manual !downKey / Auto = !onGround
-		if crouching && (!downKey || !onGround) {
+		if (!downKey || !onGround) {
 			//check if i CAN uncrouch
 			mask_index = idleSpr;
 			if !place_meeting(x,y,oWall){
-				crouching=false;
+				state = "free";
 			} else { //go back to crouching mask index if we can't uncrouch
 				mask_index=crouchSpr;
 			}
 		}
+		
+				//Transition out of crouch, in the case of losing ground
+		if (!onGround) {
+			//check if i CAN uncrouch
+			mask_index = idleSpr;
+			if !place_meeting(x,y,oWall){
+				state = "free";
+			} else { //go back to crouching mask index if we can't uncrouch
+				mask_index=crouchSpr;
+			}
+		}
+		
+		player_x_collision();
+		player_y_collision();
+		player_y_movement();
+		
+		
+		
+	break;
+	case "crouch":
+		mask_index=crouchSpr;
+		sprite_index=crouchSpr;
+		//Transition out of crouch
+		//Manual !downKey / Auto = !onGround
+		if (!downKey && onGround) {
+			//check if i CAN uncrouch
+			mask_index = idleSpr;
+			if !place_meeting(x,y,oWall){
+				state = "uncrouch";
+				image_index=0;
+			} else { //go back to crouching mask index if we can't uncrouch
+				mask_index=crouchSpr;
+			}
+		}
+		//Transition out of crouch, in the case of losing ground
+		if (!onGround) {
+			//check if i CAN uncrouch
+			mask_index = idleSpr;
+			if !place_meeting(x,y,oWall){
+				state = "free";
+			} else { //go back to crouching mask index if we can't uncrouch
+				mask_index=crouchSpr;
+			}
+		}
+		
+		player_movement_collisions();
 	
-player_collisions_movement();
+	break;
+	case "uncrouch" :
+		mask_index=crouchSpr;
+		sprite_index=crouchIdleSpr
+		if image_index >=image_number-1 {state="free";};
+		
+				//Transition out of crouch, in the case of losing ground
+		if (!onGround) {
+			//check if i CAN uncrouch
+			mask_index = idleSpr;
+			if !place_meeting(x,y,oWall){
+				state = "free";
+			} else { //go back to crouching mask index if we can't uncrouch
+				mask_index=crouchSpr;
+			}
+		}
+		
+		player_x_collision();
+		player_y_collision();
+		player_y_movement();
+	
+	break;
+}
+
+
 
 	
 //Check if I'm crushed
@@ -131,7 +236,7 @@ if place_meeting(x,y,oWall){
 
 
 
-
+/*
 
 //Sprite Control
 	//Walking
@@ -155,3 +260,5 @@ if place_meeting(x,y,oWall){
 		if crouching && xspd !=0 {sprite_index=crawlSpr;};
 		
 	if !crouching {crouchStart=false;};
+	
+	*/
