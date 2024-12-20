@@ -6,9 +6,11 @@ function player_state_scripts(){
 
 function player_movement_collisions(){
 	player_x_collision()
-	player_y_collision()
 	player_x_movement()
 	player_y_movement()
+	player_y_collision()
+
+
 
 }
 
@@ -52,6 +54,11 @@ function player_x_collision(){
 function player_x_movement(){
 	//Move
 		x += xspd;
+}
+
+function player_x_movement_reduced(){
+	//Move
+		x += (.2) * xspd;
 }
 
 function player_y_movement(){

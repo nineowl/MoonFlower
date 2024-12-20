@@ -118,6 +118,15 @@ switch (state) {
 			state = "crouch_start";
 			image_index=0;
 		}
+		
+	if (attackKeyPressed && onGround){
+		state = "attack";
+		image_index=0;
+		myHitBox = instance_create_depth(x,y,depth,oPlayerHitBox,{
+			sprite_index : sPlayerKnifeAttack0HB,
+			image_xscale : image_xscale * face //for whatever reason, this causes a visual bug if you keep the player hit box visible, but this allows it to work as intended.
+			})
+		};
 
 
 
@@ -125,6 +134,20 @@ switch (state) {
 
 	break;
 	case "attack":
+	sprite_index = knifeAttack0Spr;
+	//mask_index = sPlayerKnifeAttack0HB;
+	//myHitBox.image_xscale = myHitBox.image_xscale*face;
+	
+	
+	if image_index >=image_number-1 {
+		state="free";
+		instance_destroy(myHitBox);
+		};
+	
+	player_x_collision();
+	player_y_collision();
+	
+	
 	break;
 	case "hurt":
 	break;
@@ -155,9 +178,11 @@ switch (state) {
 			}
 		}
 		
+		//player_x_movement_reduced();
 		player_x_collision();
 		player_y_collision();
 		player_y_movement();
+		//if(xspd!=0) {state = "free";};
 		
 		
 		
@@ -207,9 +232,11 @@ switch (state) {
 			}
 		}
 		
+		//player_x_movement_reduced();
 		player_x_collision();
 		player_y_collision();
 		player_y_movement();
+		if(xspd!=0) {state = "free";};
 	
 	break;
 }

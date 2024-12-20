@@ -30,12 +30,18 @@ function getControls(){
 	runKey = keyboard_check(vk_lshift)+gamepad_button_check(0,gp_face3);
 		runKey = clamp(runKey,0,1);
 		
+	attackKey = keyboard_check(ord("N"));
+		attackKey = clamp(attackKey,0,1);
+	attackKeyPressed = keyboard_check_pressed(ord("N"));
+		attackKeyPressed = clamp(attackKeyPressed,0,1);
+		
 	
 	//Menu Inputs
 	enterKey = keyboard_check(vk_enter) + gamepad_button_check(0,gp_start);
 		enterKey = clamp(enterKey,0,1);
 	enterKeyPressed = keyboard_check_pressed(vk_enter) + gamepad_button_check_pressed(0,gp_start);
 		enterKeyPressed = clamp(enterKeyPressed,0,1);
+	
 	
 		
 	//Jump Key Buffering

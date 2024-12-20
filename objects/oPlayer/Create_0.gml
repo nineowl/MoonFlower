@@ -50,8 +50,13 @@ crouchSpr=sPlayerCrouch;
 crawlSpr=sPlayerCrawl
 idleCrouchSpr=sPlayerIdleCrouch;
 crouchIdleSpr=sPlayerCrouchIdle;
+knifeAttack0Spr=sPlayerKnifeAttack0;
 
-crouchStart = false;
+
+
+
+
+crouchStart = false;  //might be retired
 
 //Moving
 face = 1; //-1 left, 1 right
@@ -115,3 +120,7 @@ moveplatXspd=0;
 moveplatMaxYspd=termVel; //feel free to change if needed.
 crushTimer=0;
 crushDeathTime=3;
+
+
+//Attack related
+hitByAttack = ds_list_create();
