@@ -124,7 +124,7 @@ switch (state) {
 		image_index=0;
 		myHitBox = instance_create_depth(x,y,depth,oPlayerHitBox,{
 			sprite_index : sPlayerKnifeAttack0HB,
-			image_xscale : image_xscale * face //for whatever reason, this causes a visual bug if you keep the player hit box visible, but this allows it to work as intended.
+			image_xscale : image_xscale*face//for whatever reason, this causes a visual bug if you keep the player hit box visible, but this allows it to work as intended.
 			})
 		};
 
