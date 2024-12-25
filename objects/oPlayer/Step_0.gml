@@ -126,6 +126,7 @@ switch (state) {
 			sprite_index : sPlayerKnifeAttack0HB,
 			image_xscale : image_xscale*face//for whatever reason, this causes a visual bug if you keep the player hit box visible, but this allows it to work as intended.
 			})
+		ds_list_clear(hitByAttack);
 		};
 
 
@@ -137,6 +138,28 @@ switch (state) {
 	sprite_index = knifeAttack0Spr;
 	//mask_index = sPlayerKnifeAttack0HB;
 	//myHitBox.image_xscale = myHitBox.image_xscale*face;
+	with (myHitBox) {
+		var hitByAttackNow = ds_list_create();
+		var hits = instance_place_list(x,y,oNPC,hitByAttackNow,false);
+		if (hits > 0){
+			for (var i=0;i<hits;i++){
+				//if this instance has not yet been hit by this attack
+				var hitID = hitByAttackNow[| i];
+				if (ds_list_find_index(other.hitByAttack,hitID)==-1){
+					ds_list_add(other.hitByAttack,hitID);
+					with (hitID) {
+						//whatever is gonna happen to the enemy
+						//write a damage event
+						HP-=2;
+					}
+				}
+		
+			}
+	
+		}
+		ds_list_destroy(hitByAttackNow);
+	}
+	
 	
 	
 	if image_index >=image_number-1 {

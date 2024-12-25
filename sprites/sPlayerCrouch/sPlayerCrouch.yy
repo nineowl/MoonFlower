@@ -1,10 +1,10 @@
 {
   "$GMSprite":"",
   "%Name":"sPlayerCrouch",
-  "bboxMode":0,
-  "bbox_bottom":44,
+  "bboxMode":2,
+  "bbox_bottom":43,
   "bbox_left":28,
-  "bbox_right":41,
+  "bbox_right":39,
   "bbox_top":34,
   "collisionKind":1,
   "collisionTolerance":0,

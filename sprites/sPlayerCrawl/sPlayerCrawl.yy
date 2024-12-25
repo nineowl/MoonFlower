@@ -1,10 +1,10 @@
 {
   "$GMSprite":"",
   "%Name":"sPlayerCrawl",
-  "bboxMode":0,
+  "bboxMode":2,
   "bbox_bottom":44,
   "bbox_left":28,
-  "bbox_right":41,
+  "bbox_right":40,
   "bbox_top":35,
   "collisionKind":1,
   "collisionTolerance":0,
