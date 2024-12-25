@@ -151,6 +151,7 @@ switch (state) {
 						//whatever is gonna happen to the enemy
 						//write a damage event
 						HP-=2;
+						damageEvent=true;
 					}
 				}
 		

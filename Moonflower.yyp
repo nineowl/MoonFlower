@@ -92,6 +92,7 @@
     {"id":{"name":"player_collisions_movement","path":"scripts/player_collisions_movement/player_collisions_movement.yy",},},
     {"id":{"name":"player_state_scripts","path":"scripts/player_state_scripts/player_state_scripts.yy",},},
     {"id":{"name":"textbox_functions","path":"scripts/textbox_functions/textbox_functions.yy",},},
+    {"id":{"name":"shFlash","path":"shaders/shFlash/shFlash.yy",},},
     {"id":{"name":"ambRain00","path":"sounds/ambRain00/ambRain00.yy",},},
     {"id":{"name":"bgmusic00","path":"sounds/bgmusic00/bgmusic00.yy",},},
     {"id":{"name":"bgmusic01","path":"sounds/bgmusic01/bgmusic01.yy",},},
