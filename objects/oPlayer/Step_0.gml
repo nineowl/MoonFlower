@@ -118,7 +118,7 @@ switch (state) {
 			state = "crouch_start";
 			image_index=0;
 		}
-		
+		/*
 	if (attackKeyPressed && onGround){
 		state = "attack";
 		image_index=0;
@@ -128,6 +128,9 @@ switch (state) {
 			})
 		ds_list_clear(hitByAttack);
 		};
+		*/
+		
+		player_attack_command("attack",sPlayerKnifeAttack0HB,0);
 
 
 
@@ -138,6 +141,7 @@ switch (state) {
 	sprite_index = knifeAttack0Spr;
 	//mask_index = sPlayerKnifeAttack0HB;
 	//myHitBox.image_xscale = myHitBox.image_xscale*face;
+	/*
 	with (myHitBox) {
 		var hitByAttackNow = ds_list_create();
 		var hits = instance_place_list(x,y,oNPC,hitByAttackNow,false);
@@ -159,8 +163,10 @@ switch (state) {
 	
 		}
 		ds_list_destroy(hitByAttackNow);
-	}
+	}*/
 	
+	player_attack_damage(2);
+	/*
 	if (attackKeyPressed && onGround && image_index>5){
 		state = "attackcombo1";
 		image_index=0;
@@ -170,6 +176,8 @@ switch (state) {
 			})
 		ds_list_clear(hitByAttack);
 		};
+	*/
+	player_attack_command("attackcombo1",sPlayerKnifeAttack1HB,5);
 	
 	
 	//if animation ends
@@ -187,6 +195,7 @@ switch (state) {
 		sprite_index = knifeAttack1Spr;
 	//mask_index = sPlayerKnifeAttack0HB;
 	//myHitBox.image_xscale = myHitBox.image_xscale*face;
+	/*
 	with (myHitBox) {
 		var hitByAttackNow = ds_list_create();
 		var hits = instance_place_list(x,y,oNPC,hitByAttackNow,false);
@@ -208,8 +217,8 @@ switch (state) {
 	
 		}
 		ds_list_destroy(hitByAttackNow);
-	}
-	
+	}*/
+	player_attack_damage(2);
 	
 	//if animation ends
 	if image_index >=image_number-1 {
@@ -221,6 +230,10 @@ switch (state) {
 	player_y_collision();
 	
 	
+	
+	break;
+	
+	case "attackcombo2":
 	
 	break;
 	

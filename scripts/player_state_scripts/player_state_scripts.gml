@@ -337,4 +337,46 @@ function player_y_collision(){
 	
 }
 
-function player_damage_buffer(){}
+function player_damage_buffer(){}// this will basically be like a poise stat
+
+function player_attack_command(_nextState,_attackType,_comboFrame){
+	//_nextState is the string that corresponds to the state
+	//_attackType is the sprite that corresponds to the attack hitbox
+	//_comboFrame refers to the minimum frame you can start the attack from. If you can start the attack anytime, this value is 0.
+	
+	if (attackKeyPressed && onGround && image_index>=_comboFrame){
+		state = _nextState;
+		image_index=0;
+		myHitBox = instance_create_depth(x,y,depth,oPlayerHitBox,{
+			sprite_index : _attackType,
+			image_xscale : image_xscale*face//for whatever reason, this causes a visual bug if you keep the player hit box visible, but this allows it to work as intended.
+			})
+		ds_list_clear(hitByAttack);
+		};
+
+}
+
+function player_attack_damage(_damage){
+	with (myHitBox) {
+		var hitByAttackNow = ds_list_create();
+		var hits = instance_place_list(x,y,oNPC,hitByAttackNow,false);
+		if (hits > 0){
+			for (var i=0;i<hits;i++){
+				//if this instance has not yet been hit by this attack
+				var hitID = hitByAttackNow[| i];
+				if (ds_list_find_index(other.hitByAttack,hitID)==-1){
+					ds_list_add(other.hitByAttack,hitID);
+					with (hitID) {
+						//whatever is gonna happen to the enemy
+						//write a damage event
+						HP-=_damage;
+						damageEvent=true;
+					}
+				}
+		
+			}
+	
+		}
+		ds_list_destroy(hitByAttackNow);
+	}
+}

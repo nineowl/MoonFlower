@@ -115,6 +115,8 @@
     {"id":{"name":"sPlayerKnifeAttack0HB","path":"sprites/sPlayerKnifeAttack0HB/sPlayerKnifeAttack0HB.yy",},},
     {"id":{"name":"sPlayerKnifeAttack1","path":"sprites/sPlayerKnifeAttack1/sPlayerKnifeAttack1.yy",},},
     {"id":{"name":"sPlayerKnifeAttack1HB","path":"sprites/sPlayerKnifeAttack1HB/sPlayerKnifeAttack1HB.yy",},},
+    {"id":{"name":"sPlayerKnifeAttack2","path":"sprites/sPlayerKnifeAttack2/sPlayerKnifeAttack2.yy",},},
+    {"id":{"name":"sPlayerKnifeAttack2HB","path":"sprites/sPlayerKnifeAttack2HB/sPlayerKnifeAttack2HB.yy",},},
     {"id":{"name":"sPlayerRun","path":"sprites/sPlayerRun/sPlayerRun.yy",},},
     {"id":{"name":"sPlayerWalk","path":"sprites/sPlayerWalk/sPlayerWalk.yy",},},
     {"id":{"name":"sRain","path":"sprites/sRain/sRain.yy",},},
