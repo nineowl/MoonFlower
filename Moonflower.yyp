@@ -99,6 +99,7 @@
     {"id":{"name":"bg01","path":"sprites/bg01/bg01.yy",},},
     {"id":{"name":"sLayer1","path":"sprites/sLayer1/sLayer1.yy",},},
     {"id":{"name":"sLayerN1","path":"sprites/sLayerN1/sLayerN1.yy",},},
+    {"id":{"name":"sMenu_Legacy","path":"sprites/sMenu_Legacy/sMenu_Legacy.yy",},},
     {"id":{"name":"sMenu","path":"sprites/sMenu/sMenu.yy",},},
     {"id":{"name":"sMenuArrow","path":"sprites/sMenuArrow/sMenuArrow.yy",},},
     {"id":{"name":"sMonster01_Idle","path":"sprites/sMonster01_Idle/sMonster01_Idle.yy",},},

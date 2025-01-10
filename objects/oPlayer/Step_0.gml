@@ -100,145 +100,90 @@ if instance_exists(myFloorPlat) && myFloorPlat.xspd != 0 && !place_meeting(x,y+m
 
 switch (state) {
 	case "free":
-	player_movement_collisions();
-	//Sprite Control
-	//Walking
-	if abs(xspd)>0{sprite_index=walkSpr;};
-	//Running
-	if abs(xspd)>=moveSpd[1]{sprite_index=runSpr;};
-	//Not moving
-	if xspd==0{sprite_index=idleSpr;};
-	//in the air
-	if !onGround{sprite_index=jumpSpr;};
+		player_movement_collisions();
+		//Sprite Control
+		//Walking
+		if abs(xspd)>0{sprite_index=walkSpr;};
+		//Running
+		if abs(xspd)>=moveSpd[1]{sprite_index=runSpr;};
+		//Not moving
+		if xspd==0{sprite_index=idleSpr;};
+		//in the air
+		if !onGround{sprite_index=jumpSpr;};
 
-	//Crouching
-	//Transition to crouch
+		//Crouching
+		//Transition to crouch
 		//Manual = onGround / Auto = placemeeting
 		if onGround && (downKey || place_meeting(x,y,oWall)) {
 			state = "crouch_start";
 			image_index=0;
 		}
-		/*
-	if (attackKeyPressed && onGround){
-		state = "attack";
-		image_index=0;
-		myHitBox = instance_create_depth(x,y,depth,oPlayerHitBox,{
-			sprite_index : sPlayerKnifeAttack0HB,
-			image_xscale : image_xscale*face//for whatever reason, this causes a visual bug if you keep the player hit box visible, but this allows it to work as intended.
-			})
-		ds_list_clear(hitByAttack);
-		};
-		*/
-		
+
 		player_attack_command("attack",sPlayerKnifeAttack0HB,0);
-
-
-
-
-
-	break;
-	case "attack":
-	sprite_index = knifeAttack0Spr;
-	//mask_index = sPlayerKnifeAttack0HB;
-	//myHitBox.image_xscale = myHitBox.image_xscale*face;
-	/*
-	with (myHitBox) {
-		var hitByAttackNow = ds_list_create();
-		var hits = instance_place_list(x,y,oNPC,hitByAttackNow,false);
-		if (hits > 0){
-			for (var i=0;i<hits;i++){
-				//if this instance has not yet been hit by this attack
-				var hitID = hitByAttackNow[| i];
-				if (ds_list_find_index(other.hitByAttack,hitID)==-1){
-					ds_list_add(other.hitByAttack,hitID);
-					with (hitID) {
-						//whatever is gonna happen to the enemy
-						//write a damage event
-						HP-=2;
-						damageEvent=true;
-					}
-				}
 		
-			}
-	
+		
+		NPC_MEET = instance_place(x,y,oNPC);
+		if (NPC_MEET && interactKeyPressed && NPC_MEET.text_id != ""){
+			create_textbox(NPC_MEET.text_id);
 		}
-		ds_list_destroy(hitByAttackNow);
-	}*/
+		
+
+	break;
 	
-	player_attack_damage(2);
-	/*
-	if (attackKeyPressed && onGround && image_index>5){
-		state = "attackcombo1";
-		image_index=0;
-		myHitBox = instance_create_depth(x,y,depth,oPlayerHitBox,{
-			sprite_index : sPlayerKnifeAttack1HB,//sPlayerKnifeAttack1HB,
-			image_xscale : image_xscale*face//for whatever reason, this causes a visual bug if you keep the player hit box visible, but this allows it to work as intended.
-			})
-		ds_list_clear(hitByAttack);
-		};
-	*/
-	player_attack_command("attackcombo1",sPlayerKnifeAttack1HB,5);
+	case "attack":
+		sprite_index = knifeAttack0Spr;
+	
+		player_attack_damage(2);
+		player_attack_command("attackcombo1",sPlayerKnifeAttack1HB,5);
 	
 	
-	//if animation ends
-	if image_index >=image_number-1 {
-		state="free";
-		instance_destroy(myHitBox);
-		};
+		//if animation ends
+		if image_index >=image_number-1 {
+			state="free";
+			instance_destroy(myHitBox);
+			};
 	
-	player_x_collision();
-	player_y_collision();
-	
+		player_x_collision();
+		player_y_collision();
 	
 	break;
+	
 	case "attackcombo1":
 		sprite_index = knifeAttack1Spr;
-	//mask_index = sPlayerKnifeAttack0HB;
-	//myHitBox.image_xscale = myHitBox.image_xscale*face;
-	/*
-	with (myHitBox) {
-		var hitByAttackNow = ds_list_create();
-		var hits = instance_place_list(x,y,oNPC,hitByAttackNow,false);
-		if (hits > 0){
-			for (var i=0;i<hits;i++){
-				//if this instance has not yet been hit by this attack
-				var hitID = hitByAttackNow[| i];
-				if (ds_list_find_index(other.hitByAttack,hitID)==-1){
-					ds_list_add(other.hitByAttack,hitID);
-					with (hitID) {
-						//whatever is gonna happen to the enemy
-						//write a damage event
-						HP-=2;
-						damageEvent=true;
-					}
-				}
-		
-			}
+		player_attack_damage(2);
+		player_attack_command("attackcombo2",sPlayerKnifeAttack2HB,5)
 	
-		}
-		ds_list_destroy(hitByAttackNow);
-	}*/
-	player_attack_damage(2);
+		//if animation ends
+		if image_index >=image_number-1 {
+			state="free";
+			instance_destroy(myHitBox);
+			};
 	
-	//if animation ends
-	if image_index >=image_number-1 {
-		state="free";
-		instance_destroy(myHitBox);
-		};
-	
-	player_x_collision();
-	player_y_collision();
+		player_x_collision();
+		player_y_collision();
 	
 	
 	
 	break;
 	
 	case "attackcombo2":
-	
+		sprite_index=sPlayerKnifeAttack2;
+		player_attack_damage(4);
+		
+		//if animation ends
+		if image_index >=image_number-1 {
+			state="free";
+			instance_destroy(myHitBox);
+			};
+		
+		player_x_collision();
+		player_y_collision();
+		
 	break;
 	
 	case "hurt":
 	break;
+	
 	case "crouch_start":
 		mask_index=crouchSpr;
 		sprite_index=idleCrouchSpr
@@ -275,6 +220,7 @@ switch (state) {
 		
 		
 	break;
+	
 	case "crouch":
 		mask_index=crouchSpr;
 		sprite_index=crouchSpr;
@@ -304,6 +250,7 @@ switch (state) {
 		player_movement_collisions();
 	
 	break;
+	
 	case "uncrouch" :
 		mask_index=crouchSpr;
 		sprite_index=crouchIdleSpr

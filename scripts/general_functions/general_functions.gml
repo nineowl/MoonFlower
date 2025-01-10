@@ -35,6 +35,11 @@ function getControls(){
 	attackKeyPressed = keyboard_check_pressed(ord("N"));
 		attackKeyPressed = clamp(attackKeyPressed,0,1);
 		
+	interactKey = keyboard_check(ord("J"));
+		interactKey = clamp(interactKey,0,1);
+	interactKeyPressed = keyboard_check_pressed(ord("J"));
+		interactKeyPressed = clamp(interactKeyPressed,0,1);
+		
 	
 	//Menu Inputs
 	enterKey = keyboard_check(vk_enter) + gamepad_button_check(0,gp_start);

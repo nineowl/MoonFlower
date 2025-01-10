@@ -7,3 +7,6 @@ damageEvent = false;
 flashAlpha=0;
 flashColor=c_red;
 
+
+//dialogue functionality
+text_id = "";
