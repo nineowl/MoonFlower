@@ -12,8 +12,8 @@ textbox_y=camera_get_view_y(view_camera[0])+160;
 if setup==false {
 	setup=true;
 	draw_set_font(global.font_main);
-	draw_set_valign(fa_top);
-	draw_set_halign(fa_left);
+	draw_set_valign(fa_middle);
+	draw_set_halign(fa_center);
 	
 	//loop through pages
 	///page_number = array_length(text); //now redundant
@@ -48,6 +48,16 @@ if enterKeyPressed {
 			if option_number > 0 {
 			 create_textbox(option_link_id[option_pos]);
 			}
+			if (creatorID){ // This is used to help objects creating the textbox determine if end of text was reached
+				creatorID.nextFlag = true;
+				
+				with(creatorID){
+					if (text_index>=textMax-1){
+						cycleMode = true;
+					}
+				}
+			}
+			
 			instance_destroy();
 		
 		}
@@ -58,7 +68,8 @@ if enterKeyPressed {
 }
 
 
-
+//debug
+//draw_text(textbox_x+240,textbox_y+50,textbox_x);
 
 
 
@@ -104,4 +115,6 @@ if draw_char == text_length[page] && page == page_number-1{
 //draw the text
 
 var _drawtext = string_copy(text[page],1,draw_char);
-draw_text_ext(_txtb_x+border,_txtb_y,_drawtext,line_sep,line_width) // look better when you don't add the border to y, but may change depending on font
+draw_text_ext(textbox_x+centerXOffset,_txtb_y+centerYOffset,_drawtext,line_sep,line_width)
+
+//draw_text_ext(_txtb_x+border+centerXOffset,_txtb_y+centerYOffset,_drawtext,line_sep,line_width) // look better when you don't add the border to y, but may change depending on font

@@ -29,3 +29,9 @@ option_number = 0;
 
 setup=false;
 
+//Center Offsets
+centerXOffset = camera_get_view_width(view_camera[0])/2;  //180;
+centerYOffset = 50;
+
+//Records object that created this
+creatorID = noone;

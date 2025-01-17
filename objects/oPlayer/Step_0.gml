@@ -123,8 +123,17 @@ switch (state) {
 		
 		
 		NPC_MEET = instance_place(x,y,oNPC);
+		/*
 		if (NPC_MEET && interactKeyPressed && NPC_MEET.text_id != ""){
 			create_textbox(NPC_MEET.text_id);
+		}
+		*/
+		
+		//interact events can't happen if a textbox exists
+		if (!instance_exists(oTextBox)){
+				if (NPC_MEET && interactKeyPressed){
+				NPC_MEET.interactEvent = true;
+			}
 		}
 		
 
