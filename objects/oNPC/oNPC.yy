@@ -27,11 +27,17 @@
   "physicsShape":1,
   "physicsShapePoints":[],
   "physicsStartAwake":true,
-  "properties":[],
+  "properties":[
+    {"$GMObjectProperty":"v1","%Name":"idleSpr","filters":[],"listItems":[],"multiselect":false,"name":"idleSpr","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":" sDefault","varType":5,},
+    {"$GMObjectProperty":"v1","%Name":"walkSpr","filters":[],"listItems":[],"multiselect":false,"name":"walkSpr","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resource":{"name":"sDefault","path":"sprites/sDefault/sDefault.yy",},"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"sDefault","varType":5,},
+  ],
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":null,
+  "spriteId":{
+    "name":"sDefault",
+    "path":"sprites/sDefault/sDefault.yy",
+  },
   "spriteMaskId":null,
   "visible":true,
 }

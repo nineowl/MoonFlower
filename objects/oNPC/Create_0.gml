@@ -1,8 +1,10 @@
+//Properties
 HP = 10;
 invincible = false;
 
-damageEvent = false;
 
+//events
+damageEvent = false;
 interactEvent = false;
 
 
@@ -14,40 +16,32 @@ flashColor=c_red;
 //dialogue functionality
 text_id[0] = "";
 text_index = 0;
+death_text = "004";
 
-nextFlag = false;
+nextFlag = false; //This checks if dialogue reaches last page. If it does, this value is set to true in the textbox object.
 
 cycle_id[0] = ""; // Id of cycling text. Could be one id, leading to exhaustiv text.
 cycle_index = -1; //This feels risky, but the way we switch the cycle mode increments the index
-cycleMax = array_length(cycle_id);
 
 cycleMode = false; //It' set to true once all dialogue is exhausted.
 cycleType = false; //False - Ordered, True - Random;
-lastCycle = -1;
+lastCycle = -1; // starts at -1 since it gets incremented on cyclemode activation. A bit risky, maybe there's another way.
 
 
 myTextbox = noone; //initialize this variable
-
-talkRange = 60;
-
+talkRange = 60; //When this distance is passed, textboxes are destroyed
 
 
 
-/*
+//Movement & Collision
+xspd = 0;
+yspd = 0;
+moveSpd = 1;
+face = 1; //-1 left, 1 right
+moveDir = 0; //-1 left, 0, 1 right
 
-Interact types
+moveTimer = 0;
+moveTime = 40;
+dirSet = false;
 
-no dialogue - if text_id = "";
-
-exhaustive dialogue - dialogue repeats at the last text id. Exhaustive could lead into cycling
-
-cycling dialogue - dialogue cycles between
-
-single dialogue - one line of dialogue
-
-give flower/mushroom? - we'll try this later.
-
-
-
-
-*/
+//Please be sure to destroy any object created by this object upon it's own destruction unless that object has no dependencies.

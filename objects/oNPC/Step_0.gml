@@ -1,5 +1,12 @@
+#region damage related
 if (HP <= 0 && !invincible){
-	instance_destroy();
+	if (myTextbox){
+		with (myTextbox) {
+			instance_destroy();
+		}
+	}
+	create_textbox(death_text); //death dialogue. Later you may have to send this data to an external game object that keeps a list of deaths to prioritize death dialogue in the case of multiple simultaneous deaths. Or implement timer. Or both.
+	instance_destroy();//ANY destroy event must also destroy objects created by this object(unless there are no dependencies)
 }
 
 
@@ -13,12 +20,11 @@ if (flashAlpha>0){
 	flashAlpha-=.05;
 }
 
-
-
-//Damage event code should be reset every frame.
+//Damage event code should be reset every frame. //this could later be augmented with a buffer/timer
 damageEvent = false;
+#endregion
 
-
+#region interaction code
 //originally in create event, but needs to be in step event. Gets amount of dialogues
 textMax = array_length(text_id); // Get the maximum text entries
 cycleMax = array_length(cycle_id); //same as above but for cycle mode
@@ -82,9 +88,96 @@ if (nextFlag){
 	nextFlag = false;
 }
 
+#endregion
 
-//UPDATE THIS, this is barebones
+//Get out of solid moveplats that have positioned themselvesinto the NPC in the begin step
+#region moving wall collisions
+	var _rightWall=noone;
+	var _leftWall=noone;
+	var _bottomWall=noone;
+	var _topWall=noone;
+	var _list = ds_list_create();
+	var _listSize = instance_place_list(x,y,oMovePlat,_list,false);
+	
+	//loop through all the colliding  move plats
+	for(var i=0;i<_listSize;i++){
+		var _listInst = _list[| i];
+		
+		//Find closest walls in each direction
+			//Right Walls
+			if _listInst.bbox_left - _listInst.xspd >= bbox_right-1{
+				if !instance_exists(_rightWall) || _listInst.bbox_left < _rightWall.bbox_left {
+					_rightWall = _listInst;
+				}
+			}
+			//Left Walls
+			if _listInst.bbox_right - _listInst.xspd <= bbox_left+1{
+				if !instance_exists(_leftWall) || _listInst.bbox_right > _leftWall.bbox_right {
+					_leftWall = _listInst;
+				}
+			}
+			//Bottom Wall
+			if _listInst.bbox_top - _listInst.yspd >= bbox_bottom-1{
+				if !instance_exists(_bottomWall) || _listInst.bbox_top < _bottomWall.bbox_top {
+					_bottomWall = _listInst;
+				}
+			}
+			//Top Wall
+			if _listInst.bbox_bottom - _listInst.yspd <= bbox_top+1{
+				if !instance_exists(_topWall) || _listInst.bbox_bottom > _topWall.bbox_bottom {
+					_topWall = _listInst;
+				}
+			}
+	}
+	
+	//destroy the ds lsit to free memory
+	ds_list_destroy(_list);
+	
+	//Get out of the walls
+		//Right wall
+		if instance_exists(_rightWall){
+			var _rightDist = bbox_right - x;
+			x = _rightWall.bbox_left - _rightDist;
+		}
+		//Left Wall
+		if instance_exists(_leftWall){
+			var _leftDist = x - bbox_left;
+			x = _leftWall.bbox_right + _leftDist;
+		}
+		//Bottom Wall
+		if instance_exists(_bottomWall){
+			var _bottomDist = bbox_bottom - y;
+			y = _bottomWall.bbox_top - _bottomDist;
+		}
+		//Top Wall
+		if instance_exists(_topWall){
+			var _topDist = y - bbox_top;
+			var _targetY = _topWall.bbox_bottom + _topDist;
+			//Check if there isn't a wall in the way
+			if !place_meeting(x,_targetY,oWall){
+				y = _targetY;
+			}
+		}
+#endregion
 
-/* if the array index is less than the array length, increment the index.
-if the cycle_id does not equal "" and the array index = the array length,
-create a texbox using the cycle_id and increment the cycle id(stop once it's max). */
+xspd = moveDir * moveSpd;
+
+
+//quick set up for idle movement. For test purposes
+if (!dirSet){
+	moveDir = choose(-1,0,1);
+	dirSet = true;
+} else {
+	moveTimer++;
+	if (moveTimer >= moveTime){
+		moveTimer=0;
+		dirSet=false;
+		}
+}
+x += xspd; //make sure this happens after collision code
+
+if (xspd = 0) {
+		sprite_index=idleSpr
+	} else {
+		sprite_index=walkSpr
+	}

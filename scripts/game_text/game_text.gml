@@ -31,6 +31,9 @@ function game_text(_text_id){
 		scr_text("luv you");
 		scr_text("no really");
 		break;
+	case "004":
+		scr_text("...");
+		break;
 	
 	}
 

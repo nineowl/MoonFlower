@@ -34,7 +34,7 @@ if draw_char < text_length[page] {
 }
 
 //flip through pages
-if enterKeyPressed {
+if interactKeyPressed {
 
 	//if the typing is done
 	if draw_char == text_length[page] {
@@ -52,7 +52,7 @@ if enterKeyPressed {
 				creatorID.nextFlag = true;
 				
 				with(creatorID){
-					if (text_index>=textMax-1){
+					if (text_index>=textMax-1){ //Once dialogue is exhausted, dialogue mode changes for the dialogue creator
 						cycleMode = true;
 					}
 				}
