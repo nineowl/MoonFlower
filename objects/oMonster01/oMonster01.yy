@@ -5,7 +5,7 @@
   "managed":true,
   "name":"oMonster01",
   "overriddenProperties":[
-    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"oNPC","path":"objects/oNPC/oNPC.yy",},"propertyId":{"name":"idleSpr","path":"objects/oNPC/oNPC.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":" sMonster01_Idle",},
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"oNPC","path":"objects/oNPC/oNPC.yy",},"propertyId":{"name":"idleSpr","path":"objects/oNPC/oNPC.yy",},"resource":{"name":"sDefault","path":"sprites/sDefault/sDefault.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":" sMonster01_Idle",},
     {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"oNPC","path":"objects/oNPC/oNPC.yy",},"propertyId":{"name":"walkSpr","path":"objects/oNPC/oNPC.yy",},"resource":{"name":"sMonster01_walk","path":"sprites/sMonster01_walk/sMonster01_walk.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"sMonster01_walk",},
   ],
   "parent":{

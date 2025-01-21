@@ -151,6 +151,7 @@ switch (state) {
 			state="free";
 			instance_destroy(myHitBox);
 			};
+		
 	
 		player_x_collision();
 		player_y_collision();

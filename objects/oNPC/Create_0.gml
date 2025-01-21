@@ -36,12 +36,28 @@ talkRange = 60; //When this distance is passed, textboxes are destroyed
 //Movement & Collision
 xspd = 0;
 yspd = 0;
-moveSpd = 1;
+moveSpd = 0//1;
 face = 1; //-1 left, 1 right
 moveDir = 0; //-1 left, 0, 1 right
 
 moveTimer = 0;
 moveTime = 40;
 dirSet = false;
+
+//Jumping
+	grav = .275;
+	termVel = 4;
+
+
+//Moving Platforms
+myFloorPlat=noone;
+earlyMoveplatXspd=false;
+downSlopeSemiSolid=noone;
+forgetSemiSolid=noone;
+moveplatXspd=0;
+moveplatMaxYspd=termVel; //feel free to change if needed.
+
+
+
 
 //Please be sure to destroy any object created by this object upon it's own destruction unless that object has no dependencies.

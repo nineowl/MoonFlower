@@ -348,8 +348,8 @@ function player_attack_command(_nextState,_attackType,_comboFrame){
 		state = _nextState;
 		image_index=0;
 		myHitBox = instance_create_depth(x,y,depth,oPlayerHitBox,{
-			sprite_index : _attackType,
-			image_xscale : image_xscale*face//for whatever reason, this causes a visual bug if you keep the player hit box visible, but this allows it to work as intended.
+			sprite_index : _attackType//,
+			//image_xscale : image_xscale,//*face//for whatever reason, this causes a visual bug if you keep the player hit box visible, but this allows it to work as intended.
 			})
 		ds_list_clear(hitByAttack);
 		};
