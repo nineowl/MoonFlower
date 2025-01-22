@@ -177,10 +177,12 @@ if instance_exists(myFloorPlat) && myFloorPlat.xspd != 0 && !place_meeting(x,y+m
 	}
 }
 
+
 xspd = moveDir * moveSpd;
 
 
 //quick set up for idle movement. For test purposes
+
 if (!dirSet){
 	moveDir = choose(-1,0,1);
 	dirSet = true;
@@ -190,14 +192,22 @@ if (!dirSet){
 		moveTimer=0;
 		dirSet=false;
 		}
-}
+} 
 
 	//Get my face
 		if moveDir!=0{face=moveDir;};
+		
+
+var groundAhead = (place_meeting(x+xspd+(ledgeBuffer*moveDir),y+1,oWall) || place_meeting(x+xspd+(ledgeBuffer*moveDir),y+1,oSemiSolidWall))
+
+if (!groundAhead){
+	xspd = 0;
+}  //this will need to be updated to work in tandem with returning to home, and jumping when safe
+
 
 NPC_collisions_movement()
 	
-		
+	
 //for debug sake
 jumpAction = keyboard_check(vk_space);
 jumpActionStart = keyboard_check_pressed(vk_space);

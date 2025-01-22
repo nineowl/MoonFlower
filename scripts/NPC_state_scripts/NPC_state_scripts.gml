@@ -40,8 +40,8 @@ function NPC_collisions_movement(){
 		}
 
 
-x += xspd; //make sure this happens after collision code
 
+x += xspd; //make sure this happens after collision code
 
 //Jump Buffering
 	if jumpActionStart{

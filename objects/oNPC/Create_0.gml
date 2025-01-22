@@ -36,7 +36,7 @@ talkRange = 60; //When this distance is passed, textboxes are destroyed
 //Movement & Collision
 xspd = 0;
 yspd = 0;
-moveSpd = 0//1;
+moveSpd = 2//1;
 face = 1; //-1 left, 1 right
 moveDir = 0; //-1 left, 0, 1 right
 
@@ -126,6 +126,15 @@ function checkForSemisolidPlaform(_x,_y){
 
 
 //AI Related
-home = instance_create(x,y,oNPCHOME);
+//sets home for NPC, so if pathed away they can return.
+homeX = x;
+homeY = y;
+
+homeIdleDist = 30; //max distance from home NPC will go if idle;
+homeAggroDist = 60; //max distance from home NPC will go if aggro;
+
+ledgeBuffer = 8 // how close it will get to the ledge
+
+
 
 //Please be sure to destroy any object created by this object upon it's own destruction unless that object has no dependencies.
