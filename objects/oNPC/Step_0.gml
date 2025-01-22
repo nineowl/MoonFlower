@@ -1,3 +1,6 @@
+//sets face
+if (face != 0) image_xscale = face;
+
 #region damage related
 if (HP <= 0 && !invincible){
 	if (myTextbox){
@@ -159,6 +162,9 @@ if (nextFlag){
 			}
 		}
 #endregion
+
+
+
 //Don't get left behind by my moveplat !
 earlyMoveplatXspd=false;
 if instance_exists(myFloorPlat) && myFloorPlat.xspd != 0 && !place_meeting(x,y+moveplatMaxYspd+1, myFloorPlat){
@@ -189,41 +195,15 @@ if (!dirSet){
 	//Get my face
 		if moveDir!=0{face=moveDir;};
 
-	//X collision
-		var _subPixel = .5;
-		if place_meeting(x+xspd,y,oWall){
+NPC_collisions_movement()
+	
 		
-			//First Check if there is a slope to go up
-			if !place_meeting(x+xspd,y-abs(xspd)-1,oWall){  //the -1 is a little bit of padding
-				while place_meeting(x+xspd,y,oWall){y-=_subPixel;};
-			} else { //Next, check for ceiling slopes, otherwise, do a regular collision	
-				//Ceiling Slopes
-				if !place_meeting(x+xspd,y+abs(xspd)+1,oWall){
-					while place_meeting(x+xspd,y,oWall){y+=_subPixel;};
-				} else { //Normal X collision
-					//Scoot up to wall preciseley
-					var _pixelCheck = _subPixel * sign(xspd);
-					while !place_meeting(x+_pixelCheck,y,oWall){x+=_pixelCheck;};
-	
-					//Set xpsd to zero to collide
-					xspd=0;
-				}
-			}
-		} 
-	
-		//Go Down Slopes
-		downSlopeSemiSolid=noone;
-		if yspd>=0 && !place_meeting(x+xspd,y+1,oWall) && place_meeting(x+xspd,y+abs(xspd)+1,oWall){
-			//Check for a semisolid in the wway
-			downSlopeSemiSolid=checkForSemisolidPlaform(x+xspd,y+abs(xspd)+1);
-			//Precisely move down the slope if there isn't a semisolid in the way
-			if !instance_exists(downSlopeSemiSolid){
-				while !place_meeting(x+xspd,y+_subPixel,oWall){y+=_subPixel;};
-			}
-		}
+//for debug sake
+jumpAction = keyboard_check(vk_space);
+jumpActionStart = keyboard_check_pressed(vk_space);
 
 
-x += xspd; //make sure this happens after collision code
+
 
 if (xspd = 0) {
 		sprite_index=idleSpr

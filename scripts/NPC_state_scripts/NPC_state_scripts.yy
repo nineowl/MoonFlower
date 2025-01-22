@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"NPC_state_scripts",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"NPC_state_scripts",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
