@@ -207,11 +207,35 @@ if (!groundAhead){
 
 NPC_collisions_movement()
 	
-	
+
+//primitive jumping method
+if (jumpActionStart) {
+	jumpActionStart=false;
+	jumpAction = true;
+	jumpTimer = jumpTime;
+} // act like a keyboard check pressed
+
+if (jumpTimer>0){
+	jumpTimer--;
+} else {
+	if (jumpAction){
+		jumpAction=false;
+	}
+}
+
+randomJumpTimer++;
+if (randomJumpTimer >= randomJumpTime){
+	randomJumpTimer=0;
+	jumpActionStart = choose(0,1)
+}
+
+
+
+	/*
 //for debug sake
 jumpAction = keyboard_check(vk_space);
 jumpActionStart = keyboard_check_pressed(vk_space);
-
+*/
 
 
 

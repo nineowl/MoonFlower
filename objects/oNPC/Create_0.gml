@@ -70,7 +70,7 @@ dirSet = false;
 	jumpBuffered=false;
 	jumpBufferTimer=0;
 	
-	jumpActionStart=false;
+	jumpActionStart=false; //always starts with jump action
 	jumpAction=false;
 
 	
@@ -135,6 +135,11 @@ homeAggroDist = 60; //max distance from home NPC will go if aggro;
 
 ledgeBuffer = 8 // how close it will get to the ledge
 
+
+jumpTimer = 0;
+jumpTime = 80;
+randomJumpTimer=0;
+randomJumpTime=60;
 
 
 //Please be sure to destroy any object created by this object upon it's own destruction unless that object has no dependencies.
