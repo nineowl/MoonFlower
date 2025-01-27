@@ -35,17 +35,17 @@ cycleMax = array_length(cycle_id); //same as above but for cycle mode
 //If player pressed interact button
 if (interactEvent){
 	
-	if (!cycleMode){
-		myTextbox = create_textbox(text_id[text_index]);
-		myTextbox.creatorID = object_index;
+	if (text_id[0] != ""){
+		if (!cycleMode){
+			myTextbox = create_textbox(text_id[text_index]);
+			myTextbox.creatorID = object_index;
 	
 
-	} else {
-		myTextbox = create_textbox(cycle_id[cycle_index]);
-		myTextbox.creatorID = object_index;
+		} else {
+			myTextbox = create_textbox(cycle_id[cycle_index]);
+			myTextbox.creatorID = object_index;
+		}
 	}
-	
-	
 	interactEvent = false;
 	
 } 

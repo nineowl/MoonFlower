@@ -1,17 +1,17 @@
 {
   "$GMObject":"",
-  "%Name":"oSlope2",
+  "%Name":"oNPCShout",
   "eventList":[],
   "managed":true,
-  "name":"oSlope2",
+  "name":"oNPCShout",
   "overriddenProperties":[],
   "parent":{
-    "name":"Walls Collisions",
-    "path":"folders/Objects/Environment/Walls Collisions.yy",
+    "name":"Specific",
+    "path":"folders/Objects/NPCs/Specific.yy",
   },
   "parentObjectId":{
-    "name":"oWall",
-    "path":"objects/oWall/oWall.yy",
+    "name":"oNPC",
+    "path":"objects/oNPC/oNPC.yy",
   },
   "persistent":false,
   "physicsAngularDamping":0.1,
@@ -30,10 +30,7 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":{
-    "name":"sSlope2",
-    "path":"sprites/sSlope2/sSlope2.yy",
-  },
+  "spriteId":null,
   "spriteMaskId":null,
-  "visible":false,
+  "visible":true,
 }
