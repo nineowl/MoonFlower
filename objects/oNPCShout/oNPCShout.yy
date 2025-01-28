@@ -4,7 +4,17 @@
   "eventList":[],
   "managed":true,
   "name":"oNPCShout",
-  "overriddenProperties":[],
+  "overriddenProperties":[
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"oNPC","path":"objects/oNPC/oNPC.yy",},"propertyId":{"name":"idleSpr","path":"objects/oNPC/oNPC.yy",},"resource":{"name":"sNPCShoutIdle","path":"sprites/sNPCShoutIdle/sNPCShoutIdle.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"sNPCShoutIdle",},
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"oNPC","path":"objects/oNPC/oNPC.yy",},"propertyId":{"name":"walkSpr","path":"objects/oNPC/oNPC.yy",},"resource":{"name":"sNPCShoutWalk","path":"sprites/sNPCShoutWalk/sNPCShoutWalk.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"sNPCShoutWalk",},
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"oNPC","path":"objects/oNPC/oNPC.yy",},"propertyId":{"name":"runSpr","path":"objects/oNPC/oNPC.yy",},"resource":{"name":"sNPCShoutRun","path":"sprites/sNPCShoutRun/sNPCShoutRun.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"sNPCShoutRun",},
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"oNPC","path":"objects/oNPC/oNPC.yy",},"propertyId":{"name":"attack0Spr","path":"objects/oNPC/oNPC.yy",},"resource":{"name":"sNPCShoutKnifeAttack0","path":"sprites/sNPCShoutKnifeAttack0/sNPCShoutKnifeAttack0.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"sNPCShoutKnifeAttack0",},
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"oNPC","path":"objects/oNPC/oNPC.yy",},"propertyId":{"name":"attack0SprHB","path":"objects/oNPC/oNPC.yy",},"resource":{"name":"sNPCShoutKnifeAttack0HB","path":"sprites/sNPCShoutKnifeAttack0HB/sNPCShoutKnifeAttack0HB.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"sNPCShoutKnifeAttack0HB",},
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"oNPC","path":"objects/oNPC/oNPC.yy",},"propertyId":{"name":"attack1spr","path":"objects/oNPC/oNPC.yy",},"resource":{"name":"sNPCShoutKnifeAttack1","path":"sprites/sNPCShoutKnifeAttack1/sNPCShoutKnifeAttack1.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"sNPCShoutKnifeAttack1",},
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"oNPC","path":"objects/oNPC/oNPC.yy",},"propertyId":{"name":"attack1SprHB","path":"objects/oNPC/oNPC.yy",},"resource":{"name":"sNPCShoutKnifeAttack1HB","path":"sprites/sNPCShoutKnifeAttack1HB/sNPCShoutKnifeAttack1HB.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"sNPCShoutKnifeAttack1HB",},
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"oNPC","path":"objects/oNPC/oNPC.yy",},"propertyId":{"name":"jumpSpr","path":"objects/oNPC/oNPC.yy",},"resource":{"name":"sNPCShoutJump","path":"sprites/sNPCShoutJump/sNPCShoutJump.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"sNPCShoutJump",},
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"oNPC","path":"objects/oNPC/oNPC.yy",},"propertyId":{"name":"image_blend","path":"objects/oNPC/oNPC.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"$FF89C8FF",},
+  ],
   "parent":{
     "name":"Specific",
     "path":"folders/Objects/NPCs/Specific.yy",
@@ -30,7 +40,10 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":null,
+  "spriteId":{
+    "name":"sNPCShoutIdle",
+    "path":"sprites/sNPCShoutIdle/sNPCShoutIdle.yy",
+  },
   "spriteMaskId":null,
   "visible":true,
 }

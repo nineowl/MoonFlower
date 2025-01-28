@@ -3,12 +3,12 @@ if (face != 0) image_xscale = face;
 
 #region damage related
 if (HP <= 0 && !invincible){
-	if (myTextbox){
-		with (myTextbox) {
+	if (oTextBox){
+		with (oTextBox) { //this could be risky. ANY textbox will be destroyed on NPC death. Be sure to make it so it either doesn't matter, or prevent it from happening if it would
 			instance_destroy();
 		}
 	}
-	create_textbox(death_text); //death dialogue. Later you may have to send this data to an external game object that keeps a list of deaths to prioritize death dialogue in the case of multiple simultaneous deaths. Or implement timer. Or both.
+	if (death_text != ""){create_textbox(death_text); }//death dialogue. Later you may have to send this data to an external game object that keeps a list of deaths to prioritize death dialogue in the case of multiple simultaneous deaths. Or implement timer. Or both.
 	instance_destroy();//ANY destroy event must also destroy objects created by this object(unless there are no dependencies)
 }
 
@@ -208,6 +208,7 @@ if (!groundAhead){
 NPC_collisions_movement()
 	
 
+/*
 //primitive jumping method
 if (jumpActionStart) {
 	jumpActionStart=false;
@@ -228,7 +229,7 @@ if (randomJumpTimer >= randomJumpTime){
 	randomJumpTimer=0;
 	jumpActionStart = choose(0,1)
 }
-
+*/
 
 
 	/*
