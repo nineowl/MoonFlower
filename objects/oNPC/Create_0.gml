@@ -40,9 +40,6 @@ moveSpd = 2//1;
 face = 1; //-1 left, 1 right
 moveDir = 0; //-1 left, 0, 1 right
 
-moveTimer = 0;
-moveTime = 40;
-dirSet = false;
 
 	//Jumping
 	grav = .275;
@@ -141,5 +138,34 @@ jumpTime = 80;
 randomJumpTimer=0;
 randomJumpTime=60;
 
+
+moveTimer = 0;
+moveTime = 70; // in a way this indicates the maximum distance an NPC will travel while docile;
+dirSet = false;
+prevDir = 0;
+stationary = false; // determines if this NPC will move or not while docile;
+
+//States
+//Current state method uses a prev state for state returning
+prevState = ""; //set this state on state changes
+state = "docile";
+
+
+faction = "neutral"; //default faction. Set this differently at 
+// Personal relationships (override faction-based relations)
+//personal_relations = ds_map_create();
+//personal_relations[? oPlayer.id] = 0; // -1 = Hostile, 0 = Neutral, 1 = Friendly
+
+//faction = global.factions_relations.echo;
+
+
+personal_relations = [];
+
+identifier = generate_identifier();
+//show_message(identifier);
+
+//array_push(personal_relations, new special_relation("player", relation.enemy));
+
+//show_message(personal_relations[0])
 
 //Please be sure to destroy any object created by this object upon it's own destruction unless that object has no dependencies.

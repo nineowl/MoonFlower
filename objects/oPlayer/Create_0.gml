@@ -127,3 +127,8 @@ crushDeathTime=3;
 //Attack related
 hitByAttack = ds_list_create();
 knifeDamage = 2;
+
+//AI Related
+faction = "player";
+identifier = "player";
+

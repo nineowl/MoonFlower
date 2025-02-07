@@ -183,19 +183,11 @@ xspd = moveDir * moveSpd;
 
 //quick set up for idle movement. For test purposes
 
-if (!dirSet){
-	moveDir = choose(-1,0,1);
-	dirSet = true;
-} else {
-	moveTimer++;
-	if (moveTimer >= moveTime){
-		moveTimer=0;
-		dirSet=false;
-		}
-} 
+
 
 	//Get my face
 		if moveDir!=0{face=moveDir;};
+		
 		
 
 var groundAhead = (place_meeting(x+xspd+(ledgeBuffer*moveDir),y+1,oWall) || place_meeting(x+xspd+(ledgeBuffer*moveDir),y+1,oSemiSolidWall))
@@ -206,6 +198,63 @@ if (!groundAhead){
 
 
 NPC_collisions_movement()
+
+
+
+
+// Get relation to player (individual preference OR faction-based)
+var relation_to_player = GetNPCRelation(oPlayer.id);
+
+//State Machine
+
+switch (state) {
+	case "docile":
+	
+	
+		//If this NPC doesn't like the player and is close to them, aggro
+		 if (relation_to_player == relation.enemy && point_distance(x, y, oPlayer.x, oPlayer.y) < 150) {
+            state = "aggressive"; // Attack enemies
+			moveDir = 0;
+        } 
+	
+	
+		if (!dirSet){
+			if (prevDir!=0){ // this behavior basically makes it so that when the NPC is idly moving, it will stop after each movement and not keep running around.
+				moveDir = 0;
+				dirSet = true;
+				
+			} else {
+				while (moveDir = prevDir){
+					moveDir = choose(-1,0,1);
+					dirSet = true;
+				}
+			} 
+			prevDir = moveDir;
+		} else {
+			moveTimer--;
+			if (moveTimer <= 0){
+				moveTimer=irandom(moveTime);
+				dirSet=false;
+				}
+		} 
+		if (stationary){ // you need to clean this up and refine this
+			moveTimer--;
+			moveDir = 0;
+			if (moveTimer<=0){
+				face = choose(-1,1);
+				moveTimer=irandom(moveTime);
+			}
+		}
+	
+	break;
+	
+	case "aggressive":
+		image_blend = c_red;
+	break;
+
+}
+
+
 	
 
 /*
