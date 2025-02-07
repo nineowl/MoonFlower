@@ -1,3 +1,6 @@
+getControlsNPC();
+
+
 //sets face
 if (face != 0) image_xscale = face;
 
@@ -178,7 +181,17 @@ if instance_exists(myFloorPlat) && myFloorPlat.xspd != 0 && !place_meeting(x,y+m
 }
 
 
-xspd = moveDir * moveSpd;
+
+//Direction
+		moveDir = rightAction - leftAction; //can likely be organizeed outside of states
+		//Get my face
+		if moveDir!=0{face=moveDir;}; //this too
+
+		//Get xspd
+		runType=runAction;  //can possibly be organized outside of the states
+		xspd = moveDir * moveSpd[runType];	
+
+//xspd = moveDir * moveSpd[0];
 
 
 //quick set up for idle movement. For test purposes
@@ -197,26 +210,28 @@ if (!groundAhead){
 }  //this will need to be updated to work in tandem with returning to home, and jumping when safe
 
 
-NPC_collisions_movement()
+//NPC_collisions_movement()
 
 
 
 
 // Get relation to player (individual preference OR faction-based)
-var relation_to_player = GetNPCRelation(oPlayer.id);
-
+if (instance_exists(oPlayer)){ // probably unnecessary, implemented for testing
+	var relation_to_player = GetNPCRelation(oPlayer.id);
+}
 //State Machine
-
+#region statemachine
+/*
 switch (state) {
 	case "docile":
 	
-	
-		//If this NPC doesn't like the player and is close to them, aggro
-		 if (relation_to_player == relation.enemy && point_distance(x, y, oPlayer.x, oPlayer.y) < 150) {
-            state = "aggressive"; // Attack enemies
-			moveDir = 0;
-        } 
-	
+		if (instance_exists(oPlayer)){ // probably can get rid of this, for testing
+			//If this NPC doesn't like the player and is close to them, aggro
+			 if (relation_to_player == relation.enemy && point_distance(x, y, oPlayer.x, oPlayer.y) < 150) {
+	            state = "aggressive"; // Attack enemies
+				moveDir = 0;
+	        } 
+		}
 	
 		if (!dirSet){
 			if (prevDir!=0){ // this behavior basically makes it so that when the NPC is idly moving, it will stop after each movement and not keep running around.
@@ -254,8 +269,109 @@ switch (state) {
 
 }
 
+*/
+#endregion
+switch (state) {
+	case "free":
+		NPC_collisions_movement()
+		//Sprite Control
+		//Walking
+		if abs(xspd)>0{sprite_index=walkSpr;};
+		//Running
+		if abs(xspd)>=moveSpd[1]{sprite_index=runSpr;};
+		//Not moving
+		if xspd==0{sprite_index=idleSpr;};
+		//in the air
+		if !onGround{sprite_index=jumpSpr;};
 
+		/*
+		//Crouching
+		//Transition to crouch
+		//Manual = onGround / Auto = placemeeting
+		if onGround && (downKey || place_meeting(x,y,oWall)) {
+			state = "crouch_start";
+			image_index=0;
+		}
+
+		player_attack_command("attack",sPlayerKnifeAttack0HB,0);
+		
+		
+		NPC_MEET = instance_place(x,y,oNPC); */
+		/*
+		if (NPC_MEET && interactKeyPressed && NPC_MEET.text_id != ""){
+			create_textbox(NPC_MEET.text_id);
+		}
+		*/
+		/*
+		//interact events can't happen if a textbox exists
+		if (!instance_exists(oTextBox)){
+				if (NPC_MEET && interactKeyPressed){
+				NPC_MEET.interactEvent = true;
+			}
+		} */
+		
+
+	break;
 	
+	case "attack":
+		/*sprite_index = knifeAttack0Spr;
+	
+		player_attack_damage(2);
+		player_attack_command("attackcombo1",sPlayerKnifeAttack1HB,5);
+	
+	
+		//if animation ends
+		if image_index >=image_number-1 {
+			state="free";
+			instance_destroy(myHitBox);
+			};
+		
+	
+		player_x_collision();
+		player_y_collision();
+		*/
+		NPC_collisions_movement();
+	
+	break;
+	
+	case "attackcombo1":
+		/*sprite_index = knifeAttack1Spr;
+		player_attack_damage(2);
+		player_attack_command("attackcombo2",sPlayerKnifeAttack2HB,5)
+	
+		//if animation ends
+		if image_index >=image_number-1 {
+			state="free";
+			instance_destroy(myHitBox);
+			};
+		*/
+		NPC_collisions_movement();
+	
+	
+	
+	break;
+	
+	case "attackcombo2":
+		/*sprite_index=sPlayerKnifeAttack2;
+		player_attack_damage(4);
+		
+		//if animation ends
+		if image_index >=image_number-1 {
+			state="free";
+			instance_destroy(myHitBox);
+			}; */
+		
+		NPC_collisions_movement();
+		
+	break;
+	
+	case "hurt":
+	break;
+	
+	
+}
+
+
 
 /*
 //primitive jumping method
@@ -287,10 +403,11 @@ jumpAction = keyboard_check(vk_space);
 jumpActionStart = keyboard_check_pressed(vk_space);
 */
 
-
+/*
 
 if (xspd = 0) {
 		sprite_index=idleSpr
 	} else {
 		sprite_index=walkSpr
 	}
+	*/

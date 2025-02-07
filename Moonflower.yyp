@@ -87,6 +87,7 @@
     {"id":{"name":"oWall","path":"objects/oWall/oWall.yy",},},
     {"id":{"name":"Playground","path":"rooms/Playground/Playground.yy",},},
     {"id":{"name":"rmInit","path":"rooms/rmInit/rmInit.yy",},},
+    {"id":{"name":"rmNPCTesting","path":"rooms/rmNPCTesting/rmNPCTesting.yy",},},
     {"id":{"name":"rmTest","path":"rooms/rmTest/rmTest.yy",},},
     {"id":{"name":"rmTitle","path":"rooms/rmTitle/rmTitle.yy",},},
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
@@ -159,6 +160,7 @@
   "resourceVersion":"2.0",
   "RoomOrderNodes":[
     {"roomId":{"name":"rmInit","path":"rooms/rmInit/rmInit.yy",},},
+    {"roomId":{"name":"rmNPCTesting","path":"rooms/rmNPCTesting/rmNPCTesting.yy",},},
     {"roomId":{"name":"Playground","path":"rooms/Playground/Playground.yy",},},
     {"roomId":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
     {"roomId":{"name":"rmTest","path":"rooms/rmTest/rmTest.yy",},},

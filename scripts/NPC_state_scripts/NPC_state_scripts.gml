@@ -43,16 +43,7 @@ function NPC_collisions_movement(){
 
 x += xspd; //make sure this happens after collision code
 
-//Jump Buffering
-	if jumpActionStart{
-		jumpBufferTimer =jumpBufferTime;
-	}
-	if jumpBufferTimer>0{
-		jumpBuffered=true;
-		jumpBufferTimer--;
-	}else{
-		jumpBuffered=false;
-	}
+
 
 	//Gravity
 		if coyoteHangTimer>0{

@@ -36,7 +36,8 @@ talkRange = 60; //When this distance is passed, textboxes are destroyed
 //Movement & Collision
 xspd = 0;
 yspd = 0;
-moveSpd = 2//1;
+moveSpd[0] = 2;
+moveSpd[1] = 3.5;
 face = 1; //-1 left, 1 right
 moveDir = 0; //-1 left, 0, 1 right
 
@@ -148,7 +149,7 @@ stationary = false; // determines if this NPC will move or not while docile;
 //States
 //Current state method uses a prev state for state returning
 prevState = ""; //set this state on state changes
-state = "docile";
+state = "free";
 
 
 faction = "neutral"; //default faction. Set this differently at 
@@ -166,6 +167,80 @@ identifier = generate_identifier();
 
 //array_push(personal_relations, new special_relation("player", relation.enemy));
 
-//show_message(personal_relations[0])
+///Testing with control of NPC
+//control setup
+controlsSetupNPC();
+
+function controlsSetupNPC(){
+	jumpBufferTime=3;
+	jumpBuffered=0;
+	jumpBufferTimer=0;
+}
+
+function getControlsNPC(){
+	//Direction Inputs
+	rightAction = keyboard_check((ord("D"))) + gamepad_button_check(0,gp_padr);
+		rightAction = clamp(rightAction,0,1);
+	leftAction = keyboard_check((ord("A"))) + gamepad_button_check(0,gp_padl);
+		leftAction = clamp(leftAction,0,1);
+	downAction = keyboard_check((ord("S"))) + gamepad_button_check(0,gp_padd);
+		downAction = clamp(downAction,0,1);
+	upAction = keyboard_check((ord("W"))) + gamepad_button_check(0,gp_padu);
+		upAction = clamp(upAction,0,1);
+	
+	downActionStart = keyboard_check_pressed((ord("S"))) + gamepad_button_check_pressed(0,gp_padd);
+		downActionStart = clamp(downActionStart,0,1);
+	upActionStart = keyboard_check_pressed((ord("W"))) + gamepad_button_check_pressed(0,gp_padu);
+		upActionStart = clamp(upActionStart,0,1);
+	
+	
+	//Action Inputs
+	jumpActionStart = keyboard_check_pressed(vk_space) + gamepad_button_check_pressed(0, gp_face1);
+		jumpActionStart = clamp(jumpActionStart,0,1);
+	jumpAction = keyboard_check(vk_space) + gamepad_button_check(0, gp_face1);
+		jumpAction = clamp(jumpAction,0,1);
+		
+	runAction = keyboard_check(vk_lshift)+gamepad_button_check(0,gp_face3);
+		runAction = clamp(runAction,0,1);
+		
+	attackAction = keyboard_check(ord("N"));
+		attackAction = clamp(attackAction,0,1);
+	attackActionStart = keyboard_check_pressed(ord("N"));
+		attackActionStart = clamp(attackActionStart,0,1);
+		
+		/*
+	interactKey = keyboard_check(ord("J"));
+		interactKey = clamp(interactKey,0,1);
+	interactKeyPressed = keyboard_check_pressed(ord("J"));
+		interactKeyPressed = clamp(interactKeyPressed,0,1);
+		
+	
+	//Menu Inputs
+	enterKey = keyboard_check(vk_enter) + gamepad_button_check(0,gp_start);
+		enterKey = clamp(enterKey,0,1);
+	enterKeyPressed = keyboard_check_pressed(vk_enter) + gamepad_button_check_pressed(0,gp_start);
+		enterKeyPressed = clamp(enterKeyPressed,0,1);
+	
+	*/
+		
+//Jump Buffering
+	if jumpActionStart{
+		jumpBufferTimer =jumpBufferTime;
+	}
+	if jumpBufferTimer>0{
+		jumpBuffered=true;
+		jumpBufferTimer--;
+	}else{
+		jumpBuffered=false;
+	}
+	
+
+}
+
+
+
+
+
+
 
 //Please be sure to destroy any object created by this object upon it's own destruction unless that object has no dependencies.
