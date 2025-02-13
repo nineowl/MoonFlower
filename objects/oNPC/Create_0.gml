@@ -238,6 +238,11 @@ function getControlsNPC(){
 }
 
 
+//Attack Related
+//Attack related
+hitByAttack = ds_list_create();
+damage = 2;
+
 
 
 

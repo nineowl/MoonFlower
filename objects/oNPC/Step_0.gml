@@ -205,7 +205,7 @@ if instance_exists(myFloorPlat) && myFloorPlat.xspd != 0 && !place_meeting(x,y+m
 
 var groundAhead = (place_meeting(x+xspd+(ledgeBuffer*moveDir),y+1,oWall) || place_meeting(x+xspd+(ledgeBuffer*moveDir),y+1,oSemiSolidWall))
 
-if (!groundAhead){
+if (!groundAhead && onGround ){
 	xspd = 0;
 }  //this will need to be updated to work in tandem with returning to home, and jumping when safe
 
@@ -284,6 +284,8 @@ switch (state) {
 		//in the air
 		if !onGround{sprite_index=jumpSpr;};
 
+		NPC_attack_command("attack",attack0SprHB,0);
+	
 		/*
 		//Crouching
 		//Transition to crouch
@@ -314,6 +316,12 @@ switch (state) {
 	break;
 	
 	case "attack":
+		sprite_index = attack0Spr;
+		//if animation ends
+		if image_index >=image_number-1 {
+			state="free";
+			instance_destroy(myHitBox);
+			};
 		/*sprite_index = knifeAttack0Spr;
 	
 		player_attack_damage(2);
@@ -330,7 +338,8 @@ switch (state) {
 		player_x_collision();
 		player_y_collision();
 		*/
-		NPC_collisions_movement();
+		NPC_x_collision();
+		NPC_y_collision();
 	
 	break;
 	

@@ -63,6 +63,7 @@
     {"id":{"name":"oMonster01","path":"objects/oMonster01/oMonster01.yy",},},
     {"id":{"name":"oMovePlat","path":"objects/oMovePlat/oMovePlat.yy",},},
     {"id":{"name":"oNPC","path":"objects/oNPC/oNPC.yy",},},
+    {"id":{"name":"oNPCHitBox","path":"objects/oNPCHitBox/oNPCHitBox.yy",},},
     {"id":{"name":"oNPCShout","path":"objects/oNPCShout/oNPCShout.yy",},},
     {"id":{"name":"oOverRain","path":"objects/oOverRain/oOverRain.yy",},},
     {"id":{"name":"oParallaxBG00","path":"objects/oParallaxBG00/oParallaxBG00.yy",},},
