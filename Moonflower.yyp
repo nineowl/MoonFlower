@@ -60,6 +60,7 @@
     {"id":{"name":"oGame","path":"objects/oGame/oGame.yy",},},
     {"id":{"name":"oLayer1","path":"objects/oLayer1/oLayer1.yy",},},
     {"id":{"name":"oLayerN1","path":"objects/oLayerN1/oLayerN1.yy",},},
+    {"id":{"name":"oLife","path":"objects/oLife/oLife.yy",},},
     {"id":{"name":"oMonster01","path":"objects/oMonster01/oMonster01.yy",},},
     {"id":{"name":"oMovePlat","path":"objects/oMovePlat/oMovePlat.yy",},},
     {"id":{"name":"oNPC","path":"objects/oNPC/oNPC.yy",},},

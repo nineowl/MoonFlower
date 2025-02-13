@@ -210,8 +210,6 @@ if (!groundAhead && onGround ){
 }  //this will need to be updated to work in tandem with returning to home, and jumping when safe
 
 
-//NPC_collisions_movement()
-
 
 
 
@@ -295,28 +293,15 @@ switch (state) {
 			image_index=0;
 		}
 
-		player_attack_command("attack",sPlayerKnifeAttack0HB,0);
-		
-		
-		NPC_MEET = instance_place(x,y,oNPC); */
-		/*
-		if (NPC_MEET && interactKeyPressed && NPC_MEET.text_id != ""){
-			create_textbox(NPC_MEET.text_id);
-		}
 		*/
-		/*
-		//interact events can't happen if a textbox exists
-		if (!instance_exists(oTextBox)){
-				if (NPC_MEET && interactKeyPressed){
-				NPC_MEET.interactEvent = true;
-			}
-		} */
 		
 
 	break;
 	
 	case "attack":
 		sprite_index = attack0Spr;
+		NPC_attack_damage(2);
+		
 		//if animation ends
 		if image_index >=image_number-1 {
 			state="free";

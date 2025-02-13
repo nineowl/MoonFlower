@@ -658,12 +658,14 @@ function NPC_attack_command(_nextState,_attackType,_comboFrame){
 function NPC_attack_damage(_damage){
 	with (myHitBox) {
 		var hitByAttackNow = ds_list_create();
-		var hits = instance_place_list(x,y,oNPC,hitByAttackNow,false);
+		
+		var hits = instance_place_list(x,y,oLife,hitByAttackNow,false);
+		
 		if (hits > 0){
 			for (var i=0;i<hits;i++){
 				//if this instance has not yet been hit by this attack
 				var hitID = hitByAttackNow[| i];
-				if (ds_list_find_index(other.hitByAttack,hitID)==-1){
+				if (ds_list_find_index(other.hitByAttack,hitID)==-1 && hitID != creatorID){ //conditions prevent the attack from hurting itself
 					ds_list_add(other.hitByAttack,hitID);
 					with (hitID) {
 						//whatever is gonna happen to the enemy
