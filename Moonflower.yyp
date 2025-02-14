@@ -114,6 +114,7 @@
     {"id":{"name":"sMenu","path":"sprites/sMenu/sMenu.yy",},},
     {"id":{"name":"sMenuArrow","path":"sprites/sMenuArrow/sMenuArrow.yy",},},
     {"id":{"name":"sMonster01_attack","path":"sprites/sMonster01_attack/sMonster01_attack.yy",},},
+    {"id":{"name":"sMonster01_attackHB","path":"sprites/sMonster01_attackHB/sMonster01_attackHB.yy",},},
     {"id":{"name":"sMonster01_Idle","path":"sprites/sMonster01_Idle/sMonster01_Idle.yy",},},
     {"id":{"name":"sMonster01_walk","path":"sprites/sMonster01_walk/sMonster01_walk.yy",},},
     {"id":{"name":"sMovePlat","path":"sprites/sMovePlat/sMovePlat.yy",},},
