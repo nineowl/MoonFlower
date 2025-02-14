@@ -1,4 +1,4 @@
-getControlsNPC();
+//getControlsNPC();
 
 
 //sets face
@@ -213,24 +213,69 @@ if (!groundAhead && onGround ){
 
 
 
+
+
 // Get relation to player (individual preference OR faction-based)
 if (instance_exists(oPlayer)){ // probably unnecessary, implemented for testing
 	var relation_to_player = GetNPCRelation(oPlayer.id);
 }
-//State Machine
+
+
+//Action handling
+// Reset single-frame actions --- consolidate this into a function
+jumpActionStart = false;
+attackActionStart = false;
+
+// Get all active actions
+var keys = variable_struct_get_names(action_queue);
+for (var i = 0; i < array_length(keys); i++) {
+    var key = keys[i];
+
+    if (action_queue[$ key] > 0) {
+        // Set corresponding action variables
+        if (key == "jump") {
+            jumpAction = true;
+            if (action_queue[$ key] == 1) jumpActionStart = true;
+        }
+        else if (key == "attack") {
+            attackAction = true;
+            if (action_queue[$ key] == 1) attackActionStart = true;
+        }
+
+        // Decrease timer
+        action_queue[$ key]--;
+
+        // Remove action when it expires
+        if (action_queue[$ key] <= 0) {
+            struct_remove(action_queue, key);
+        }
+    }
+}
+
+if keyboard_check_pressed(ord("B")){
+	QueueAction("attack",1);
+}
+
+
+//State Machine for behavior
+
 #region statemachine
-/*
-switch (state) {
+
+switch (ai_state) {
 	case "docile":
 	
 		if (instance_exists(oPlayer)){ // probably can get rid of this, for testing
 			//If this NPC doesn't like the player and is close to them, aggro
 			 if (relation_to_player == relation.enemy && point_distance(x, y, oPlayer.x, oPlayer.y) < 150) {
-	            state = "aggressive"; // Attack enemies
+	            ai_state = "aggressive"; // Attack enemies
 				moveDir = 0;
 	        } 
 		}
-	
+		
+
+		
+		#region legacy
+		/*
 		if (!dirSet){
 			if (prevDir!=0){ // this behavior basically makes it so that when the NPC is idly moving, it will stop after each movement and not keep running around.
 				moveDir = 0;
@@ -258,7 +303,8 @@ switch (state) {
 				moveTimer=irandom(moveTime);
 			}
 		}
-	
+		*/
+		#endregion
 	break;
 	
 	case "aggressive":
@@ -267,7 +313,7 @@ switch (state) {
 
 }
 
-*/
+
 #endregion
 switch (state) {
 	case "free":

@@ -6,3 +6,5 @@ cycle_id[1] = "003";
 cycle_id[2] = "000";
 
 cycleType = true;
+
+//array_push(personal_relations, new special_relation("player", relation.enemy));

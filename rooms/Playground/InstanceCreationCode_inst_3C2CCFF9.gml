@@ -1,4 +1,4 @@
 faction = "echo";
 identifier = "shout"
 
-//personal_relations[? oPlayer.id] = -1;
+array_push(personal_relations, new special_relation("player", relation.enemy));

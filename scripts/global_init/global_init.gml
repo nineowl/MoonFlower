@@ -32,7 +32,13 @@ global.faction_relations = {
         mirror : relation.enemy,
         neutral : relation.neutral,
 		player : relation.neutral
-    }
+    },
+	neutral : {
+		echo : relation.neutral,
+		mirror : relation.neutral,
+		player : relation.neutral
+	
+	}
 }
 
 

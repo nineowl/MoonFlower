@@ -175,6 +175,32 @@ function controlsSetupNPC(){
 	jumpBufferTime=3;
 	jumpBuffered=0;
 	jumpBufferTimer=0;
+	
+	
+	//Direction Inputs
+	rightAction = false;
+	leftAction = false;
+	downAction = false;
+	upAction = false;
+	
+	downActionStart = false;
+	upActionStart = false;
+	
+	
+	//Action Inputs
+	jumpActionStart = false;
+	jumpAction = false;
+		
+	runAction = false;
+		
+	attackAction = false;
+	attackActionStart = false;
+	
+	
+	
+	
+	
+	
 }
 
 function getControlsNPC(){
@@ -245,7 +271,14 @@ damage = 2;
 
 
 
+//Logic State Machine
+ai_state = "docile";
+target = noone;
+action_queue = {};
 
+function QueueAction(action_name, frames) {
+    action_queue[$ action_name] = frames; 
+}
 
 
 //Please be sure to destroy any object created by this object upon it's own destruction unless that object has no dependencies.
