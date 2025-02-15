@@ -221,27 +221,39 @@ if (instance_exists(oPlayer)){ // probably unnecessary, implemented for testing
 }
 
 
+
 //Action handling
 // Reset single-frame actions --- consolidate this into a function
 jumpActionStart = false;
 attackActionStart = false;
+rightAction=false;
 
 // Get all active actions
 var keys = variable_struct_get_names(action_queue);
 for (var i = 0; i < array_length(keys); i++) {
     var key = keys[i];
 
-    if (action_queue[$ key] > 0) {
-        // Set corresponding action variables
-        if (key == "jump") {
-            jumpAction = true;
-            if (action_queue[$ key] == 1) jumpActionStart = true;
-        }
-        else if (key == "attack") {
-            attackAction = true;
-            if (action_queue[$ key] == 1) attackActionStart = true;
-        }
+ if (action_queue[$ key] > 0) {
+        switch (key) {
+            case "jump":
+                jumpAction = true;
+                if (action_queue[$ key] == 1) jumpActionStart = true;
+                break;
 
+            case "attack":
+                attackAction = true;
+                if (action_queue[$ key] == 1) attackActionStart = true;
+                break;
+
+            case "move_left":
+                moveLeftAction = true;
+                break;
+
+            case "move_right":
+                rightAction = true;
+                break;
+
+        }
         // Decrease timer
         action_queue[$ key]--;
 
@@ -253,8 +265,24 @@ for (var i = 0; i < array_length(keys); i++) {
 }
 
 if keyboard_check_pressed(ord("B")){
-	QueueAction("attack",1);
+	//QueueAction("jump",1);
+	QueueAction("move_right",50)
+
 }
+
+//the way jumping works, you need to keep this underneath the action handler
+//Jump Buffering
+	if jumpActionStart{
+		jumpBufferTimer =jumpBufferTime;
+	}
+	if jumpBufferTimer>0{
+		jumpBuffered=true;
+		jumpBufferTimer--;
+	}else{
+		jumpBuffered=false;
+	}
+	
+
 
 
 //State Machine for behavior
