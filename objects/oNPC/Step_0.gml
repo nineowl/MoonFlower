@@ -227,26 +227,31 @@ if (instance_exists(oPlayer)){ // probably unnecessary, implemented for testing
 jumpActionStart = false;
 attackActionStart = false;
 rightAction=false;
+leftAction=false;
+idleAction = false;
 
+
+#region old 
+/*
 // Get all active actions
 var keys = variable_struct_get_names(action_queue);
 for (var i = 0; i < array_length(keys); i++) {
     var key = keys[i];
 
- if (action_queue[$ key] > 0) {
+ if (action_queue[$ key].duration > 0) {
         switch (key) {
             case "jump":
                 jumpAction = true;
-                if (action_queue[$ key] == 1) jumpActionStart = true;
+                if (action_queue[$ key].duration == 1) jumpActionStart = true;
                 break;
 
             case "attack":
                 attackAction = true;
-                if (action_queue[$ key] == 1) attackActionStart = true;
+                if (action_queue[$ key].duration == 1) attackActionStart = true;
                 break;
 
             case "move_left":
-                moveLeftAction = true;
+                leftAction = true;
                 break;
 
             case "move_right":
@@ -255,18 +260,87 @@ for (var i = 0; i < array_length(keys); i++) {
 
         }
         // Decrease timer
-        action_queue[$ key]--;
+        action_queue[$ key].duration--;
 
         // Remove action when it expires
-        if (action_queue[$ key] <= 0) {
+        if (action_queue[$ key].duration <= 0) {
             struct_remove(action_queue, key);
+			break;
+        }
+		
+		  // If this action is sequential, stop processing further actions
+       if (action_queue[$ key].sequential) {
+            //sequential_mode = true;
+            break;
+        }
+    }
+}
+*/
+#endregion
+
+// Get all active actions
+var keys = variable_struct_get_names(action_queue);
+var sequential_mode = false; // Track if we should execute sequentially this frame
+
+for (var i = 0; i < array_length(keys); i++) {
+    var key = keys[i];
+    var action = action_queue[$ key];
+
+    if (action.duration > 0) {
+        switch (key) {
+            case "jump":
+                jumpAction = true;
+                if (action.duration == 1) jumpActionStart = true;
+                break;
+
+            case "attack":
+                attackAction = true;
+                if (action.duration == 1) attackActionStart = true;
+                break;
+
+            case "move_left":
+                leftAction = true;
+                break;
+
+            case "move_right":
+                rightAction = true;
+                break;
+				
+			case "idle": // New "do nothing" action
+                idleAction = true;
+                break;
+
+        }
+
+        // Decrease timer
+        action_queue[$ key].duration--;
+
+        // Remove action when it expires
+        if (action_queue[$ key].duration <= 0) {
+            struct_remove(action_queue, key);
+        }
+
+        // If this action is sequential, stop processing further actions
+        if (action.sequential) {
+            sequential_mode = true;
+            break;
         }
     }
 }
 
+
+
+
 if keyboard_check_pressed(ord("B")){
 	//QueueAction("jump",1);
-	QueueAction("move_right",50)
+			QueueAction("move_right",30)
+			QueueAction("idle",50)
+			QueueAction("move_left",40)
+			QueueAction("idle",60)
+			QueueAction("move_right",30)
+			QueueAction("idle",50)
+			QueueAction("move_left",40)
+			QueueAction("idle",60)
 
 }
 
@@ -298,6 +372,13 @@ switch (ai_state) {
 	            ai_state = "aggressive"; // Attack enemies
 				moveDir = 0;
 	        } 
+		}
+		
+		if (stationary && array_length(variable_struct_get_names(action_queue)) == 0){
+			QueueAction("move_right",30)
+			QueueAction("idle",50)
+			QueueAction("move_left",40)
+			QueueAction("idle",60)
 		}
 		
 

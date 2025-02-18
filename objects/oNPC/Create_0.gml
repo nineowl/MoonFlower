@@ -276,9 +276,18 @@ ai_state = "docile";
 target = noone;
 action_queue = {};
 
+/*
 function QueueAction(action_name, frames) {
     action_queue[$ action_name] = frames; 
+} */
+
+function QueueAction(action_name, frames, is_sequential = true) {
+    action_queue[$ action_name] = {
+        duration: frames,
+        sequential: is_sequential
+    };
 }
+
 
 
 //Please be sure to destroy any object created by this object upon it's own destruction unless that object has no dependencies.
