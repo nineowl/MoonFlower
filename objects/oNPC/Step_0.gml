@@ -223,13 +223,14 @@ if (instance_exists(oPlayer)){ // probably unnecessary, implemented for testing
 
 
 //Action handling
+/*
 // Reset single-frame actions --- consolidate this into a function
 jumpActionStart = false;
 attackActionStart = false;
 rightAction=false;
 leftAction=false;
 idleAction = false;
-
+*/
 
 #region old 
 /*
@@ -277,7 +278,8 @@ for (var i = 0; i < array_length(keys); i++) {
 }
 */
 #endregion
-
+#region old
+/*
 // Get all active actions
 var keys = variable_struct_get_names(action_queue);
 var sequential_mode = false; // Track if we should execute sequentially this frame
@@ -326,21 +328,171 @@ for (var i = 0; i < array_length(keys); i++) {
             break;
         }
     }
+} */
+
+#endregion
+#region old
+/*
+if (array_length(action_queue) > 0) {
+    var action = action_queue[0]; // Get the first action in the queue
+
+    switch (action._name) {
+        case "jump":
+            jumpAction = true;
+            if (action.duration == 1) jumpActionStart = true;
+            break;
+
+        case "attack":
+            attackAction = true;
+            if (action.duration == 1) attackActionStart = true;
+            break;
+
+        case "left":
+            leftAction = true;
+            break;
+
+        case "right":
+            rightAction = true;
+            break;
+
+        case "idle": 
+            idleAction = true;
+            break;
+    }
+
+    // Reduce duration
+    action.duration--;
+
+    // If action is finished, remove it from the queue
+    if (action.duration <= 0) {
+        array_delete(action_queue, 0, 1); // Remove the first action
+    }
+
+}
+*/
+
+/*
+if (array_length(action_queue) > 0) {
+    var action = action_queue[0]; // Get the first action in the queue
+
+    // Reset all input variables
+    leftAction = false;
+    rightAction = false;
+    jumpAction = false;
+    jumpActionStart = false;
+    attackAction = false;
+    attackActionStart = false;
+    idleAction = false;
+
+    // Execute action based on its type
+    switch (action._name) {
+        case "jump":
+            jumpAction = true;
+            if (action.duration == 1) jumpActionStart = true;
+            break;
+
+        case "attack":
+            attackAction = true;
+            if (action.duration == 1) attackActionStart = true;
+            break;
+
+        case "left":
+            leftAction = true;
+            break;
+
+        case "right":
+            rightAction = true;
+            break;
+
+        case "idle":
+            idleAction = true;
+            break;
+    }
+
+    // Reduce duration
+    action_queue[0].duration--;
+
+    // If action is finished, remove it from the queue
+    if (action_queue[0].duration <= 0) {
+        array_delete(action_queue, 0, 1); // Remove completed action
+    }
+}
+
+*/
+#endregion
+
+if (array_length(action_queue) > 0) {
+	var current_actions = action_queue[0];// get the first entry
+	
+	// Reset all input variables
+    leftAction = false;
+    rightAction = false;
+    jumpAction = false;
+    jumpActionStart = false;
+    attackAction = false;
+    attackActionStart = false;
+    idleAction = false;
+	
+	//Process each action present in the struct
+	var keys = variable_struct_get_names(current_actions); //stores all the keys of current struct into an array as strings
+	for (var i=0;i<array_length(keys);i++){
+		var action = keys[i]; //store key of current struct
+		
+		switch (action) {
+			case "jump":
+				jumpAction = true;
+				if (current_actions[$ action].duration == 1) jumpActionStart=true;
+				break;
+				
+				 case "attack":
+                attackAction = true;
+                if (current_actions[$ action].duration == 1) attackActionStart=true;
+                break;
+
+            case "left":
+                leftAction = true;
+                break;
+
+            case "right":
+                rightAction = true;
+                break;
+
+            case "idle":
+                idleAction = true;
+                break;
+		
+		}
+		
+		//Reduce duration
+		current_actions[$ action].duration--;
+		
+		//remove finished actions
+		if (current_actions[$ action].duration <= 0){
+			struct_remove(current_actions, action);
+		}
+	}
+	
+	// If all the actions in the current step are done, move to the next one
+	if (array_length(variable_struct_get_names(current_actions)) == 0){ //if the struct at the current index is now empty
+		array_delete(action_queue,0,1); //delete first entry of the array
+		action_count = max(0,action_count-1); // prevent negative index
+	}
+
 }
 
 
 
+//show_debug_message(string(action_queue));
 
 if keyboard_check_pressed(ord("B")){
 	//QueueAction("jump",1);
-			QueueAction("move_right",30)
+			QueueAction("right",30)
 			QueueAction("idle",50)
-			QueueAction("move_left",40)
+			QueueAction("left",20)
 			QueueAction("idle",60)
-			QueueAction("move_right",30)
-			QueueAction("idle",50)
-			QueueAction("move_left",40)
-			QueueAction("idle",60)
+			QueueAction("jump",1,false)
+			QueueAction("right",40)
+			//QueueAction("idle",60)
 
 }
 
@@ -374,11 +526,12 @@ switch (ai_state) {
 	        } 
 		}
 		
-		if (stationary && array_length(variable_struct_get_names(action_queue)) == 0){
-			QueueAction("move_right",30)
-			QueueAction("idle",50)
-			QueueAction("move_left",40)
-			QueueAction("idle",60)
+		if (!stationary && array_length(action_queue) == 0){
+			show_debug_message("working")
+			QueueAction("left", irandom_range(15, 30));  // Walk left
+		    QueueAction("idle", irandom_range(70, 205));  // Stop
+		    QueueAction("right", irandom_range(15, 30)); // Walk right
+		    QueueAction("idle", irandom_range(70, 205));   // Stop (last action must be sequential)
 		}
 		
 

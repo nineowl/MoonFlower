@@ -144,7 +144,7 @@ moveTimer = 0;
 moveTime = 70; // in a way this indicates the maximum distance an NPC will travel while docile;
 dirSet = false;
 prevDir = 0;
-stationary = false; // determines if this NPC will move or not while docile;
+
 
 //States
 //Current state method uses a prev state for state returning
@@ -274,20 +274,65 @@ damage = 2;
 //Logic State Machine
 ai_state = "docile";
 target = noone;
-action_queue = {};
+stationary = false; // determines if this NPC will move or not while docile;
 
+//action handling
+action_queue = []; //{};
+action_queue[0] = {};
+action_count = 0;
+
+
+/*NOTE: when queueing actions, if you're doing simultaneous actions, the last action has to be sequential*/
+function QueueAction(action_name, frames, sequential = true){
+		
+		// Ensure action_queue[action_count] exists as a struct
+	    if (!array_length(action_queue) || action_count >= array_length(action_queue)) {
+	        action_queue[action_count] = {}; // Create an empty struct at this index
+	    }
+
+	    // Add action to the struct
+	    action_queue[action_count][$ action_name] = { duration: frames };
+		
+		
+		//if sequenced move up to next action
+		if (sequential) {
+			action_count++;
+			action_queue[action_count] = {} // prepare next step
+		}
+		
+}
+
+
+
+#region old
 /*
 function QueueAction(action_name, frames) {
     action_queue[$ action_name] = frames; 
 } */
 
+
+
+/*
 function QueueAction(action_name, frames, is_sequential = true) {
     action_queue[$ action_name] = {
         duration: frames,
         sequential: is_sequential
     };
 }
+*/
+/*
+function QueueAction(action_name, frame, is_sequential=true) {
+    var new_action = {
+        _name: action_name,
+        duration: frame,
+        sequential: is_sequential
+    };
 
+    //array_push(action_queue, new_action); // Add the new action to the queue
+	action_queue[array_length(action_queue)] = new_action; // Append to array properly
+}
+*/
 
+#endregion
 
 //Please be sure to destroy any object created by this object upon it's own destruction unless that object has no dependencies.
