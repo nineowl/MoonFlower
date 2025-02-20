@@ -26,18 +26,27 @@ global.faction_relations = {
     mirror : {
         echo : relation.enemy,
         neutral : relation.neutral,
-		player : relation.neutral
+		player : relation.neutral,
+		mindless : relation.enemy
     },
     echo : {
         mirror : relation.enemy,
         neutral : relation.neutral,
-		player : relation.neutral
+		player : relation.neutral,
+		mindless : relation.enemy
     },
 	neutral : {
 		echo : relation.neutral,
 		mirror : relation.neutral,
-		player : relation.neutral
+		player : relation.neutral,
+		mindless : relation.enemy
 	
+	},
+	mindless :{
+		echo : relation.enemy,
+        neutral : relation.enemy,
+		player : relation.enemy,
+		mirror : relation.enemy
 	}
 }
 

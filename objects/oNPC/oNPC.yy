@@ -42,6 +42,7 @@
     {"$GMObjectProperty":"v1","%Name":"jumpAttackSpr","filters":[],"listItems":[],"multiselect":false,"name":"jumpAttackSpr","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resource":{"name":"sDefault","path":"sprites/sDefault/sDefault.yy",},"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"sDefault","varType":5,},
     {"$GMObjectProperty":"v1","%Name":"jumpSpr","filters":[],"listItems":[],"multiselect":false,"name":"jumpSpr","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resource":{"name":"sDefault","path":"sprites/sDefault/sDefault.yy",},"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"sDefault","varType":5,},
     {"$GMObjectProperty":"v1","%Name":"image_blend","filters":[],"listItems":[],"multiselect":false,"name":"image_blend","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"$FFFFFFFF","varType":7,},
+    {"$GMObjectProperty":"v1","%Name":"faction","filters":[],"listItems":[],"multiselect":false,"name":"faction","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"neutral","varType":2,},
   ],
   "resourceType":"GMObject",
   "resourceVersion":"2.0",

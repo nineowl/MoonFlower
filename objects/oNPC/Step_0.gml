@@ -487,11 +487,11 @@ if (array_length(action_queue) > 0) {
 if keyboard_check_pressed(ord("B")){
 	//QueueAction("jump",1);
 			QueueAction("right",30)
-			QueueAction("idle",50)
-			QueueAction("left",20)
-			QueueAction("idle",60)
-			QueueAction("jump",1,false)
-			QueueAction("right",40)
+			//QueueAction("idle",50)
+			//QueueAction("left",20)
+			//QueueAction("idle",60)
+			//QueueAction("jump",1,false)
+			//("right",40)
 			//QueueAction("idle",60)
 
 }
@@ -525,7 +525,7 @@ switch (ai_state) {
 				moveDir = 0;
 	        } 
 		}
-		
+		//normal idling behavior if not a stationary NPC
 		if (!stationary && array_length(action_queue) == 0){
 			show_debug_message("working")
 			QueueAction("left", irandom_range(15, 30));  // Walk left
@@ -534,8 +534,15 @@ switch (ai_state) {
 		    QueueAction("idle", irandom_range(70, 205));   // Stop (last action must be sequential)
 		}
 		
+		// check to see if we haven't strayed far from home.
+		var distance_from_start = abs(x-xstart);
+		// If too far, switch to returning state
+        if (distance_from_start > wander_range) {
+            ai_state = "returning";
+            ActionBreak(); // Clear current actions to prioritize returning
+        } 
 
-		
+
 		#region legacy
 		/*
 		if (!dirSet){
@@ -567,6 +574,22 @@ switch (ai_state) {
 		}
 		*/
 		#endregion
+	break;
+	
+	case "returning":
+		// Move towards the starting point
+        if (x < xstart) {
+            QueueAction("right", irandom_range(15,30), true);
+        } 
+        else if (x > xstart) {
+            QueueAction("left", irandom_range(15,30), true);
+        } 
+        else {
+            // Reached starting point, go back to docile state
+            ai_state = "docile";
+            ActionBreak(); // Clear actions to reset behavior
+        }
+	
 	break;
 	
 	case "aggressive":

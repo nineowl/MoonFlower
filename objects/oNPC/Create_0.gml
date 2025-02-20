@@ -152,7 +152,7 @@ prevState = ""; //set this state on state changes
 state = "free";
 
 
-faction = "neutral"; //default faction. Set this differently at 
+//faction = "neutral"; //default faction. Set this differently at 
 // Personal relationships (override faction-based relations)
 //personal_relations = ds_map_create();
 //personal_relations[? oPlayer.id] = 0; // -1 = Hostile, 0 = Neutral, 1 = Friendly
@@ -274,12 +274,15 @@ damage = 2;
 //Logic State Machine
 ai_state = "docile";
 target = noone;
+wander_range = 100;
+aggro_range = 200;
 stationary = false; // determines if this NPC will move or not while docile;
 
 //action handling
 action_queue = []; //{};
 action_queue[0] = {};
 action_count = 0;
+
 
 
 /*NOTE: when queueing actions, if you're doing simultaneous actions, the last action has to be sequential*/
@@ -301,7 +304,10 @@ function QueueAction(action_name, frames, sequential = true){
 		}
 		
 }
-
+function ActionBreak(){
+	action_queue = [];
+    action_count = 0;
+}
 
 
 #region old

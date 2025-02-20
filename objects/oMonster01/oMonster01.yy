@@ -9,6 +9,7 @@
     {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"oNPC","path":"objects/oNPC/oNPC.yy",},"propertyId":{"name":"walkSpr","path":"objects/oNPC/oNPC.yy",},"resource":{"name":"sMonster01_walk","path":"sprites/sMonster01_walk/sMonster01_walk.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"sMonster01_walk",},
     {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"oNPC","path":"objects/oNPC/oNPC.yy",},"propertyId":{"name":"attack0Spr","path":"objects/oNPC/oNPC.yy",},"resource":{"name":"sMonster01_attack","path":"sprites/sMonster01_attack/sMonster01_attack.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"sMonster01_attack",},
     {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"oNPC","path":"objects/oNPC/oNPC.yy",},"propertyId":{"name":"attack0SprHB","path":"objects/oNPC/oNPC.yy",},"resource":{"name":"sMonster01_attackHB","path":"sprites/sMonster01_attackHB/sMonster01_attackHB.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"sMonster01_attackHB",},
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"oNPC","path":"objects/oNPC/oNPC.yy",},"propertyId":{"name":"faction","path":"objects/oNPC/oNPC.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"mindless",},
   ],
   "parent":{
     "name":"Mobs",
