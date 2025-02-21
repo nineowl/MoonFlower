@@ -420,7 +420,7 @@ if (array_length(action_queue) > 0) {
 
 */
 #endregion
-
+		//this is the action handler
 if (array_length(action_queue) > 0) {
 	var current_actions = action_queue[0];// get the first entry
 	
@@ -515,19 +515,57 @@ if keyboard_check_pressed(ord("B")){
 
 #region statemachine
 
+//Determine target if potential target exists
+
+
+var target_list = ds_list_create();
+collision_circle_list(x,y,aggro_range,oLife,false,true,target_list,true);
+var nearest_dist = aggro_range;
+
+	
+//Loop through potential targets
+for (var i=0; i<ds_list_size(target_list);i++){
+	var other_id = target_list[| i];
+		
+	//dont target self. This shouldn't happen regardless considering how the collision circle list works
+	if (other_id = id) continue;
+		
+	//Check faction relation
+	var _relation = GetNPCRelation(other_id.id);
+		
+	if(_relation == relation.enemy){
+		var dist = point_distance(x,y,other_id.x,other_id.y);
+		
+		//if closer than the previous closest, set as target
+		if (dist < nearest_dist){
+			nearest_dist = dist;
+			target = other_id;
+		}
+	}
+		
+}
+ds_list_destroy(target_list);
+
+show_debug_message(ai_state);
+
 switch (ai_state) {
 	case "docile":
 	
+		#region old player relation checker
+		/*
 		if (instance_exists(oPlayer)){ // probably can get rid of this, for testing
 			//If this NPC doesn't like the player and is close to them, aggro
 			 if (relation_to_player == relation.enemy && point_distance(x, y, oPlayer.x, oPlayer.y) < 150) {
 	            ai_state = "aggressive"; // Attack enemies
 				moveDir = 0;
 	        } 
-		}
+		} */
+		#endregion
+		
+		
 		//normal idling behavior if not a stationary NPC
 		if (!stationary && array_length(action_queue) == 0){
-			show_debug_message("working")
+			//show_debug_message("working")
 			QueueAction("left", irandom_range(15, 30));  // Walk left
 		    QueueAction("idle", irandom_range(70, 205));  // Stop
 		    QueueAction("right", irandom_range(15, 30)); // Walk right
@@ -541,8 +579,12 @@ switch (ai_state) {
             ai_state = "returning";
             ActionBreak(); // Clear current actions to prioritize returning
         } 
-
-
+		//run this code in most peaceful states
+		if (target != noone){
+			ai_state = "aggressive";
+			ActionBreak();
+			show_debug_message("NPC MAD!")
+		}
 		#region legacy
 		/*
 		if (!dirSet){
@@ -578,22 +620,50 @@ switch (ai_state) {
 	
 	case "returning":
 		// Move towards the starting point
-        if (x < xstart) {
+        if (x < xstart-8) { //the 8 is a buffer so that the else condition can have a real range instead of being an exact point
             QueueAction("right", irandom_range(15,30), true);
         } 
-        else if (x > xstart) {
+        else if (x > xstart+8) {
             QueueAction("left", irandom_range(15,30), true);
-        } 
-        else {
+        } else {
             // Reached starting point, go back to docile state
             ai_state = "docile";
             ActionBreak(); // Clear actions to reset behavior
         }
+		
+		//if target shows up
+		if (target != noone){
+			ai_state = "aggressive";
+			ActionBreak();
+			show_debug_message("NPC MAD!")
+		}
 	
 	break;
 	
 	case "aggressive":
 		image_blend = c_red;
+		var dist_to_target = point_distance(x, y, target.x, target.y);
+
+	    // Move towards target
+	    if (dist_to_target > 20 && dist_to_target <= aggro_range) {
+			aggro_timer = 0;
+	        if (x < target.x) {
+	            QueueAction("right", 1, false);
+	        }
+	        else if (x > target.x) {
+	            QueueAction("left", 1, false);
+	        }
+	    } else if (dist_to_target <=20) {
+	        // If close enough, attack
+	        QueueAction("attack", 1, false); // Assuming 30 frames for attack duration
+	    } else {
+			aggro_timer++
+			if (aggro_timer >= aggro_time){
+				ActionBreak();
+				ai_state = "docile";
+				target = noone;
+			}
+		}
 	break;
 
 }

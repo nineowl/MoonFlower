@@ -24,6 +24,7 @@ enum relation {
 
 global.faction_relations = {
     mirror : {
+		mirror : relation.ally,
         echo : relation.enemy,
         neutral : relation.neutral,
 		player : relation.neutral,
@@ -31,6 +32,7 @@ global.faction_relations = {
     },
     echo : {
         mirror : relation.enemy,
+		echo : relation.ally,
         neutral : relation.neutral,
 		player : relation.neutral,
 		mindless : relation.enemy
@@ -38,15 +40,18 @@ global.faction_relations = {
 	neutral : {
 		echo : relation.neutral,
 		mirror : relation.neutral,
+		neutral : relation.neutral,
 		player : relation.neutral,
 		mindless : relation.enemy
 	
 	},
 	mindless :{
+		mirror : relation.enemy,
 		echo : relation.enemy,
         neutral : relation.enemy,
 		player : relation.enemy,
-		mirror : relation.enemy
+		mindless : relation.neutral
+		
 	}
 }
 
@@ -60,6 +65,9 @@ function special_relation(_id, _relation) constructor {
     identifier = _id;
     relation = _relation;
 }
+
+//example usage:
+//array_push(personal_relations, new special_relation("player", relation.enemy));
 
 function GetNPCRelation(target_id) {
     for (var i = 0; i < array_length(personal_relations); i++) {

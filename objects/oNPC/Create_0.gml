@@ -196,11 +196,6 @@ function controlsSetupNPC(){
 	attackAction = false;
 	attackActionStart = false;
 	
-	
-	
-	
-	
-	
 }
 
 function getControlsNPC(){
@@ -275,7 +270,10 @@ damage = 2;
 ai_state = "docile";
 target = noone;
 wander_range = 100;
-aggro_range = 200;
+aggro_wander_range = 200;
+aggro_range = 50;
+aggro_timer = 0;
+aggro_time = 200;
 stationary = false; // determines if this NPC will move or not while docile;
 
 //action handling
