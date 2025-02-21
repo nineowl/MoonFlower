@@ -16,7 +16,7 @@ flashColor=c_red;
 //dialogue functionality
 text_id[0] = "";
 text_index = 0;
-death_text = "004";
+death_text = "";// "004"; //initially default death text, but it's a bit much
 
 nextFlag = false; //This checks if dialogue reaches last page. If it does, this value is set to true in the textbox object.
 

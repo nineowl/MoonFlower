@@ -642,8 +642,24 @@ switch (ai_state) {
 	
 	case "aggressive":
 		image_blend = c_red;
+		
+		if (!instance_exists(target)) {
+	        ActionBreak();
+	        ai_state = "docile";
+	        target = noone;
+	        break;
+		}
+		
 		var dist_to_target = point_distance(x, y, target.x, target.y);
-
+		
+		 // Face the target
+	    if (x < target.x) {
+	        face = 1;  // Face right
+	    } 
+	    else if (x > target.x) {
+	        face = -1; // Face left
+	    }
+		
 	    // Move towards target
 	    if (dist_to_target > 20 && dist_to_target <= aggro_range) {
 			aggro_timer = 0;
@@ -653,7 +669,7 @@ switch (ai_state) {
 	        else if (x > target.x) {
 	            QueueAction("left", 1, false);
 	        }
-	    } else if (dist_to_target <=20) {
+	    } else if (dist_to_target <=20) { //within attack range
 	        // If close enough, attack
 	        QueueAction("attack", 1, false); // Assuming 30 frames for attack duration
 	    } else {
