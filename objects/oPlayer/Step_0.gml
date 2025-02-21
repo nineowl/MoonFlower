@@ -92,7 +92,7 @@ if instance_exists(myFloorPlat) && myFloorPlat.xspd != 0 && !place_meeting(x,y+m
 		if moveDir!=0{face=moveDir;}; //this too
 
 		//Get xspd
-		runType=runKey;  //can possibly be organized outside of the states
+		runType=agileKey;  //can possibly be organized outside of the states
 		xspd = moveDir * moveSpd[runType];	
 
 
@@ -100,7 +100,7 @@ if instance_exists(myFloorPlat) && myFloorPlat.xspd != 0 && !place_meeting(x,y+m
 
 switch (state) {
 	case "free":
-		player_movement_collisions();
+		
 		//Sprite Control
 		//Walking
 		if abs(xspd)>0{sprite_index=walkSpr;};
@@ -108,6 +108,8 @@ switch (state) {
 		if abs(xspd)>=moveSpd[1]{sprite_index=runSpr;};
 		//Not moving
 		if xspd==0{sprite_index=idleSpr;};
+		//if backstepping
+		if (isBackstepping){sprite_index=backStepSpr;};
 		//in the air
 		if !onGround{sprite_index=jumpSpr;};
 
@@ -136,6 +138,42 @@ switch (state) {
 			}
 		}
 		
+		///////////////////////////////
+		// Check for agileKey tap
+		if (agileKeyPressed) {
+		    agileTapTimer = agileTapBuffer;
+			
+		}
+
+		// Decrement timer if it's active
+		if (agileTapTimer > 0) {
+		    agileTapTimer--;
+		    // Check if key is released before timer ends (trigger backstep)
+		    if (!agileKey) {
+		        isBackstepping = true;
+		        agileTapTimer = 0;
+				backstepTimer = backstepTime; //timer start
+		        //invulnerable = true; // Optional
+				//show_debug_message("backstep released")
+				
+		    }
+		}
+
+		// Handle backstep movement
+		if (isBackstepping) { // This could technically be a new state, but I think it works for free state
+		    backstepTimer--;
+			//show_debug_message("backstep?")
+		    // Move in the opposite direction of facing
+		    xspd = face * (1-backstepSpeed);
+    
+		    // End backstep
+		    if (backstepTimer <= 0) {
+		        isBackstepping = false;
+		        //invulnerable = false; // Optional: End invulnerability
+		    }
+		}
+		//////////////////////////////
+		player_movement_collisions();
 
 	break;
 	

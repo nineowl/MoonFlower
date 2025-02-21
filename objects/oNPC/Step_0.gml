@@ -546,7 +546,7 @@ for (var i=0; i<ds_list_size(target_list);i++){
 }
 ds_list_destroy(target_list);
 
-show_debug_message(ai_state);
+//show_debug_message(ai_state);
 
 switch (ai_state) {
 	case "docile":
@@ -583,7 +583,6 @@ switch (ai_state) {
 		if (target != noone){
 			ai_state = "aggressive";
 			ActionBreak();
-			show_debug_message("NPC MAD!")
 		}
 		#region legacy
 		/*
@@ -635,7 +634,6 @@ switch (ai_state) {
 		if (target != noone){
 			ai_state = "aggressive";
 			ActionBreak();
-			show_debug_message("NPC MAD!")
 		}
 	
 	break;
@@ -661,7 +659,7 @@ switch (ai_state) {
 	    }
 		
 	    // Move towards target
-	    if (dist_to_target > 20 && dist_to_target <= aggro_range) {
+	    if (dist_to_target > 20 && dist_to_target <= aggro_wander_range) {
 			aggro_timer = 0;
 	        if (x < target.x) {
 	            QueueAction("right", 1, false);

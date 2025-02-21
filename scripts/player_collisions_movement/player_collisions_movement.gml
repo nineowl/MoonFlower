@@ -8,7 +8,7 @@ function player_collisions_movement() {
 		if moveDir!=0{face=moveDir;}; //this too
 
 		//Get xspd
-		runType=runKey;  //can possibly be organized outside of the states
+		runType=agileKey;  //can possibly be organized outside of the states
 		xspd = moveDir * moveSpd[runType];
 	
 		/*//Stop xspd if crouching

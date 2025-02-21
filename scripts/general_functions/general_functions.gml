@@ -27,8 +27,12 @@ function getControls(){
 	jumpKey = keyboard_check(vk_space) + gamepad_button_check(0, gp_face1);
 		jumpKey = clamp(jumpKey,0,1);
 		
-	runKey = keyboard_check(vk_lshift)+gamepad_button_check(0,gp_face3);
-		runKey = clamp(runKey,0,1);
+	agileKey = keyboard_check(vk_lshift)+gamepad_button_check(0,gp_face3);
+		agileKey = clamp(agileKey,0,1);
+	agileKeyPressed = keyboard_check_pressed(vk_lshift)+gamepad_button_check_pressed(0,gp_face3);
+		agileKeyPressed = clamp(agileKeyPressed,0,1);
+		
+		
 		
 	attackKey = keyboard_check(ord("N"));
 		attackKey = clamp(attackKey,0,1);
@@ -39,6 +43,8 @@ function getControls(){
 		interactKey = clamp(interactKey,0,1);
 	interactKeyPressed = keyboard_check_pressed(ord("J"));
 		interactKeyPressed = clamp(interactKeyPressed,0,1);
+		
+	//agileKeyPressed = keyboard_check_pressed(ord("M"));
 		
 	
 	//Menu Inputs

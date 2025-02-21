@@ -45,6 +45,7 @@ maskSpr=sPlayerIdle;
 idleSpr=sPlayerIdle;
 walkSpr=sPlayerWalk;
 runSpr=sPlayerRun;
+backStepSpr=sPlayerBackStep
 jumpSpr=sPlayerJump;
 crouchSpr=sPlayerCrouch;
 crawlSpr=sPlayerCrawl
@@ -68,6 +69,17 @@ moveSpd[0] = 2;
 moveSpd[1] = 3.5;
 xspd = 0;
 yspd = 0;
+
+//dodging
+agileTapTimer = 0;
+agileTapBuffer = 10; // Number of frames to consider as a tap
+isBackstepping = false;
+backstepTimer = 0;
+backstepTime = 5; // Number of frames for the backstep
+backstepSpeed = 4;
+invulnerable = false; // Optional: If you want invulnerability during the backstep
+
+
 
 //State Variables
 crouching=false;//about to be retired
