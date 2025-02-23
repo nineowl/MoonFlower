@@ -112,6 +112,8 @@ switch (state) {
 		if (isBackstepping){sprite_index=backStepSpr;};
 		//in the air
 		if !onGround{sprite_index=jumpSpr;};
+		//rolling, can roll in air
+		if (isRolling){sprite_index=rollSpr;};
 
 		//Crouching
 		//Transition to crouch
@@ -149,13 +151,21 @@ switch (state) {
 		if (agileTapTimer > 0) {
 		    agileTapTimer--;
 		    // Check if key is released before timer ends (trigger backstep)
-		    if (!agileKey) {
-		        isBackstepping = true;
-		        agileTapTimer = 0;
-				backstepTimer = backstepTime; //timer start
-		        //invulnerable = true; // Optional
-				//show_debug_message("backstep released")
-				
+		    if (!agileKey) { // if there is a directional input the player should roll instead
+		        
+				// Check for roll input
+		        if (leftKey || rightKey) {
+		            isRolling = true;
+		            isBackstepping = false;
+					rollTimer = rollTime;
+		            //invulnerable = true;
+				} else {
+					isBackstepping = true;
+			        agileTapTimer = 0;
+					backstepTimer = backstepTime; //timer start
+			        //invulnerable = true; // Optional
+					//show_debug_message("backstep released")
+				}
 		    }
 		}
 
@@ -172,6 +182,32 @@ switch (state) {
 		        //invulnerable = false; // Optional: End invulnerability
 		    }
 		}
+		
+		// Handle roll movement
+		if (isRolling) {
+		    rollTimer--;
+    
+		    // Move in the direction pressed
+		    /*
+			if (rightKey) {
+		        x += rollSpeed;
+		        facingRight = true;
+		    }
+		    else if (leftKey) {
+		        x -= rollSpeed;
+		        facingRight = false;
+		    } */
+			
+			xspd = face * rollSpeed;
+    
+		    // End roll
+		    if (rollTimer <= 0) {
+		        isRolling = false;
+		        //invulnerable = false; // Optional: End invulnerability
+		    }
+		}
+		
+		
 		//////////////////////////////
 		player_movement_collisions();
 
