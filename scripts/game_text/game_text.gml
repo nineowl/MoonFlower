@@ -31,10 +31,17 @@ function game_text(_text_id){
 		scr_text("luv you");
 		scr_text("no really");
 		break;
+		
 	case "004":
 		scr_text("...");
 		break;
-	
+		
+	case "005":
+		scr_text("STFU brindan");
+		break;
+		
+	case "006":
+		scr_text("My dad works at blizzard");
+		break;
 	}
-
 }

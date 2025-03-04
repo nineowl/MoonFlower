@@ -188,7 +188,7 @@ if instance_exists(myFloorPlat) && myFloorPlat.xspd != 0 && !place_meeting(x,y+m
 		if moveDir!=0{face=moveDir;}; //this too
 
 		//Get xspd
-		runType=runAction;  //can possibly be organized outside of the states
+		runType=agileAction;  //can possibly be organized outside of the states
 		xspd = moveDir * moveSpd[runType];	
 
 //xspd = moveDir * moveSpd[0];
@@ -686,7 +686,7 @@ switch (ai_state) {
 #endregion
 switch (state) {
 	case "free":
-		NPC_collisions_movement()
+		
 		//Sprite Control
 		//Walking
 		if abs(xspd)>0{sprite_index=walkSpr;};
@@ -709,6 +709,78 @@ switch (state) {
 		}
 
 		*/
+		
+		///////////////////////////////
+		// Check for agileKey tap
+		if (agileActionStart) {
+		    agileTapTimer = agileTapBuffer;
+			
+		}
+
+		// Decrement timer if it's active
+		if (agileTapTimer > 0) {
+		    agileTapTimer--;
+		    // Check if key is released before timer ends (trigger backstep)
+		    if (!agileAction) { // if there is a directional input the player should roll instead
+		        
+				// Check for roll input
+		        if (leftAction || rightAction) {
+		            isRolling = true;
+		            isBackstepping = false;
+					rollTimer = rollTime;
+		            //invulnerable = true;
+				} else {
+					isBackstepping = true;
+			        agileTapTimer = 0;
+					backstepTimer = backstepTime; //timer start
+			        //invulnerable = true; // Optional
+					//show_debug_message("backstep released")
+				}
+		    }
+		}
+
+		// Handle backstep movement
+		if (isBackstepping) { // This could technically be a new state, but I think it works for free state
+		    backstepTimer--;
+			//show_debug_message("backstep?")
+		    // Move in the opposite direction of facing
+		    xspd = face * (1-backstepSpeed);
+    
+		    // End backstep
+		    if (backstepTimer <= 0) {
+		        isBackstepping = false;
+		        //invulnerable = false; // Optional: End invulnerability
+		    }
+		}
+		
+		// Handle roll movement
+		if (isRolling) {
+		    rollTimer--;
+    
+		    // Move in the direction pressed
+		    /*
+			if (rightKey) {
+		        x += rollSpeed;
+		        facingRight = true;
+		    }
+		    else if (leftKey) {
+		        x -= rollSpeed;
+		        facingRight = false;
+		    } */
+			
+			xspd = face * rollSpeed;
+    
+		    // End roll
+		    if (rollTimer <= 0) {
+		        isRolling = false;
+		        //invulnerable = false; // Optional: End invulnerability
+		    }
+		}
+		
+		NPC_collisions_movement(); //moved to the bottom
+		
+		
+		//////////////////////////////
 		
 
 	break;

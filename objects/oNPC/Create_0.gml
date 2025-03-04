@@ -41,6 +41,19 @@ moveSpd[1] = 3.5;
 face = 1; //-1 left, 1 right
 moveDir = 0; //-1 left, 0, 1 right
 
+//dodging
+agileTapTimer = 0;
+agileTapBuffer = 20; // Number of frames to consider as a tap
+isBackstepping = false;
+backstepTimer = 0;
+backstepTime = 5; // Number of frames for the backstep
+backstepSpeed = 4;
+invulnerable = false; // Optional: If you want invulnerability during the backstep
+
+isRolling = false;
+rollSpeed = 4;
+rollTime = 10;
+rollTimer = 0;
 
 	//Jumping
 	grav = .275;
@@ -191,7 +204,8 @@ function controlsSetupNPC(){
 	jumpActionStart = false;
 	jumpAction = false;
 		
-	runAction = false;
+	agileAction = false;
+	agileActionStart = false;
 		
 	attackAction = false;
 	attackActionStart = false;
@@ -221,8 +235,10 @@ function getControlsNPC(){
 	jumpAction = keyboard_check(vk_space) + gamepad_button_check(0, gp_face1);
 		jumpAction = clamp(jumpAction,0,1);
 		
-	runAction = keyboard_check(vk_lshift)+gamepad_button_check(0,gp_face3);
-		runAction = clamp(runAction,0,1);
+	agileAction = keyboard_check(vk_lshift)+gamepad_button_check(0,gp_face3);
+		agileAction = clamp(agileAction,0,1);
+	agileActionStart = keyboard_check_pressed(vk_lshift)+gamepad_button_check_pressed(0,gp_face3);
+		agileActionStart = clamp(agileActionStart,0,1);
 		
 	attackAction = keyboard_check(ord("N"));
 		attackAction = clamp(attackAction,0,1);

@@ -339,12 +339,16 @@ function player_y_collision(){
 
 function player_damage_buffer(){}// this will basically be like a poise stat
 
+//consider if you want a roll to be able to be cancelled into an attack
 function player_attack_command(_nextState,_attackType,_comboFrame){
 	//_nextState is the string that corresponds to the state
 	//_attackType is the sprite that corresponds to the attack hitbox
 	//_comboFrame refers to the minimum frame you can start the attack from. If you can start the attack anytime, this value is 0.
 	
 	if (attackKeyPressed && onGround && image_index>=_comboFrame){
+		isRolling = false;
+		isBackstepping = false;
+		//prevents rolling or backstepping to complete after attack is done
 		state = _nextState;
 		image_index=0;
 		myHitBox = instance_create_depth(x,y,depth,oPlayerHitBox,{
