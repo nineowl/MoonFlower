@@ -1,7 +1,8 @@
 //Properties
 HP = 10;
 invincible = false;
-
+equippedFlower = noone;
+damage = 0; //amount of incoming damage
 
 //events
 damageEvent = false;

@@ -93,6 +93,7 @@
     {"id":{"name":"rmTest","path":"rooms/rmTest/rmTest.yy",},},
     {"id":{"name":"rmTitle","path":"rooms/rmTitle/rmTitle.yy",},},
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
+    {"id":{"name":"flower","path":"scripts/flower/flower.yy",},},
     {"id":{"name":"game_text","path":"scripts/game_text/game_text.yy",},},
     {"id":{"name":"general_functions","path":"scripts/general_functions/general_functions.yy",},},
     {"id":{"name":"global_init","path":"scripts/global_init/global_init.yy",},},

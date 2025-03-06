@@ -216,7 +216,7 @@ switch (state) {
 	case "attack":
 		sprite_index = knifeAttack0Spr;
 	
-		player_attack_damage(2);
+		player_attack_damage(1);
 		player_attack_command("attackcombo1",sPlayerKnifeAttack1HB,5);
 	
 	
@@ -234,7 +234,7 @@ switch (state) {
 	
 	case "attackcombo1":
 		sprite_index = knifeAttack1Spr;
-		player_attack_damage(2);
+		player_attack_damage(1);
 		player_attack_command("attackcombo2",sPlayerKnifeAttack2HB,5)
 	
 		//if animation ends
@@ -252,7 +252,7 @@ switch (state) {
 	
 	case "attackcombo2":
 		sprite_index=sPlayerKnifeAttack2;
-		player_attack_damage(4);
+		player_attack_damage(2);
 		
 		//if animation ends
 		if image_index >=image_number-1 {

@@ -8,3 +8,7 @@ cycle_id[2] = "000";
 cycleType = true;
 
 //array_push(personal_relations, new special_relation("player", relation.enemy));
+
+
+//Flower equipped
+equippedFlower = new Flower(3, "Red", 2, false, false, "Thin"); // Example equipped flower

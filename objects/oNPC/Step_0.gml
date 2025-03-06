@@ -5,6 +5,8 @@
 if (face != 0) image_xscale = face;
 
 #region damage related
+//retired
+/*
 if (HP <= 0 && !invincible){
 	if (oTextBox){
 		with (oTextBox) { //this could be risky. ANY textbox will be destroyed on NPC death. Be sure to make it so it either doesn't matter, or prevent it from happening if it would
@@ -15,19 +17,35 @@ if (HP <= 0 && !invincible){
 	instance_destroy();//ANY destroy event must also destroy objects created by this object(unless there are no dependencies)
 }
 
-
+*/
 
 //Flash
 if (damageEvent){
 	flashAlpha = 1;
+	
+	if (equippedFlower != noone && equippedFlower.petals > 0) {
+        equippedFlower.petals -= damage; // Lose a petal
+        if (equippedFlower.petals == 0) {
+            show_debug_message("The flower has withered...");
+        } else {
+            show_debug_message("Lost a petal! " + string(equippedFlower.petals) + " left.");
+        }
+    } else {
+        //Die(); // No petals left, normal death
+		if (death_text != ""){create_textbox(death_text); }//death dialogue. Later you may have to send this data to an external game object that keeps a list of deaths to prioritize death dialogue in the case of multiple simultaneous deaths. Or implement timer. Or both.
+		instance_destroy();
+    }
+	
+	damage=0;
+	//Damage event code should be reset every frame. //this could later be augmented with a buffer/timer
+	damageEvent = false;
 }
 //reduce flash
 if (flashAlpha>0){
 	flashAlpha-=.05;
 }
 
-//Damage event code should be reset every frame. //this could later be augmented with a buffer/timer
-damageEvent = false;
+
 #endregion
 
 #region interaction code
