@@ -704,8 +704,12 @@ switch (state) {
 		if abs(xspd)>=moveSpd[1]{sprite_index=runSpr;};
 		//Not moving
 		if xspd==0{sprite_index=idleSpr;};
+		//if backstepping
+		if (isBackstepping){sprite_index=backStepSpr;};
 		//in the air
 		if !onGround{sprite_index=jumpSpr;};
+		//rolling, can roll in air
+		if (isRolling){sprite_index=rollSpr;};
 
 		NPC_attack_command("attack",attack0SprHB,0);
 	
