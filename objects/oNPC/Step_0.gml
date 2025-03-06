@@ -432,6 +432,8 @@ if (array_length(action_queue) > 0) {
     attackAction = false;
     attackActionStart = false;
     idleAction = false;
+	agileAction = false;
+	agileActionStart = false;
 	
 	//Process each action present in the struct
 	var keys = variable_struct_get_names(current_actions); //stores all the keys of current struct into an array as strings
@@ -444,9 +446,14 @@ if (array_length(action_queue) > 0) {
 				if (current_actions[$ action].duration == 1) jumpActionStart=true;
 				break;
 				
-				 case "attack":
+			case "attack":
                 attackAction = true;
                 if (current_actions[$ action].duration == 1) attackActionStart=true;
+                break;
+				
+			case "agile":
+                agileAction = true;
+                if (current_actions[$ action].duration == 1) agileActionStart=true;
                 break;
 
             case "left":
@@ -486,13 +493,16 @@ if (array_length(action_queue) > 0) {
 
 if keyboard_check_pressed(ord("B")){
 	//QueueAction("jump",1);
-			QueueAction("right",30)
+			//QueueAction("right",30)
 			//QueueAction("idle",50)
 			//QueueAction("left",20)
 			//QueueAction("idle",60)
 			//QueueAction("jump",1,false)
 			//("right",40)
 			//QueueAction("idle",60)
+			QueueAction("right",20,false);
+			QueueAction("agile",1);
+			
 
 }
 
