@@ -41,12 +41,12 @@ if (interactEvent){
 	if (text_id[0] != ""){
 		if (!cycleMode){
 			myTextbox = create_textbox(text_id[text_index]);
-			myTextbox.creatorID = object_index;
+			myTextbox.creatorID = id;
 	
 
 		} else {
 			myTextbox = create_textbox(cycle_id[cycle_index]);
-			myTextbox.creatorID = object_index;
+			myTextbox.creatorID = id;
 		}
 	}
 	interactEvent = false;
@@ -57,7 +57,9 @@ if (myTextbox){
 	if (distance_to_object(oPlayer)>talkRange){
 
 		with(myTextbox){
-			instance_destroy();
+			if (creatorID == other.id){
+				instance_destroy();
+			}
 		}
 	}
 	
