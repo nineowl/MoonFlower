@@ -415,6 +415,7 @@ switch (state) {
 	case "dead":
 		sprite_index=deathSpr;
 		if (image_index>=image_number-1){image_speed=0;};
+		face=0;
 	break;
 }
 
