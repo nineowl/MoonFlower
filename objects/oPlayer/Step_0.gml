@@ -1,6 +1,60 @@
 //Get inputs
 getControls();
 
+//sets face
+if (face != 0) image_xscale = face;
+
+#region Damage Related
+if (damageEvent) {
+    flashAlpha = 1;
+
+    if (equippedFlower != noone &&(equippedFlower.petals>0 ||equippedFlower.phantom_petals>0)) {
+        // Handle Phantom Damage
+        if (damageType == "phantom" || damageType == "hybrid") {
+            equippedFlower.phantom_petals -= damage;
+            if (equippedFlower.phantom_petals < 0) {
+                equippedFlower.phantom_petals = 0;
+            }
+            show_debug_message("Lost a phantom petal! " + string(equippedFlower.phantom_petals) + " left.");
+        }
+
+        // Handle Regular Damage
+        if (damageType == "normal" || damageType == "hybrid") {
+            equippedFlower.petals -= damage;
+            if (equippedFlower.petals < 0) {
+                equippedFlower.petals = 0;
+            }
+            show_debug_message("Lost a petal! " + string(equippedFlower.petals) + " left.");
+        }
+
+        // Check if the entity should die (either petal count reaching 0)
+        if (equippedFlower.petals <= 0 && equippedFlower.phantom_petals <= 0) {
+            show_debug_message("The flower has withered...");
+        }
+    } else {
+		if (damage>0){
+	        // No flower equipped = instant death
+			//you want this? maybe?
+	        //if (death_text != "") {create_textbox(death_text);};
+	        state = "dead";
+	        //ai_state = "dead";
+		}
+    }
+	
+
+    // Reset damage values
+    damage = 0;
+    damageType = "none";
+    damageEvent = false;
+}
+
+
+//reduce flash
+if (flashAlpha>0){
+	flashAlpha-=.05;
+}
+
+#endregion
 
 //Get out of solid moveplats that have positioned themselvesinto the player in the begin step
 #region moving wall collisions

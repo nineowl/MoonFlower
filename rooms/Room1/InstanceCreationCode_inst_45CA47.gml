@@ -1,0 +1,1 @@
+equippedFlower = new Flower(15, "Red", 2, false, false, "Thin"); // Example equipped flower

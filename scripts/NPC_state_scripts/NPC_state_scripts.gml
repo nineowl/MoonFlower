@@ -655,22 +655,21 @@ function NPC_attack_command(_nextState,_attackType,_comboFrame){
 
 }
 
-function NPC_attack_damage(_damage){
+function NPC_attack_damage(_damage=1,_damageType="normal"){
 	with (myHitBox) {
 		var hitByAttackNow = ds_list_create();
-		
 		var hits = instance_place_list(x,y,oLife,hitByAttackNow,false);
-		
 		if (hits > 0){
 			for (var i=0;i<hits;i++){
 				//if this instance has not yet been hit by this attack
 				var hitID = hitByAttackNow[| i];
-				if (ds_list_find_index(other.hitByAttack,hitID)==-1 && hitID != creatorID){ //conditions prevent the attack from hurting itself
+				if (ds_list_find_index(other.hitByAttack,hitID)==-1 && hitID != other.id){ //conditions prevent the attack from hurting itself
 					ds_list_add(other.hitByAttack,hitID);
 					with (hitID) {
 						//whatever is gonna happen to the enemy
 						//write a damage event
-						HP-=_damage;
+						damage+=_damage;
+						damageType=_damageType
 						damageEvent=true;
 					}
 				}

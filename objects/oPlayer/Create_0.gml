@@ -1,6 +1,16 @@
 //States + Properties
 equippedFlower = noone;
 
+//Attack related
+hitByAttack = ds_list_create();
+knifeDamage = 2;
+
+damageEvent = false;
+damage=0;
+//HP = 10;
+
+flashAlpha=0;
+flashColor=c_red;
 
 //Custom functions for player
 function setOnGround(_val=true){
@@ -145,12 +155,7 @@ crushTimer=0;
 crushDeathTime=3;
 
 
-//Attack related
-hitByAttack = ds_list_create();
-knifeDamage = 2;
 
-damageEvent = false;
-HP = 10;
 
 //AI Related
 faction = "player";

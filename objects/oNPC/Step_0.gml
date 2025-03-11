@@ -876,7 +876,7 @@ switch (state) {
 	
 	case "attack":
 		sprite_index = attack0Spr;
-		NPC_attack_damage(2);
+		NPC_attack_damage(attackDamage,attackDamageType);
 		
 		//if animation ends
 		if image_index >=image_number-1 {

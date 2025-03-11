@@ -352,7 +352,8 @@ function player_attack_command(_nextState,_attackType,_comboFrame){
 		state = _nextState;
 		image_index=0;
 		myHitBox = instance_create_depth(x,y,depth,oPlayerHitBox,{
-			sprite_index : _attackType//,
+			sprite_index : _attackType,
+			creatorID : id
 			//image_xscale : image_xscale,//*face//for whatever reason, this causes a visual bug if you keep the player hit box visible, but this allows it to work as intended.
 			})
 		ds_list_clear(hitByAttack);
@@ -368,7 +369,7 @@ function player_attack_damage(_damage=1, _damageType="normal"){ //damage should 
 			for (var i=0;i<hits;i++){
 				//if this instance has not yet been hit by this attack
 				var hitID = hitByAttackNow[| i];
-				if (ds_list_find_index(other.hitByAttack,hitID)==-1 && hitID != creatorID){ //conditions prevent the player from being hit by self
+				if (ds_list_find_index(other.hitByAttack,hitID)==-1 && hitID != other.id){ //conditions prevent the player from being hit by self
 					ds_list_add(other.hitByAttack,hitID);
 					with (hitID) {
 						//whatever is gonna happen to the enemy

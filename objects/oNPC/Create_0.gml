@@ -281,7 +281,8 @@ function getControlsNPC(){
 //Attack related
 hitByAttack = ds_list_create();
 //damage = 2;
-
+attackDamage=1;
+attackDamageType="normal";
 
 
 //Logic State Machine
