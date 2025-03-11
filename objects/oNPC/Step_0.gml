@@ -47,8 +47,7 @@ if (damageEvent){
 */
 
 if (damageEvent) {
-    flashAlpha = 1;
-
+	if(state!="dead"){ flashAlpha = 1;};
     if (equippedFlower != noone &&(equippedFlower.petals>0 ||equippedFlower.phantom_petals>0)) {
         // Handle Phantom Damage
         if (damageType == "phantom" || damageType == "hybrid") {

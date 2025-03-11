@@ -386,3 +386,78 @@ function player_attack_damage(_damage=1, _damageType="normal"){ //damage should 
 		ds_list_destroy(hitByAttackNow);
 	}
 }
+
+function player_dodge(){
+		
+		///////////////////////////////
+		// Check for agileKey tap
+		if (agileKeyPressed) {
+			if(state != "free") state="free";
+		    agileTapTimer = agileTapBuffer;
+			
+		}
+
+		// Decrement timer if it's active
+		if (agileTapTimer > 0) {
+		    agileTapTimer--;
+		    // Check if key is released before timer ends (trigger backstep)
+		    if (!agileKey) { // if there is a directional input the player should roll instead
+		        
+				// Check for roll input
+		        if (leftKey || rightKey) {
+		            isRolling = true;
+		            isBackstepping = false;
+					rollTimer = rollTime;
+		            //invulnerable = true;
+				} else {
+					isBackstepping = true;
+			        agileTapTimer = 0;
+					backstepTimer = backstepTime; //timer start
+			        //invulnerable = true; // Optional
+					//show_debug_message("backstep released")
+				}
+		    }
+		}
+
+		// Handle backstep movement
+		if (isBackstepping) { // This could technically be a new state, but I think it works for free state
+		    backstepTimer--;
+			//show_debug_message("backstep?")
+		    // Move in the opposite direction of facing
+		    xspd = face * (1-backstepSpeed);
+    
+		    // End backstep
+		    if (backstepTimer <= 0) {
+		        isBackstepping = false;
+		        //invulnerable = false; // Optional: End invulnerability
+		    }
+		}
+		
+		// Handle roll movement
+		if (isRolling) {
+		    rollTimer--;
+    
+		    // Move in the direction pressed
+		    /*
+			if (rightKey) {
+		        x += rollSpeed;
+		        facingRight = true;
+		    }
+		    else if (leftKey) {
+		        x -= rollSpeed;
+		        facingRight = false;
+		    } */
+			
+			xspd = face * rollSpeed;
+    
+		    // End roll
+		    if (rollTimer <= 0) {
+		        isRolling = false;
+		        //invulnerable = false; // Optional: End invulnerability
+		    }
+		}
+		
+		
+		//////////////////////////////
+
+}
