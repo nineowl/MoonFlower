@@ -3,6 +3,7 @@ HP = 10;
 invincible = false;
 equippedFlower = noone;
 damage = 0; //amount of incoming damage
+damageType = "none" //type of incoming damage
 
 //events
 damageEvent = false;
@@ -279,7 +280,7 @@ function getControlsNPC(){
 //Attack Related
 //Attack related
 hitByAttack = ds_list_create();
-damage = 2;
+//damage = 2;
 
 
 

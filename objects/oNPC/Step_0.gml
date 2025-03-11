@@ -20,6 +20,7 @@ if (HP <= 0 && !invincible){
 */
 
 //Flash
+/*
 if (damageEvent){
 	flashAlpha = 1;
 	
@@ -33,13 +34,64 @@ if (damageEvent){
     } else {
         //Die(); // No petals left, normal death
 		if (death_text != ""){create_textbox(death_text); }//death dialogue. Later you may have to send this data to an external game object that keeps a list of deaths to prioritize death dialogue in the case of multiple simultaneous deaths. Or implement timer. Or both.
-		instance_destroy();
+		//instance_destroy();
+		state="dead";
+		ai_state="dead";
     }
 	
 	damage=0;
+	damageType="none"
 	//Damage event code should be reset every frame. //this could later be augmented with a buffer/timer
 	damageEvent = false;
+} 
+*/
+
+if (damageEvent) {
+    flashAlpha = 1;
+
+    if (equippedFlower != noone &&(equippedFlower.petals>0 ||equippedFlower.phantom_petals>0)) {
+        // Handle Phantom Damage
+        if (damageType == "phantom" || damageType == "hybrid") {
+            equippedFlower.phantom_petals -= damage;
+            if (equippedFlower.phantom_petals < 0) {
+                equippedFlower.phantom_petals = 0;
+            }
+            show_debug_message("Lost a phantom petal! " + string(equippedFlower.phantom_petals) + " left.");
+        }
+
+        // Handle Regular Damage
+        if (damageType == "normal" || damageType == "hybrid") {
+            equippedFlower.petals -= damage;
+            if (equippedFlower.petals < 0) {
+                equippedFlower.petals = 0;
+            }
+            show_debug_message("Lost a petal! " + string(equippedFlower.petals) + " left.");
+        }
+
+        // Check if the entity should die (either petal count reaching 0)
+        if (equippedFlower.petals <= 0 && equippedFlower.phantom_petals <= 0) {
+            show_debug_message("The flower has withered...");
+        }
+    } else {
+		if (damage>0){
+	        // No flower equipped = instant death
+	        if (death_text != "") {
+	            create_textbox(death_text);
+	        }
+	        state = "dead";
+	        ai_state = "dead";
+		}
+    }
+	
+
+    // Reset damage values
+    damage = 0;
+    damageType = "none";
+    damageEvent = false;
 }
+
+
+
 //reduce flash
 if (flashAlpha>0){
 	flashAlpha-=.05;
@@ -709,6 +761,9 @@ switch (ai_state) {
 			}
 		}
 	break;
+	
+	case "dead":
+	break;
 
 }
 
@@ -882,7 +937,9 @@ switch (state) {
 	
 	case "hurt":
 	break;
-	
+	case "dead":
+	sprite_index=deathSpr;
+	if (image_index>=image_number-1){image_speed=0;};
 	
 }
 

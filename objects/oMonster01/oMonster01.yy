@@ -14,6 +14,7 @@
     {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"oNPC","path":"objects/oNPC/oNPC.yy",},"propertyId":{"name":"backStepSpr","path":"objects/oNPC/oNPC.yy",},"resource":{"name":"sMonster01_backstep","path":"sprites/sMonster01_backstep/sMonster01_backstep.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"sMonster01_backstep",},
     {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"oNPC","path":"objects/oNPC/oNPC.yy",},"propertyId":{"name":"rollSpr","path":"objects/oNPC/oNPC.yy",},"resource":{"name":"sMonster01_dash","path":"sprites/sMonster01_dash/sMonster01_dash.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"sMonster01_dash",},
     {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"oNPC","path":"objects/oNPC/oNPC.yy",},"propertyId":{"name":"jumpSpr","path":"objects/oNPC/oNPC.yy",},"resource":{"name":"sMonster01_jump","path":"sprites/sMonster01_jump/sMonster01_jump.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"sMonster01_jump",},
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"oNPC","path":"objects/oNPC/oNPC.yy",},"propertyId":{"name":"deathSpr","path":"objects/oNPC/oNPC.yy",},"resource":{"name":"sMonster01_death","path":"sprites/sMonster01_death/sMonster01_death.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"sMonster01_death",},
   ],
   "parent":{
     "name":"Mobs",

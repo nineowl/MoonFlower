@@ -5,8 +5,9 @@ function flower(){
 }
 
 //as you implement the next properties you must expand the constructor
-function Flower(_petals, _type, _leaves, _thorns, _poisonous, _stemType) constructor {
+function Flower(_petals, _type, _leaves, _thorns, _poisonous, _stemType, _phantompetals=0) constructor {
     petals = _petals;          // Number of hits it can take
+	phantom_petals = _phantompetals //Number of phantom petals
     type = _type;				//Determines appearance/effects
     leaves = _leaves;          // (Future: stamina if implemented)
     thorns = _thorns;          // True/false: has thorns?

@@ -360,7 +360,7 @@ function player_attack_command(_nextState,_attackType,_comboFrame){
 
 }
 
-function player_attack_damage(_damage=1){ //damage should just be 1 or 2
+function player_attack_damage(_damage=1, _damageType="normal"){ //damage should just be 1 or 2
 	with (myHitBox) {
 		var hitByAttackNow = ds_list_create();
 		var hits = instance_place_list(x,y,oLife,hitByAttackNow,false);
@@ -373,7 +373,8 @@ function player_attack_damage(_damage=1){ //damage should just be 1 or 2
 					with (hitID) {
 						//whatever is gonna happen to the enemy
 						//write a damage event
-						damage=_damage;
+						damage+=_damage;
+						damageType=_damageType;
 						damageEvent=true;
 					}
 				}

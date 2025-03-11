@@ -56,6 +56,7 @@ crouchSpr=sPlayerCrouch;
 crawlSpr=sPlayerCrawl
 idleCrouchSpr=sPlayerIdleCrouch;
 crouchIdleSpr=sPlayerCrouchIdle;
+deathSpr=sPlayerDeath;
 //attack sprites
 knifeAttack0Spr=sPlayerKnifeAttack0;
 knifeAttack1Spr=sPlayerKnifeAttack1;
