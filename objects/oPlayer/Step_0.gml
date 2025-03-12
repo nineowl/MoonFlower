@@ -4,6 +4,7 @@ getControls();
 //sets face
 if (face != 0) image_xscale = face;
 
+
 #region Damage Related
 if (damageEvent) {
     flashAlpha = 1;
@@ -154,7 +155,7 @@ if instance_exists(myFloorPlat) && myFloorPlat.xspd != 0 && !place_meeting(x,y+m
 
 switch (state) {
 	case "free":
-		
+		isAttacking=false;
 		//Sprite Control
 		//Walking
 		if abs(xspd)>0{sprite_index=walkSpr;};
@@ -201,7 +202,7 @@ switch (state) {
 	
 	case "attack":
 		sprite_index = knifeAttack0Spr;
-	
+		isAttacking=true;
 		player_attack_damage(1);
 		player_attack_command("attackcombo1",sPlayerKnifeAttack1HB,5);
 		player_dodge();
@@ -220,6 +221,7 @@ switch (state) {
 	
 	case "attackcombo1":
 		sprite_index = knifeAttack1Spr;
+		isAttacking=true;
 		player_attack_damage(1);
 		player_attack_command("attackcombo2",sPlayerKnifeAttack2HB,5)
 		player_dodge();
@@ -239,6 +241,7 @@ switch (state) {
 	
 	case "attackcombo2":
 		sprite_index=sPlayerKnifeAttack2;
+		isAttacking=true;
 		player_attack_damage(2);
 		
 		//if animation ends
@@ -253,9 +256,11 @@ switch (state) {
 	break;
 	
 	case "hurt":
+	isAttacking=false;
 	break;
 	
 	case "crouch_start":
+		isAttacking=false;//set in each state where attack isn't happening
 		mask_index=crouchSpr;
 		sprite_index=idleCrouchSpr
 		if image_index >=image_number-1 {state="crouch";};
@@ -293,6 +298,7 @@ switch (state) {
 	break;
 	
 	case "crouch":
+		isAttacking=false;
 		mask_index=crouchSpr;
 		sprite_index=crouchSpr;
 		//Transition out of crouch
@@ -323,6 +329,7 @@ switch (state) {
 	break;
 	
 	case "uncrouch" :
+		isAttacking=false;
 		mask_index=crouchSpr;
 		sprite_index=crouchIdleSpr
 		if image_index >=image_number-1 {state="free";};
@@ -346,6 +353,7 @@ switch (state) {
 	
 	break;
 	case "dead":
+		isAttacking=false;
 		sprite_index=deathSpr;
 		if (image_index>=image_number-1){image_speed=0;};
 		face=0;

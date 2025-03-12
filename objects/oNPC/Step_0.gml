@@ -294,203 +294,6 @@ if (instance_exists(oPlayer)){ // probably unnecessary, implemented for testing
 
 
 //Action handling
-/*
-// Reset single-frame actions --- consolidate this into a function
-jumpActionStart = false;
-attackActionStart = false;
-rightAction=false;
-leftAction=false;
-idleAction = false;
-*/
-
-#region old 
-/*
-// Get all active actions
-var keys = variable_struct_get_names(action_queue);
-for (var i = 0; i < array_length(keys); i++) {
-    var key = keys[i];
-
- if (action_queue[$ key].duration > 0) {
-        switch (key) {
-            case "jump":
-                jumpAction = true;
-                if (action_queue[$ key].duration == 1) jumpActionStart = true;
-                break;
-
-            case "attack":
-                attackAction = true;
-                if (action_queue[$ key].duration == 1) attackActionStart = true;
-                break;
-
-            case "move_left":
-                leftAction = true;
-                break;
-
-            case "move_right":
-                rightAction = true;
-                break;
-
-        }
-        // Decrease timer
-        action_queue[$ key].duration--;
-
-        // Remove action when it expires
-        if (action_queue[$ key].duration <= 0) {
-            struct_remove(action_queue, key);
-			break;
-        }
-		
-		  // If this action is sequential, stop processing further actions
-       if (action_queue[$ key].sequential) {
-            //sequential_mode = true;
-            break;
-        }
-    }
-}
-*/
-#endregion
-#region old
-/*
-// Get all active actions
-var keys = variable_struct_get_names(action_queue);
-var sequential_mode = false; // Track if we should execute sequentially this frame
-
-for (var i = 0; i < array_length(keys); i++) {
-    var key = keys[i];
-    var action = action_queue[$ key];
-
-    if (action.duration > 0) {
-        switch (key) {
-            case "jump":
-                jumpAction = true;
-                if (action.duration == 1) jumpActionStart = true;
-                break;
-
-            case "attack":
-                attackAction = true;
-                if (action.duration == 1) attackActionStart = true;
-                break;
-
-            case "move_left":
-                leftAction = true;
-                break;
-
-            case "move_right":
-                rightAction = true;
-                break;
-				
-			case "idle": // New "do nothing" action
-                idleAction = true;
-                break;
-
-        }
-
-        // Decrease timer
-        action_queue[$ key].duration--;
-
-        // Remove action when it expires
-        if (action_queue[$ key].duration <= 0) {
-            struct_remove(action_queue, key);
-        }
-
-        // If this action is sequential, stop processing further actions
-        if (action.sequential) {
-            sequential_mode = true;
-            break;
-        }
-    }
-} */
-
-#endregion
-#region old
-/*
-if (array_length(action_queue) > 0) {
-    var action = action_queue[0]; // Get the first action in the queue
-
-    switch (action._name) {
-        case "jump":
-            jumpAction = true;
-            if (action.duration == 1) jumpActionStart = true;
-            break;
-
-        case "attack":
-            attackAction = true;
-            if (action.duration == 1) attackActionStart = true;
-            break;
-
-        case "left":
-            leftAction = true;
-            break;
-
-        case "right":
-            rightAction = true;
-            break;
-
-        case "idle": 
-            idleAction = true;
-            break;
-    }
-
-    // Reduce duration
-    action.duration--;
-
-    // If action is finished, remove it from the queue
-    if (action.duration <= 0) {
-        array_delete(action_queue, 0, 1); // Remove the first action
-    }
-
-}
-*/
-
-/*
-if (array_length(action_queue) > 0) {
-    var action = action_queue[0]; // Get the first action in the queue
-
-    // Reset all input variables
-    leftAction = false;
-    rightAction = false;
-    jumpAction = false;
-    jumpActionStart = false;
-    attackAction = false;
-    attackActionStart = false;
-    idleAction = false;
-
-    // Execute action based on its type
-    switch (action._name) {
-        case "jump":
-            jumpAction = true;
-            if (action.duration == 1) jumpActionStart = true;
-            break;
-
-        case "attack":
-            attackAction = true;
-            if (action.duration == 1) attackActionStart = true;
-            break;
-
-        case "left":
-            leftAction = true;
-            break;
-
-        case "right":
-            rightAction = true;
-            break;
-
-        case "idle":
-            idleAction = true;
-            break;
-    }
-
-    // Reduce duration
-    action_queue[0].duration--;
-
-    // If action is finished, remove it from the queue
-    if (action_queue[0].duration <= 0) {
-        array_delete(action_queue, 0, 1); // Remove completed action
-    }
-}
-
-*/
-#endregion
 		//this is the action handler
 if (array_length(action_queue) > 0) {
 	var current_actions = action_queue[0];// get the first entry
@@ -514,17 +317,17 @@ if (array_length(action_queue) > 0) {
 		switch (action) {
 			case "jump":
 				jumpAction = true;
-				if (current_actions[$ action].duration == 1) jumpActionStart=true;
+				if (current_actions[$ action].duration == current_actions[$ action].durationMax) {jumpActionStart=true;} else {jumpActionStart=false;}
 				break;
 				
 			case "attack":
                 attackAction = true;
-                if (current_actions[$ action].duration == 1) attackActionStart=true;
+                if (current_actions[$ action].duration == current_actions[$ action].durationMax) {attackActionStart=true;} else {attackActionStart=false;}
                 break;
 				
 			case "agile":
                 agileAction = true;
-                if (current_actions[$ action].duration == 1) agileActionStart=true;
+                if (current_actions[$ action].duration == current_actions[$ action].durationMax){agileActionStart=true;} else {agileActionStart=false;}
                 break;
 
             case "left":
@@ -571,8 +374,9 @@ if keyboard_check_pressed(ord("B")){
 			//QueueAction("jump",1,false)
 			//("right",40)
 			//QueueAction("idle",60)
-			QueueAction("right",20,false);
-			QueueAction("agile",1);
+			//QueueAction("right",20,false);
+			ActionBreak();
+			QueueAction("jump",60);
 			
 
 }
@@ -626,6 +430,10 @@ for (var i=0; i<ds_list_size(target_list);i++){
 		
 }
 ds_list_destroy(target_list);
+
+if(target){
+	if (target.state="dead"){target=noone;};
+}
 
 //show_debug_message(ai_state);
 
@@ -721,7 +529,7 @@ switch (ai_state) {
 	
 	case "aggressive":
 		image_blend = c_red;
-		
+		/*
 		if (!instance_exists(target)) {
 	        ActionBreak();
 	        ai_state = "docile";
@@ -758,7 +566,64 @@ switch (ai_state) {
 				ai_state = "docile";
 				target = noone;
 			}
-		}
+		} */
+		
+		
+	    if (!instance_exists(target)) {
+	        ActionBreak();
+	        ai_state = "docile";
+	        target = noone;
+	        break;
+	    }
+
+	    var dist_to_target = point_distance(x, y, target.x, target.y);
+	    var attack_range = 20; // Adjust attack range as needed
+	    var dodge_chance = 20; // % chance to dodge
+	    var reposition_chance = 10; // % chance to back off before attacking
+
+	    // Face the target
+	    if (x < target.x) face = 1;
+	    else if (x > target.x) face = -1;
+
+	    // Random chance to reposition instead of attacking immediately
+	    if (dist_to_target <= attack_range && irandom(100) < reposition_chance) {
+	        QueueAction("idle", irandom_range(10, 30), true); // Small pause before attacking
+	    }
+
+	    // Attack logic with cooldown
+	    if (dist_to_target <= attack_range && attack_timer <= 0) {
+	        QueueAction("attack", 1, true);
+	        attack_timer = attack_cooldown; // Reset attack cooldown
+	    }
+
+	    // Move towards target but not constantly
+	    if (dist_to_target > attack_range && dist_to_target <= aggro_wander_range) {
+	        aggro_timer = 0;
+	        if (irandom(100) > 30) { // 70% chance to move
+	            if (x < target.x) QueueAction("right", 1, true);
+	            else if (x > target.x) QueueAction("left", 1, true);
+	        }
+	    }
+		
+	    // Random chance to dodge when player attacks
+	    if (target.isAttacking && irandom(100) < dodge_chance) {
+			ActionBreak();
+	        QueueAction("agile", 1, true);
+	    } 
+
+	    // Lose aggro after some time if out of range
+	    if (dist_to_target > aggro_wander_range) {
+	        aggro_timer++;
+	        if (aggro_timer >= aggro_time) {
+	            ActionBreak();
+	            ai_state = "docile";
+	            target = noone;
+	        }
+	    }
+
+	    // Reduce attack cooldown over time
+	    if (attack_timer > 0) attack_timer--;
+		
 	break;
 	
 	case "dead":

@@ -295,6 +295,11 @@ aggro_timer = 0;
 aggro_time = 200;
 stationary = false; // determines if this NPC will move or not while docile;
 
+attack_timer=0;
+attack_cooldown=30;
+
+isAttacking=false;
+
 //action handling
 action_queue = []; //{};
 action_queue[0] = {};
@@ -311,7 +316,9 @@ function QueueAction(action_name, frames, sequential = true){
 	    }
 
 	    // Add action to the struct
-	    action_queue[action_count][$ action_name] = { duration: frames };
+	    action_queue[action_count][$ action_name] = { 
+			duration: frames, 
+			durationMax: frames};
 		
 		
 		//if sequenced move up to next action
