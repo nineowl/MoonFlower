@@ -130,6 +130,7 @@ switch (state) {
 		}
 
 		player_attack_command("attack",sPlayerKnifeAttack0HB,0);
+		player_aerial_attack_command("jump_attack",sPlayerJumpAttackHB,0);
 		
 		
 		NPC_MEET = instance_place(x,y,oNPC);
@@ -204,6 +205,23 @@ switch (state) {
 		player_x_collision();
 		player_y_collision();
 		
+	break;
+	case "jump_attack":
+		sprite_index=sPlayerJumpAttack;
+		//isAttacking=true;
+		player_attack_damage(2);
+		
+		//if animation ends
+		if image_index >=image_number-1 {
+			state="free";
+			instance_destroy(myHitBox);
+			};
+		
+		player_x_movement();
+		player_y_movement();
+		player_x_collision();
+		player_y_collision();
+	
 	break;
 	
 	case "hurt":

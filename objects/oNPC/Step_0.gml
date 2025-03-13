@@ -382,37 +382,7 @@ switch (ai_state) {
 			ai_state = "aggressive";
 			ActionBreak();
 		}
-		#region legacy
-		/*
-		if (!dirSet){
-			if (prevDir!=0){ // this behavior basically makes it so that when the NPC is idly moving, it will stop after each movement and not keep running around.
-				moveDir = 0;
-				dirSet = true;
-				
-			} else {
-				while (moveDir = prevDir){
-					moveDir = choose(-1,0,1);
-					dirSet = true;
-				}
-			} 
-			prevDir = moveDir;
-		} else {
-			moveTimer--;
-			if (moveTimer <= 0){
-				moveTimer=irandom(moveTime);
-				dirSet=false;
-				}
-		} 
-		if (stationary){ // you need to clean this up and refine this
-			moveTimer--;
-			moveDir = 0;
-			if (moveTimer<=0){
-				face = choose(-1,1);
-				moveTimer=irandom(moveTime);
-			}
-		}
-		*/
-		#endregion
+		
 	break;
 	
 	case "returning":
@@ -493,11 +463,13 @@ switch (ai_state) {
 	    // Face the target
 	    if (x < target.x) face = 1;
 	    else if (x > target.x) face = -1;
-
+		
+		/*
 	    // Random chance to reposition instead of attacking immediately
 	    if (dist_to_target <= attack_range && irandom(100) < reposition_chance) {
 	        QueueAction("idle", irandom_range(10, 30), true); // Small pause before attacking
 	    }
+		*/
 		/*
 	    // Attack logic with cooldown
 	    if (dist_to_target <= attack_range && attack_timer <= 0) {
@@ -509,9 +481,10 @@ switch (ai_state) {
 	    // Move towards target but not constantly
 	    if (dist_to_target > attack_range && dist_to_target <= aggro_wander_range) {
 	        aggro_timer = 0;
-	        if (irandom(100) > 30) { // 70% chance to move
-	            if (x < target.x) QueueAction("right", 1, true);
-	            else if (x > target.x) QueueAction("left", 1, true);
+			if (x < target.x) QueueAction("right", 1, true);
+	        else if (x > target.x) QueueAction("left", 1, true);
+	        if (irandom(1000) > 998) { // .2% chance to stop
+	            QueueAction("idle",20);
 	        }
 	    }
 		
