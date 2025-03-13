@@ -161,4 +161,6 @@ crushDeathTime=3;
 faction = "player";
 identifier = "player";
 
-isAttacking=false;
+//isAttacking=false;
+attackStart=false;
+myHitBox=noone;

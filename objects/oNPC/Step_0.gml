@@ -376,7 +376,9 @@ if keyboard_check_pressed(ord("B")){
 			//QueueAction("idle",60)
 			//QueueAction("right",20,false);
 			ActionBreak();
-			QueueAction("jump",60);
+			//QueueAction("right",30,false)
+			QueueAction("agile",1);
+			QueueAction("idle",50)
 			
 
 }
@@ -578,7 +580,7 @@ switch (ai_state) {
 
 	    var dist_to_target = point_distance(x, y, target.x, target.y);
 	    var attack_range = 20; // Adjust attack range as needed
-	    var dodge_chance = 20; // % chance to dodge
+	    var dodge_chance = 17; // % chance to dodge
 	    var reposition_chance = 10; // % chance to back off before attacking
 
 	    // Face the target
@@ -605,12 +607,38 @@ switch (ai_state) {
 	        }
 	    }
 		
+		/*
 	    // Random chance to dodge when player attacks
-	    if (target.isAttacking && irandom(100) < dodge_chance) {
+	    if (target.attackStart && (irandom(100) < dodge_chance)) {
 			ActionBreak();
-	        QueueAction("agile", 1, true);
+	        QueueAction("agile", 1, false);
+			QueueAction("idle", backstepTime, true);
+			show_debug_message("Dodging")
 	    } 
+		*/
+		
+		if (instance_exists(target.myHitBox)) {
+		    var hitbox = target.myHitBox;
+			var dist = point_distance(x, y, hitbox.x, hitbox.y);
+			
+			if (hitbox.image_alpha > 0 && reaction_timer <= 0) { 
+			    reaction_timer = irandom_range(3, 6); // Small delay before dodging
+			}
 
+			if (reaction_timer > 0 ) {
+			    reaction_timer--;
+			    if (reaction_timer == 0 && lastDodgedAttack != hitbox.id && irandom(100) < dodge_chance && dist <= dodgeRange ) {
+					lastDodgedAttack = hitbox.id; // Store the ID to prevent re-triggering
+			        ActionBreak();
+					QueueAction("idle",5,true);
+			        QueueAction("agile", 1, false);
+			        QueueAction("idle", backstepTime+30, true);
+					show_debug_message("Dodging")
+			    }
+			}
+			
+		}
+		
 	    // Lose aggro after some time if out of range
 	    if (dist_to_target > aggro_wander_range) {
 	        aggro_timer++;
@@ -663,77 +691,9 @@ switch (state) {
 
 		*/
 		
-		///////////////////////////////
-		// Check for agileKey tap
-		if (agileActionStart) {
-		    agileTapTimer = agileTapBuffer;
-			
-		}
-
-		// Decrement timer if it's active
-		if (agileTapTimer > 0) {
-		    agileTapTimer--;
-		    // Check if key is released before timer ends (trigger backstep)
-		    if (!agileAction) { // if there is a directional input the player should roll instead
-		        
-				// Check for roll input
-		        if (leftAction || rightAction) {
-		            isRolling = true;
-		            isBackstepping = false;
-					rollTimer = rollTime;
-		            //invulnerable = true;
-				} else {
-					isBackstepping = true;
-			        agileTapTimer = 0;
-					backstepTimer = backstepTime; //timer start
-			        //invulnerable = true; // Optional
-					//show_debug_message("backstep released")
-				}
-		    }
-		}
-
-		// Handle backstep movement
-		if (isBackstepping) { // This could technically be a new state, but I think it works for free state
-		    backstepTimer--;
-			//show_debug_message("backstep?")
-		    // Move in the opposite direction of facing
-		    xspd = face * (1-backstepSpeed);
-    
-		    // End backstep
-		    if (backstepTimer <= 0) {
-		        isBackstepping = false;
-		        //invulnerable = false; // Optional: End invulnerability
-		    }
-		}
-		
-		// Handle roll movement
-		if (isRolling) {
-		    rollTimer--;
-    
-		    // Move in the direction pressed
-		    /*
-			if (rightKey) {
-		        x += rollSpeed;
-		        facingRight = true;
-		    }
-		    else if (leftKey) {
-		        x -= rollSpeed;
-		        facingRight = false;
-		    } */
-			
-			xspd = face * rollSpeed;
-    
-		    // End roll
-		    if (rollTimer <= 0) {
-		        isRolling = false;
-		        //invulnerable = false; // Optional: End invulnerability
-		    }
-		}
+		NPC_dodge();
 		
 		NPC_collisions_movement(); //moved to the bottom
-		
-		
-		//////////////////////////////
 		
 
 	break;
@@ -741,6 +701,7 @@ switch (state) {
 	case "attack":
 		sprite_index = attack0Spr;
 		NPC_attack_damage(attackDamage,attackDamageType);
+		NPC_dodge();
 		
 		//if animation ends
 		if image_index >=image_number-1 {

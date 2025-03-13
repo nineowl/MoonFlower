@@ -8,6 +8,7 @@ damageType = "none" //type of incoming damage
 //events
 damageEvent = false;
 interactEvent = false;
+myHitBox = noone;
 
 
 //Shader related
@@ -54,7 +55,7 @@ invulnerable = false; // Optional: If you want invulnerability during the backst
 
 isRolling = false;
 rollSpeed = 4;
-rollTime = 10;
+rollTime = 8;
 rollTimer = 0;
 
 	//Jumping
@@ -299,6 +300,11 @@ attack_timer=0;
 attack_cooldown=30;
 
 isAttacking=false;
+
+reaction_timer=0;
+lastDodgedAttack=noone;
+dodgeRange=24;
+
 
 //action handling
 action_queue = []; //{};

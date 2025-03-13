@@ -1,1 +1,1 @@
-equippedFlower = new Flower(5, "Red", 2, false, false, "Thin"); // Example equipped flower
+equippedFlower = new Flower(50, "Red", 2, false, false, "Thin"); // Example equipped flower
