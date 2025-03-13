@@ -1,9 +1,9 @@
 //Properties
 HP = 10;
-invincible = false;
 equippedFlower = noone;
 damage = 0; //amount of incoming damage
 damageType = "none" //type of incoming damage
+immortal=false;
 
 //events
 damageEvent = false;
@@ -51,7 +51,12 @@ isBackstepping = false;
 backstepTimer = 0;
 backstepTime = 5; // Number of frames for the backstep
 backstepSpeed = 4;
-invulnerable = false; // Optional: If you want invulnerability during the backstep
+invincible = false; // Optional: If you want invulnerability during the backstep
+invincibilityTimer=0;
+invincibilityTime=4;
+invincibilityBuffer=4;
+invincibilityBufferFrames=4;
+
 
 isRolling = false;
 rollSpeed = 4;
@@ -297,8 +302,7 @@ aggro_time = 200;
 stationary = false; // determines if this NPC will move or not while docile;
 
 attack_timer=0;
-attack_cooldown=30;
-attackCooldown=30;
+attack_cooldown=45;
 
 isAttacking=false;
 attackRange=22;

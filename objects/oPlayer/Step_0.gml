@@ -6,57 +6,7 @@ if (face != 0) image_xscale = face;
 
 attackStart=false;
 
-#region Damage Related
-if (damageEvent) {
-    if(state != "dead")flashAlpha = 1;
 
-    if (equippedFlower != noone &&(equippedFlower.petals>0 ||equippedFlower.phantom_petals>0)) {
-        // Handle Phantom Damage
-        if (damageType == "phantom" || damageType == "hybrid") {
-            equippedFlower.phantom_petals -= damage;
-            if (equippedFlower.phantom_petals < 0) {
-                equippedFlower.phantom_petals = 0;
-            }
-            show_debug_message("Lost a phantom petal! " + string(equippedFlower.phantom_petals) + " left.");
-        }
-
-        // Handle Regular Damage
-        if (damageType == "normal" || damageType == "hybrid") {
-            equippedFlower.petals -= damage;
-            if (equippedFlower.petals < 0) {
-                equippedFlower.petals = 0;
-            }
-            show_debug_message("Lost a petal! " + string(equippedFlower.petals) + " left.");
-        }
-
-        // Check if the entity should die (either petal count reaching 0)
-        if (equippedFlower.petals <= 0 && equippedFlower.phantom_petals <= 0) {
-            show_debug_message("The flower has withered...");
-        }
-    } else {
-		if (damage>0){
-	        // No flower equipped = instant death
-			//you want this? maybe?
-	        //if (death_text != "") {create_textbox(death_text);};
-	        state = "dead";
-	        //ai_state = "dead";
-		}
-    }
-	
-
-    // Reset damage values
-    damage = 0;
-    damageType = "none";
-    damageEvent = false;
-}
-
-
-//reduce flash
-if (flashAlpha>0){
-	flashAlpha-=.05;
-}
-
-#endregion
 
 //Get out of solid moveplats that have positioned themselvesinto the player in the begin step
 #region moving wall collisions
@@ -370,42 +320,70 @@ if place_meeting(x,y,oWall){
 	image_blend=c_blue;
 }
 
-/*
-//Crushed death or damage code
-if place_meeting(x,y,oWall){
-	crushTimer++;
-	if crushTimer>crushDeathTime{
-		instance_destroy();
+	
+#region Damage Related
+if (damageEvent) {
+	if(invincibilityBuffer>0){
+		invincibilityBuffer--;
+	} else {
+		if(!invincible){
+		    if(state != "dead")flashAlpha = 1;
+
+		    if (equippedFlower != noone &&(equippedFlower.petals>0 ||equippedFlower.phantom_petals>0)) {
+		        // Handle Phantom Damage
+		        if (damageType == "phantom" || damageType == "hybrid") {
+		            equippedFlower.phantom_petals -= damage;
+		            if (equippedFlower.phantom_petals < 0) {
+		                equippedFlower.phantom_petals = 0;
+		            }
+		            show_debug_message("Lost a phantom petal! " + string(equippedFlower.phantom_petals) + " left.");
+		        }
+
+		        // Handle Regular Damage
+		        if (damageType == "normal" || damageType == "hybrid") {
+		            equippedFlower.petals -= damage;
+		            if (equippedFlower.petals < 0) {
+		                equippedFlower.petals = 0;
+		            }
+		            show_debug_message("Lost a petal! " + string(equippedFlower.petals) + " left.");
+		        }
+
+		        // Check if the entity should die (either petal count reaching 0)
+		        if (equippedFlower.petals <= 0 && equippedFlower.phantom_petals <= 0) {
+		            show_debug_message("The flower has withered...");
+		        }
+		    } else {
+				if (damage>0){
+			        // No flower equipped = instant death
+					//you want this? maybe?
+			        //if (death_text != "") {create_textbox(death_text);};
+			        state = "dead";
+			        //ai_state = "dead";
+				}
+		    }
+		}
+
+	    // Reset damage values
+	    damage = 0;
+	    damageType = "none";
+	    damageEvent = false;
+		invincibilityBuffer=invincibilityBufferFrames;
 	}
+}
+
+
+//reduce flash
+if (flashAlpha>0){
+	flashAlpha-=.05;
+}
+
+if (invincibilityTimer>0){
+	invincible=true;
+	show_debug_message("invulnerable")
+	invincibilityTimer--;
 } else {
-	crushTimer=0;
-} //*/
+	invincible=false;
+}
 
 
-
-/*
-
-//Sprite Control
-	//Walking
-	if abs(xspd)>0{sprite_index=walkSpr;};
-	//Running
-	if abs(xspd)>=moveSpd[1]{sprite_index=runSpr;};
-	//Not moving
-	if xspd==0{sprite_index=idleSpr;};
-	//in the air
-	if !onGround{sprite_index=jumpSpr;};
-	//Crouching
-	if crouching && crouchStart==false{
-		sprite_index=idleCrouchSpr
-		if image_index >=image_number-1 {crouchStart=true;};
-	}
-	
-	if crouching && crouchStart==true{sprite_index=crouchSpr;};
-		//set the collision mask
-		mask_index=maskSpr;
-		if crouching{mask_index=crouchSpr;};
-		if crouching && xspd !=0 {sprite_index=crawlSpr;};
-		
-	if !crouching {crouchStart=false;};
-	
-	*/
+#endregion

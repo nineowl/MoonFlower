@@ -701,11 +701,13 @@ function NPC_dodge(){
 		            isRolling = true;
 		            isBackstepping = false;
 					rollTimer = rollTime;
+					invincibilityTimer=invincibilityTime+rollTime;
 		            //invulnerable = true;
 				} else {
 					isBackstepping = true;
 			        agileTapTimer = 0;
 					backstepTimer = backstepTime; //timer start
+					invincibilityTimer=invincibilityTime+rollTime;
 			        //invulnerable = true; // Optional
 					//show_debug_message("backstep released")
 				}

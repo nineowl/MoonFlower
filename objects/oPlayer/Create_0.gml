@@ -91,9 +91,14 @@ agileTapTimer = 0;
 agileTapBuffer = 20; // Number of frames to consider as a tap
 isBackstepping = false;
 backstepTimer = 0;
-backstepTime = 5; // Number of frames for the backstep
+backstepTime = 8; // Number of frames for the backstep
 backstepSpeed = 4;
-invulnerable = false; // Optional: If you want invulnerability during the backstep
+invincible = false; // Optional: If you want invulnerability during the backstep
+invincibilityTimer=0;
+invincibilityTime=5;
+invincibilityBuffer=5;
+invincibilityBufferFrames=5;
+//invincibility time and bufferframes should be equal. They are separated just in case, but they probably are fine as one value
 
 isRolling = false;
 rollSpeed = 4;
