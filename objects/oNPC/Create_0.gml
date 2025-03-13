@@ -298,8 +298,11 @@ stationary = false; // determines if this NPC will move or not while docile;
 
 attack_timer=0;
 attack_cooldown=30;
+attackCooldown=30;
 
 isAttacking=false;
+attackRange=22;
+minAttackDistance=1;
 
 reaction_timer=0;
 lastDodgedAttack=noone;

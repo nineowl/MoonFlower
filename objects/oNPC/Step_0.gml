@@ -591,13 +591,14 @@ switch (ai_state) {
 	    if (dist_to_target <= attack_range && irandom(100) < reposition_chance) {
 	        QueueAction("idle", irandom_range(10, 30), true); // Small pause before attacking
 	    }
-
+		/*
 	    // Attack logic with cooldown
 	    if (dist_to_target <= attack_range && attack_timer <= 0) {
 	        QueueAction("attack", 1, true);
 	        attack_timer = attack_cooldown; // Reset attack cooldown
 	    }
-
+		*/
+	
 	    // Move towards target but not constantly
 	    if (dist_to_target > attack_range && dist_to_target <= aggro_wander_range) {
 	        aggro_timer = 0;
@@ -616,6 +617,23 @@ switch (ai_state) {
 			show_debug_message("Dodging")
 	    } 
 		*/
+		
+		// Only attack if not already attacking
+		if (!isAttacking && target != noone && attack_timer <= 0) {
+		    var dist = point_distance(x, y, target.x, target.y);
+    
+		    if (dist <= attackRange && abs(target.x - x) > minAttackDistance) {
+		        // Face the target before attacking
+		        face = sign(target.x - x);
+
+		        // Commit to the attack
+		        isAttacking = true;
+				attack_timer = attack_cooldown; // Start cooldown
+		        ActionBreak();
+		        QueueAction("attack", 1, true);
+		    }
+		}
+		
 		
 		if (instance_exists(target.myHitBox)) {
 		    var hitbox = target.myHitBox;
@@ -663,7 +681,7 @@ switch (ai_state) {
 #endregion
 switch (state) {
 	case "free":
-		
+		isAttacking=false;
 		//Sprite Control
 		//Walking
 		if abs(xspd)>0{sprite_index=walkSpr;};
