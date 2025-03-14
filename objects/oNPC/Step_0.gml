@@ -729,7 +729,7 @@ if (flashAlpha>0){
 
 if (invincibilityTimer>0){
 	invincible=true;
-	show_debug_message("invulnerable")
+	//show_debug_message("invulnerable")
 	invincibilityTimer--;
 } else {
 	invincible=false;

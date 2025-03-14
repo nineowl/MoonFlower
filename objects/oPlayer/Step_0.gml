@@ -156,7 +156,7 @@ switch (state) {
 		sprite_index = knifeAttack0Spr;
 		//isAttacking=true;
 		player_attack_damage(1);
-		player_attack_command("attackcombo1",sPlayerKnifeAttack1HB,5);
+		player_attack_command("attackcombo1",sPlayerKnifeAttack1HB,3);
 		player_dodge();
 	
 		//if animation ends
@@ -165,8 +165,9 @@ switch (state) {
 			instance_destroy(myHitBox);
 			};
 		
-	
+		
 		player_x_collision();
+		player_x_movement_reduced();
 		player_y_collision();
 	
 	break;
@@ -175,7 +176,7 @@ switch (state) {
 		sprite_index = knifeAttack1Spr;
 		//isAttacking=true;
 		player_attack_damage(1);
-		player_attack_command("attackcombo2",sPlayerKnifeAttack2HB,5)
+		player_attack_command("attackcombo2",sPlayerKnifeAttack2HB,4)
 		player_dodge();
 	
 		//if animation ends
@@ -185,6 +186,7 @@ switch (state) {
 			};
 	
 		player_x_collision();
+		player_x_movement_reduced();
 		player_y_collision();
 	
 	
@@ -217,11 +219,7 @@ switch (state) {
 			instance_destroy(myHitBox);
 			};
 		
-		player_x_movement();
-		player_y_movement();
-		player_x_collision();
-		player_y_collision();
-	
+		player_movement_collisions();
 	break;
 	
 	case "hurt":
@@ -397,7 +395,7 @@ if (flashAlpha>0){
 
 if (invincibilityTimer>0){
 	invincible=true;
-	show_debug_message("invulnerable")
+	//show_debug_message("invulnerable")
 	invincibilityTimer--;
 } else {
 	invincible=false;
