@@ -217,13 +217,18 @@ switch (state) {
 		if image_index >=image_number-1 {
 			state="free";
 			instance_destroy(myHitBox);
-			};
+		};
 		
 		player_movement_collisions();
 	break;
 	
 	case "hurt":
 	//isAttacking=false;
+	sprite_index=hurtSpr;
+		if image_index >=image_number-1 {
+			state="free";
+		};
+	
 	break;
 	
 	case "crouch_start":
@@ -324,11 +329,36 @@ switch (state) {
 		sprite_index=deathSpr;
 		if (image_index>=image_number-1){image_speed=0;};
 		face=0;
+		
+		player_x_collision();
+		player_y_collision();
+		
+		//Makes sure that when dead, body doesn't freeze midair
+		//Gravity
+		if coyoteHangTimer>0{
+			//count the timer down
+			coyoteHangTimer--;  //is it possible we actually get 1 less frame because of where this is?
+		}else{
+			//Apply gravity to the player
+			yspd+=grav;
+			//We're no longer on the ground
+			setOnGround(false); //need to get surgical with how we replace this
+		}
+		
+		//Terminal velocity
+		if yspd>termVel{yspd=termVel;};
+		
+		//Move
+		if !place_meeting(x,y+yspd,oWall){y+=yspd;};
+		
 	break;
 }
 
 
 
+if keyboard_check(ord("P")){
+	state="dead";
+}
 	
 //Check if I'm crushed
 image_blend = c_white;
@@ -343,8 +373,10 @@ if (damageEvent) {
 		invincibilityBuffer--;
 	} else {
 		if(!invincible){
-		    if(state != "dead")flashAlpha = 1;
-
+		    if(state != "dead"){
+				flashAlpha = 1;
+				state="hurt";
+			}
 		    if (equippedFlower != noone &&(equippedFlower.petals>0 ||equippedFlower.phantom_petals>0)) {
 		        // Handle Phantom Damage
 		        if (damageType == "phantom" || damageType == "hybrid") {

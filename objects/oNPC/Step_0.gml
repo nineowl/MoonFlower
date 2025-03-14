@@ -605,7 +605,7 @@ switch (state) {
 		if image_index >=image_number-1 {
 			state="free";
 			instance_destroy(myHitBox);
-			};
+		};
 		/*sprite_index = knifeAttack0Spr;
 	
 		player_attack_damage(2);
@@ -659,6 +659,10 @@ switch (state) {
 	break;
 	
 	case "hurt":
+	sprite_index=hurtSpr;
+	if image_index >=image_number-1 {
+		state="free";
+	};
 	break;
 	case "dead":
 	sprite_index=deathSpr;
@@ -675,6 +679,11 @@ if (damageEvent) {
 		invincibilityBuffer--;
 	} else {
 		if(!invincible){
+			if(state != "dead"){
+				flashAlpha = 1;
+				state="hurt";
+			}
+			
 			if(state!="dead"){ flashAlpha = 1;};
 		    if (equippedFlower != noone &&(equippedFlower.petals>0 ||equippedFlower.phantom_petals>0)) {
 		        // Handle Phantom Damage

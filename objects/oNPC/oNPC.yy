@@ -46,6 +46,7 @@
     {"$GMObjectProperty":"v1","%Name":"backStepSpr","filters":[],"listItems":[],"multiselect":false,"name":"backStepSpr","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resource":{"name":"sDefault","path":"sprites/sDefault/sDefault.yy",},"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"sDefault","varType":5,},
     {"$GMObjectProperty":"v1","%Name":"rollSpr","filters":[],"listItems":[],"multiselect":false,"name":"rollSpr","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resource":{"name":"sDefault","path":"sprites/sDefault/sDefault.yy",},"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"sDefault","varType":5,},
     {"$GMObjectProperty":"v1","%Name":"deathSpr","filters":[],"listItems":[],"multiselect":false,"name":"deathSpr","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resource":{"name":"sDefault","path":"sprites/sDefault/sDefault.yy",},"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"sDefault","varType":5,},
+    {"$GMObjectProperty":"v1","%Name":"hurtSpr","filters":[],"listItems":[],"multiselect":false,"name":"hurtSpr","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resource":{"name":"sDefault","path":"sprites/sDefault/sDefault.yy",},"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"sDefault","varType":5,},
   ],
   "resourceType":"GMObject",
   "resourceVersion":"2.0",

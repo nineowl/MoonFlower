@@ -18,6 +18,7 @@
     {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"oNPC","path":"objects/oNPC/oNPC.yy",},"propertyId":{"name":"backStepSpr","path":"objects/oNPC/oNPC.yy",},"resource":{"name":"sNPCShoutBackstep","path":"sprites/sNPCShoutBackstep/sNPCShoutBackstep.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"sNPCShoutBackstep",},
     {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"oNPC","path":"objects/oNPC/oNPC.yy",},"propertyId":{"name":"rollSpr","path":"objects/oNPC/oNPC.yy",},"resource":{"name":"sNPCShoutRoll","path":"sprites/sNPCShoutRoll/sNPCShoutRoll.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"sNPCShoutRoll",},
     {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"oNPC","path":"objects/oNPC/oNPC.yy",},"propertyId":{"name":"deathSpr","path":"objects/oNPC/oNPC.yy",},"resource":{"name":"sNPCShoutDeath","path":"sprites/sNPCShoutDeath/sNPCShoutDeath.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"sNPCShoutDeath",},
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"oNPC","path":"objects/oNPC/oNPC.yy",},"propertyId":{"name":"hurtSpr","path":"objects/oNPC/oNPC.yy",},"resource":{"name":"sNPCShoutHurt","path":"sprites/sNPCShoutHurt/sNPCShoutHurt.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"sNPCShoutHurt",},
   ],
   "parent":{
     "name":"Specific",
