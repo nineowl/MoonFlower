@@ -160,7 +160,7 @@ switch (state) {
 		player_dodge();
 	
 		//if animation ends
-		if image_index >=image_number-1 {
+		if animation_end() {
 			state="free";
 			instance_destroy(myHitBox);
 			};
@@ -180,7 +180,7 @@ switch (state) {
 		player_dodge();
 	
 		//if animation ends
-		if image_index >=image_number-1 {
+		if animation_end() {
 			state="free";
 			instance_destroy(myHitBox);
 			};
@@ -199,7 +199,7 @@ switch (state) {
 		player_attack_damage(2);
 		
 		//if animation ends
-		if image_index >=image_number-1 {
+		if animation_end() {
 			state="free";
 			instance_destroy(myHitBox);
 			};
@@ -214,7 +214,7 @@ switch (state) {
 		player_attack_damage(2);
 		
 		//if animation ends
-		if image_index >=image_number-1 {
+		if animation_end() {
 			state="free";
 			instance_destroy(myHitBox);
 		};
@@ -225,9 +225,29 @@ switch (state) {
 	case "hurt":
 	//isAttacking=false;
 	sprite_index=hurtSpr;
-		if image_index >=image_number-1 {
+		if animation_end() {
 			state="free";
 		};
+		
+	player_x_collision();
+	player_y_collision();
+		
+	//Gravity
+		if coyoteHangTimer>0{
+			//count the timer down
+			coyoteHangTimer--;  //is it possible we actually get 1 less frame because of where this is?
+		}else{
+			//Apply gravity to the player
+			yspd+=grav;
+			//We're no longer on the ground
+			setOnGround(false); //need to get surgical with how we replace this
+		}
+		
+		//Terminal velocity
+		if yspd>termVel{yspd=termVel;};
+		
+		//Move
+		if !place_meeting(x,y+yspd,oWall){y+=yspd;};
 	
 	break;
 	
@@ -235,7 +255,7 @@ switch (state) {
 		//isAttacking=false;//set in each state where attack isn't happening
 		mask_index=crouchSpr;
 		sprite_index=idleCrouchSpr
-		if image_index >=image_number-1 {state="crouch";};
+		if animation_end() {state="crouch";};
 		//Transition out of crouch
 		//Manual !downKey / Auto = !onGround
 		if (!downKey || !onGround) {
@@ -304,7 +324,7 @@ switch (state) {
 		//isAttacking=false;
 		mask_index=crouchSpr;
 		sprite_index=crouchIdleSpr
-		if image_index >=image_number-1 {state="free";};
+		if animation_end() {state="free";};
 		
 				//Transition out of crouch, in the case of losing ground
 		if (!onGround) {
@@ -327,8 +347,18 @@ switch (state) {
 	case "dead":
 		//isAttacking=false;
 		sprite_index=deathSpr;
-		if (image_index>=image_number-1){image_speed=0;};
+		if (animation_end()){image_speed=0;};
 		face=0;
+		
+		if(immortal){
+			reviveTimer--;
+			if (reviveTimer<=0){
+				state = "revive";
+				reviveTimer=reviveTime;
+				image_speed=1;
+			}
+		}
+		
 		
 		player_x_collision();
 		player_y_collision();
@@ -351,6 +381,12 @@ switch (state) {
 		//Move
 		if !place_meeting(x,y+yspd,oWall){y+=yspd;};
 		
+	break;
+	
+	case "revive":
+		sprite_index=reviveSpr;
+		if animation_end() {state="free";};
+	
 	break;
 }
 

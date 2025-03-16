@@ -7,6 +7,10 @@ knifeDamage = 2;
 
 damageEvent = false;
 damage=0;
+immortal=true;
+reviveTimer=300;
+reviveTime=300;
+
 //HP = 10;
 
 flashAlpha=0;
@@ -68,6 +72,7 @@ idleCrouchSpr=sPlayerIdleCrouch;
 crouchIdleSpr=sPlayerCrouchIdle;
 deathSpr=sPlayerDeath;
 hurtSpr=sPlayerHurt
+reviveSpr=sPlayerRise;
 //attack sprites
 knifeAttack0Spr=sPlayerKnifeAttack0;
 knifeAttack1Spr=sPlayerKnifeAttack1;
