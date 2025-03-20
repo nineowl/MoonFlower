@@ -8,12 +8,15 @@ textbox_x=camera_get_view_x(view_camera[0]);
 textbox_y=camera_get_view_y(view_camera[0])+160;
 
 //setup
+draw_set_font(global.font_main);
+draw_set_valign(fa_middle);
+draw_set_halign(fa_center);
 
 if setup==false {
 	setup=true;
-	draw_set_font(global.font_main);
-	draw_set_valign(fa_middle);
-	draw_set_halign(fa_center);
+	//draw_set_font(global.font_main);
+	//draw_set_valign(fa_middle);
+	//draw_set_halign(fa_center);
 	
 	//loop through pages
 	///page_number = array_length(text); //now redundant

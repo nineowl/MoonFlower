@@ -59,6 +59,7 @@
     {"id":{"name":"fDirectMessage","path":"fonts/fDirectMessage/fDirectMessage.yy",},},
     {"id":{"name":"fFontFantasy","path":"fonts/fFontFantasy/fFontFantasy.yy",},},
     {"id":{"name":"oCamera","path":"objects/oCamera/oCamera.yy",},},
+    {"id":{"name":"oDebugText","path":"objects/oDebugText/oDebugText.yy",},},
     {"id":{"name":"oFlower","path":"objects/oFlower/oFlower.yy",},},
     {"id":{"name":"oGame","path":"objects/oGame/oGame.yy",},},
     {"id":{"name":"oLayer1","path":"objects/oLayer1/oLayer1.yy",},},
