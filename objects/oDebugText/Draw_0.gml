@@ -14,4 +14,7 @@ if (oPlayer.equippedFlower){
 }
 
 draw_text_ext(textbox_x+32,textbox_y,drawtext,8,100)
-//draw_text_ext(textbox_x+32,textbox_y+16,"inventory",16,100)
+draw_text_ext(textbox_x+32,textbox_y+16,"inventory",16,100)
+if(array_length(oPlayer.inventory)>0){
+	draw_text_ext(textbox_x+32,textbox_y+32,oPlayer.inventory[0].petals,16,100)
+}

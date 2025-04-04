@@ -53,6 +53,17 @@ function getControls(){
 	enterKeyPressed = keyboard_check_pressed(vk_enter) + gamepad_button_check_pressed(0,gp_start);
 		enterKeyPressed = clamp(enterKeyPressed,0,1);
 	
+	cycleRightKey = keyboard_check(221);
+		cycleRightKey = clamp(cycleRightKey,0,1);
+	cycleRightKeyPressed = keyboard_check_pressed(221);
+		cycleRightKeyPressed = clamp(cycleRightKeyPressed,0,1);
+	cycleLeftKey = keyboard_check(219);
+		cycleLeftKey = clamp(cycleLeftKey,0,1);
+	cycleLeftKeyPressed = keyboard_check_pressed(219);
+		cycleLeftKeyPressed = clamp(cycleLeftKeyPressed,0,1);
+		
+	if(cycleLeftKeyPressed){show_debug_message("cycle left")}
+	
 	
 		
 	//Jump Key Buffering

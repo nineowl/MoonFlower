@@ -1,6 +1,9 @@
 //States + Properties
 equippedFlower = noone;
 
+//Inventory
+inventory=[];
+
 //Attack related
 hitByAttack = ds_list_create();
 knifeDamage = 2;

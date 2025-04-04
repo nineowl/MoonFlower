@@ -133,7 +133,7 @@ switch (state) {
 		player_aerial_attack_command("jump_attack",sPlayerJumpAttackHB,0);
 		
 		
-		NPC_MEET = instance_place(x,y,oNPC);
+		INTERACT_MEET = instance_place(x,y,oLife);
 		/*
 		if (NPC_MEET && interactKeyPressed && NPC_MEET.text_id != ""){
 			create_textbox(NPC_MEET.text_id);
@@ -142,8 +142,8 @@ switch (state) {
 		
 		//interact events can't happen if a textbox exists
 		if (!instance_exists(oTextBox)){
-				if (NPC_MEET && interactKeyPressed){
-				NPC_MEET.interactEvent = true;
+				if (INTERACT_MEET && interactKeyPressed){
+				INTERACT_MEET.interactEvent = true;
 			}
 		}
 		
