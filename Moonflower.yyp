@@ -169,6 +169,7 @@
     {"id":{"name":"sPlayerJump","path":"sprites/sPlayerJump/sPlayerJump.yy",},},
     {"id":{"name":"sPlayerJumpAttack","path":"sprites/sPlayerJumpAttack/sPlayerJumpAttack.yy",},},
     {"id":{"name":"sPlayerJumpAttackHB","path":"sprites/sPlayerJumpAttackHB/sPlayerJumpAttackHB.yy",},},
+    {"id":{"name":"sPlayerJumpStart","path":"sprites/sPlayerJumpStart/sPlayerJumpStart.yy",},},
     {"id":{"name":"sPlayerKnifeAttack0_1","path":"sprites/sPlayerKnifeAttack0_1/sPlayerKnifeAttack0_1.yy",},},
     {"id":{"name":"sPlayerKnifeAttack0","path":"sprites/sPlayerKnifeAttack0/sPlayerKnifeAttack0.yy",},},
     {"id":{"name":"sPlayerKnifeAttack0HB_1","path":"sprites/sPlayerKnifeAttack0HB_1/sPlayerKnifeAttack0HB_1.yy",},},

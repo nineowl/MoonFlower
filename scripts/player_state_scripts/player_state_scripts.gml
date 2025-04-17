@@ -95,7 +95,8 @@ function player_y_movement(){
 	
 	
 		if jumpKeyBuffered && jumpCount<jumpMax && (!downKey||_floorIsSolid){
-		
+			state="jump_start";//this might need revision
+			image_index=0;
 			//Reset Buffer
 			jumpKeyBuffered=false;
 			jumpKeyBufferTimer=0;

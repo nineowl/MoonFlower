@@ -344,6 +344,15 @@ switch (state) {
 		if(xspd!=0) {state = "free";};
 	
 	break;
+	
+	case "jump_start":
+	sprite_index=sPlayerJumpStart;
+	player_aerial_attack_command("jump_attack",sPlayerJumpAttackHB,0);
+	if (animation_end()||onGround){state="free"};
+	
+	player_movement_collisions();
+	break;
+	
 	case "dead":
 		//isAttacking=false;
 		sprite_index=deathSpr;

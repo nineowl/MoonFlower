@@ -19,6 +19,8 @@ enum relation {
 	neutral
 }
 
+global.butterflies=0;
+global.butterflyMax=300;
 
 
 
