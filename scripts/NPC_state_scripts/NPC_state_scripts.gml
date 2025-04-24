@@ -655,7 +655,7 @@ function NPC_attack_command(_nextState,_attackType,_comboFrame){
 
 }
 
-function NPC_attack_damage(_damage=1,_damageType="normal"){
+function NPC_attack_damage(_damage=1,_damageType="normal",_poiseDamage=10){
 	with (myHitBox) {
 		var hitByAttackNow = ds_list_create();
 		var hits = instance_place_list(x,y,oLife,hitByAttackNow,false);
@@ -671,6 +671,7 @@ function NPC_attack_damage(_damage=1,_damageType="normal"){
 						damage+=_damage;
 						damageType=_damageType
 						damageEvent=true;
+						poiseDamage=_poiseDamage;
 					}
 				}
 		

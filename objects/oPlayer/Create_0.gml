@@ -14,6 +14,12 @@ immortal=true;
 reviveTimer=300;
 reviveTime=300;
 
+poise=0;
+poiseMax=0;
+poiseTime=300; //5 seconds
+poiseTimer=0;
+poiseDamage=0; //incoming poise damage.
+
 //HP = 10;
 
 flashAlpha=0;

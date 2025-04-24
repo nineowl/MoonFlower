@@ -10,6 +10,12 @@ damageEvent = false;
 interactEvent = false;
 myHitBox = noone;
 
+poise=0;
+poiseMax=0;
+poiseTime=300; //5 seconds
+poiseTimer=0;
+poiseDamage=0; //incoming poise damage.
+
 
 //Shader related
 flashAlpha=0;

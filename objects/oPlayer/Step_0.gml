@@ -231,7 +231,7 @@ switch (state) {
 		
 	player_x_collision();
 	player_y_collision();
-		
+	//Below code is a piece of player y movement code, prevents the player from freezing midair on hurt state. Could be an intentional feature though.
 	//Gravity
 		if coyoteHangTimer>0{
 			//count the timer down
@@ -358,7 +358,7 @@ switch (state) {
 		sprite_index=deathSpr;
 		if (animation_end()){image_speed=0;};
 		face=0;
-		
+		/*
 		if(immortal){
 			reviveTimer--;
 			if (reviveTimer<=0){
@@ -366,7 +366,7 @@ switch (state) {
 				reviveTimer=reviveTime;
 				image_speed=1;
 			}
-		}
+		} */
 		
 		
 		player_x_collision();
@@ -413,6 +413,24 @@ if place_meeting(x,y,oWall){
 
 	
 #region Damage Related
+
+if (equippedFlower == noone){
+	poiseMax = 0;
+	poiseTime = 300;
+	poise = 0;
+} else {
+	poiseMax = equippedFlower.poiseMax;
+	poiseTime = equippedFlower.poiseTime;
+}
+
+if (poise < poiseMax){
+	poiseTimer++;
+	if (poiseTimer>=poiseTime){
+		poise=poiseMax;
+		poiseTimer = 0;
+	}
+}
+
 if (damageEvent) {
 	if(invincibilityBuffer>0){
 		invincibilityBuffer--;
@@ -420,7 +438,10 @@ if (damageEvent) {
 		if(!invincible){
 		    if(state != "dead"){
 				flashAlpha = 1;
-				state="hurt";
+				poise -= poiseDamage;
+				if(poise<=0){
+					state="hurt";
+				}
 			}
 		    if (equippedFlower != noone &&(equippedFlower.petals>0 ||equippedFlower.phantom_petals>0)) {
 		        // Handle Phantom Damage
@@ -460,6 +481,7 @@ if (damageEvent) {
 	    damage = 0;
 	    damageType = "none";
 	    damageEvent = false;
+		poiseDamage = 0;
 		invincibilityBuffer=invincibilityBufferFrames;
 	}
 }

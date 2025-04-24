@@ -271,7 +271,7 @@ if (array_length(action_queue) > 0) {
 
 
 //show_debug_message(string(action_queue));
-
+/*
 if keyboard_check_pressed(ord("B")){
 	//QueueAction("jump",1);
 			//QueueAction("right",30)
@@ -289,7 +289,7 @@ if keyboard_check_pressed(ord("B")){
 			
 
 }
-
+debugging  */
 //the way jumping works, you need to keep this underneath the action handler
 //Jump Buffering
 	if jumpActionStart{
@@ -602,7 +602,7 @@ switch (state) {
 		NPC_dodge();
 		
 		//if animation ends
-		if image_index >=image_number-1 {
+		if animation_end() {
 			state="free";
 			instance_destroy(myHitBox);
 		};
@@ -659,19 +659,90 @@ switch (state) {
 	break;
 	
 	case "hurt":
-	sprite_index=hurtSpr;
-	if image_index >=image_number-1 {
-		state="free";
-	};
+		sprite_index=hurtSpr;
+		if animation_end() {
+			state="free";
+		};
+		NPC_x_collision();
+		NPC_y_collision();
+		//Makes sure that body doesn't freeze midair
+		//Gravity
+		if coyoteHangTimer>0{
+			//count the timer down
+			coyoteHangTimer--;  //is it possible we actually get 1 less frame because of where this is?
+		}else{
+			//Apply gravity to the player
+			yspd+=grav;
+			//We're no longer on the ground
+			setOnGround(false); //need to get surgical with how we replace this
+		}
+		
+		//Terminal velocity
+		if yspd>termVel{yspd=termVel;};
+		
+		//Move
+		if !place_meeting(x,y+yspd,oWall){y+=yspd;};
 	break;
 	case "dead":
-	sprite_index=deathSpr;
-	if (image_index>=image_number-1){image_speed=0;};
+		sprite_index=deathSpr;
+		if (animation_end()){image_speed=0;};
+		NPC_x_collision();
+		NPC_y_collision();
+		//Makes sure that when dead, body doesn't freeze midair
+		//Gravity
+		if coyoteHangTimer>0{
+			//count the timer down
+			coyoteHangTimer--;  //is it possible we actually get 1 less frame because of where this is?
+		}else{
+			//Apply gravity to the player
+			yspd+=grav;
+			//We're no longer on the ground
+			setOnGround(false); //need to get surgical with how we replace this
+		}
+		
+		//Terminal velocity
+		if yspd>termVel{yspd=termVel;};
+		
+		//Move
+		if !place_meeting(x,y+yspd,oWall){y+=yspd;};
+	break;
 	
 }
 
 
 #region damage related
+
+if (equippedFlower == noone){
+	poiseMax = 0;
+	poiseTime = 300;
+	poise = 0;
+} else {
+	poiseMax = equippedFlower.poiseMax;
+	poiseTime = equippedFlower.poiseTime;
+}
+
+if (poise < poiseMax){
+	poiseTimer++;
+	if (poiseTimer>=poiseTime){
+		poise=poiseMax;
+		poiseTimer = 0;
+	}
+}if (equippedFlower == noone){
+	poiseMax = 0;
+	poiseTime = 300;
+	poise = 0;
+} else {
+	poiseMax = equippedFlower.poiseMax;
+	poiseTime = equippedFlower.poiseTime;
+}
+
+if (poise < poiseMax){
+	poiseTimer++;
+	if (poiseTimer>=poiseTime){
+		poise=poiseMax;
+		poiseTimer = 0;
+	}
+}
 
 
 if (damageEvent) {
@@ -681,7 +752,10 @@ if (damageEvent) {
 		if(!invincible){
 			if(state != "dead"){
 				flashAlpha = 1;
-				state="hurt";
+				poise -= poiseDamage;
+				if(poise<=0){
+					state="hurt";
+				}
 			}
 			
 			if(state!="dead"){ flashAlpha = 1;};
