@@ -13,19 +13,26 @@ cycleMax = array_length(cycle_id); //same as above but for cycle mode
 
 //If player pressed interact button
 if (interactEvent){
-	
-	if (text_id[0] != ""){
-		if (!cycleMode){
-			myTextbox = create_textbox(text_id[text_index]);
-			myTextbox.creatorID = id;
+	if(state!="dead" && ai_state == "docile"){
+		if (text_id[0] != ""){
+			if (!cycleMode){
+				myTextbox = create_textbox(text_id[text_index]);
+				myTextbox.creatorID = id;
 	
 
-		} else {
-			myTextbox = create_textbox(cycle_id[cycle_index]);
-			myTextbox.creatorID = id;
+			} else {
+				myTextbox = create_textbox(cycle_id[cycle_index]);
+				myTextbox.creatorID = id;
+			}
+		}
+	} else if (state="dead"){
+		if (corpse_text!=""){
+			create_textbox(corpse_text);
 		}
 	}
+	
 	interactEvent = false;
+	
 	
 } 
 

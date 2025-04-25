@@ -26,7 +26,7 @@ flashColor=c_red;
 text_id[0] = "";
 text_index = 0;
 death_text = "";// "004"; //initially default death text, but it's a bit much
-
+corpse_text = "";// if you interact with it's corpse
 nextFlag = false; //This checks if dialogue reaches last page. If it does, this value is set to true in the textbox object.
 
 cycle_id[0] = ""; // Id of cycling text. Could be one id, leading to exhaustiv text.
