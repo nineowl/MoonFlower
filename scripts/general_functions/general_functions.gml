@@ -52,6 +52,7 @@ function getControls(){
 		enterKey = clamp(enterKey,0,1);
 	enterKeyPressed = keyboard_check_pressed(vk_enter) + gamepad_button_check_pressed(0,gp_start);
 		enterKeyPressed = clamp(enterKeyPressed,0,1);
+		
 	
 	cycleRightKey = keyboard_check(221);
 		cycleRightKey = clamp(cycleRightKey,0,1);
@@ -62,7 +63,25 @@ function getControls(){
 	cycleLeftKeyPressed = keyboard_check_pressed(219);
 		cycleLeftKeyPressed = clamp(cycleLeftKeyPressed,0,1);
 		
-	if(cycleLeftKeyPressed){show_debug_message("cycle left")}
+	menuRightKey = keyboard_check(vk_right);
+		menuRightKey = clamp(menuRightKey,0,1);
+	menuLeftKey = keyboard_check(vk_left);
+		menuLeftKey = clamp(menuLeftKey,0,1);
+	menuDownKey = keyboard_check(vk_down)
+		menuDownKey = clamp(menuDownKey,0,1);
+	menuUpKey = keyboard_check(vk_up)
+		menuUpKey = clamp(menuUpKey,0,1);
+		
+		
+	menuRightKeyPressed = keyboard_check_pressed(vk_right);
+		menuRightKeyPressed = clamp(menuRightKeyPressed,0,1);
+	menuLeftKeyPressed = keyboard_check_pressed(vk_left);
+		menuLeftKeyPressed = clamp(menuLeftKeyPressed,0,1);
+	menuDownKeyPressed = keyboard_check_pressed(vk_down)
+		menuDownKeyPressed = clamp(menuDownKeyPressed,0,1);
+	menuUpKeyPressed = keyboard_check_pressed(vk_up)
+		menuUpKeyPressed = clamp(menuUpKeyPressed,0,1);
+	
 	
 	
 		

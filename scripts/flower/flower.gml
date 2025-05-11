@@ -5,7 +5,7 @@ function flower(){
 }
 
 //as you implement the next properties you must expand the constructor
-function Flower(_petals, _type, _leaves, _thorns, _poisonous, _stemType, _phantompetals=0,_poiseMax=0) constructor {
+function Flower(_petals, _type, _leaves, _thorns, _poisonous, _stemType, _phantompetals=0,_poiseMax=0, _description="Just a little flower") constructor {
     petals = _petals;          // Number of hits it can take
 	phantom_petals = _phantompetals //Number of phantom petals
     type = _type;				//Determines appearance/effects
@@ -23,6 +23,8 @@ function Flower(_petals, _type, _leaves, _thorns, _poisonous, _stemType, _phanto
     // Future properties
     glows = false;             // Does it glow in the dark?
     sweetNectar = false;       // Attracts creatures?
+	
+	description = _description //Flavor text
 	
 	if (poiseMax=0){	//if poise isn't preset on creation
 		switch(stemType){
