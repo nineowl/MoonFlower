@@ -42,29 +42,36 @@ switch (pos){
 		draw_set_halign(fa_left);
 		
 		if (instance_exists(oPlayer)){
-			if(oPlayer.inventory[flwr_pos]){
-				draw_sprite(sFlower0,0,x+op_border,y+pg_border+op_space)
-				draw_text_color(x+op_border,y+pg_border+op_space,info_flwr[0]+ string(oPlayer.inventory[flwr_pos].petals),_c,_c,_c,_c,1); //how many petals
-				draw_text_color(x+op_border,y+pg_border+op_space*2,info_flwr[1]+ oPlayer.inventory[flwr_pos].stemType,_c,_c,_c,_c,1); //type of stem
-				draw_text_color(x+op_border,y+pg_border+op_space*3,info_flwr[2]+ oPlayer.inventory[flwr_pos].description,_c,_c,_c,_c,1); //description, need to learn how to wrap text
+			if (array_length(oPlayer.inventory)>0){
+				if(oPlayer.inventory[flwr_pos]){
+					draw_sprite(sFlower0,0,x+op_border,y+pg_border+op_space)
+					draw_text_color(x+op_border+200,y+pg_border+5,string(flwr_pos+1)+"/"+string(array_length(oPlayer.inventory)),_c,_c,_c,_c,1); //Tells you what you're scrolled on
+					draw_text_color(x+op_border,y+pg_border+op_space,info_flwr[0]+ string(oPlayer.inventory[flwr_pos].petals),_c,_c,_c,_c,1); //how many petals
+					draw_text_color(x+op_border,y+pg_border+op_space*2,info_flwr[1]+ oPlayer.inventory[flwr_pos].stemType,_c,_c,_c,_c,1); //type of stem
+					draw_text_color(x+op_border,y+pg_border+op_space*3,info_flwr[2]+ oPlayer.inventory[flwr_pos].description,_c,_c,_c,_c,1); //description, need to learn how to wrap text
 				
-				if (oPlayer.inventory[flwr_pos] == oPlayer.equippedFlower) {
-					draw_text_color(x+op_border,y+pg_border+op_space*4,"equipped",_c,_c,_c,_c,1);
+					if (oPlayer.inventory[flwr_pos].petals == 0) {
+						draw_text_color(x+op_border,y+pg_border+op_space*4,"withered",_c,_c,_c,_c,1);
+					}
+				
+					if (oPlayer.inventory[flwr_pos] == oPlayer.equippedFlower) {
+						draw_text_color(x+op_border,y+pg_border+op_space*5,"equipped",_c,_c,_c,_c,1);
+					}
+
+
+					/*
+					draw_text_color(x+op_border,y+pg_border+op_space,info_flwr[0]+ string(oPlayer.equippedFlower.petals),_c,_c,_c,_c,1); //how many petals
+					draw_text_color(x+op_border,y+pg_border+op_space*2,info_flwr[1]+ oPlayer.equippedFlower.stemType,_c,_c,_c,_c,1); //type of stem
+					draw_text_color(x+op_border,y+pg_border+op_space*3,info_flwr[2]+ oPlayer.equippedFlower.description,_c,_c,_c,_c,1); //description, need to learn how to wrap text
+					*/
 				}
-
-
-				/*
-				draw_text_color(x+op_border,y+pg_border+op_space,info_flwr[0]+ string(oPlayer.equippedFlower.petals),_c,_c,_c,_c,1); //how many petals
-				draw_text_color(x+op_border,y+pg_border+op_space*2,info_flwr[1]+ oPlayer.equippedFlower.stemType,_c,_c,_c,_c,1); //type of stem
-				draw_text_color(x+op_border,y+pg_border+op_space*3,info_flwr[2]+ oPlayer.equippedFlower.description,_c,_c,_c,_c,1); //description, need to learn how to wrap text
-				*/
-			}
 			
-			if (interactKeyPressed){
-				if (oPlayer.equippedFlower == oPlayer.inventory[flwr_pos]){
-					oPlayer.equippedFlower = noone;
-				} else {
-					oPlayer.equippedFlower = oPlayer.inventory[flwr_pos];
+				if (interactKeyPressed){
+					if (oPlayer.equippedFlower == oPlayer.inventory[flwr_pos]){
+						oPlayer.equippedFlower = noone;
+					} else {
+						oPlayer.equippedFlower = oPlayer.inventory[flwr_pos];
+					}
 				}
 			}
 		

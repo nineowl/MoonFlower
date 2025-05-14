@@ -1,0 +1,56 @@
+Things to implement:
+
+
+There should be a graveyard area. NPCs who die will have a grave set up for them.
+
+
+
+7 summons.
+
+5 main summon quests. 2 extra summon quests.
+
+Some summons you have to fight. Others they progress story.
+
+There's the moons echo's, and the mirrors of the bloodmoon. Opposing factions.
+
+In general people aren't born, they manifest into this world. There is no memory of a childhood or such things
+
+It is believed there were past lives, but it is pointless to imagine what they might've been.
+
+Echo's death is glitched and his next life always manifests back into this world.
+
+
+The game is just more or less here for exploration, platforming, fun characters and quests, and stuff.
+no need to actually do the main quest. THat's just a device to move the game forward and give you something to do
+
+
+the main plot focuses around summons. You are a summoner and you do tasks related to summoning certing beings
+
+brewmaster Kay will make you all kinds of brews depending on what you bring. Usually tea in exchange for flowres
+but will also make special consumables if you bring her special beans
+
+You are not the only with a death manifestation glitch.
+
+It rains a lot. It normally doesn't matter, but it can.
+
+Some flowers are better off saved for quests than to be used as an equip.
+
+Bouquets can be made.
+
+There is a big toe hiding somewhere. It can't be killed. It won't kill you, but it will annoy you.
+
+Nyx the fox will give you advice. But how will it be received?
+
+
+
+
+Inventory drops can work with irandom. First determining how much of the slain NPCs items you get, and then the order in which they are dropped(so it's always a random amount)
+there should also be a check to make sure specific NPCs drop all or specific items at least
+
+
+Factions:
+Mirror of the Devil Moon
+Moon's Echo
+Lunar Knight
+Faerie's Ring
+Compost Collector
