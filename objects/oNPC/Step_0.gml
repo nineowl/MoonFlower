@@ -11,10 +11,20 @@ if (face != 0) image_xscale = face;
 textMax = array_length(text_id); // Get the maximum text entries
 cycleMax = array_length(cycle_id); //same as above but for cycle mode
 
+
 //If player pressed interact button
 if (interactEvent){
 	if(state!="dead" && ai_state == "docile"){
+
+
 		if (text_id[0] != ""){
+			
+			if (point_direction(x,y,oPlayer.x,oPlayer.y)>90){
+					face=-1;
+				} else {
+					face=1;
+			}
+			
 			if (!cycleMode){
 				myTextbox = create_textbox(text_id[text_index]);
 				myTextbox.creatorID = id;

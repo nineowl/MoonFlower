@@ -105,6 +105,7 @@
     {"id":{"name":"oSpeakBlock","path":"objects/oSpeakBlock/oSpeakBlock.yy",},},
     {"id":{"name":"oTextBox","path":"objects/oTextBox/oTextBox.yy",},},
     {"id":{"name":"oTitleMenu","path":"objects/oTitleMenu/oTitleMenu.yy",},},
+    {"id":{"name":"oUnborn","path":"objects/oUnborn/oUnborn.yy",},},
     {"id":{"name":"oUnderRain","path":"objects/oUnderRain/oUnderRain.yy",},},
     {"id":{"name":"oWall","path":"objects/oWall/oWall.yy",},},
     {"id":{"name":"Playground","path":"rooms/Playground/Playground.yy",},},
