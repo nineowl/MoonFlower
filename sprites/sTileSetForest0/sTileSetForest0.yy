@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":0,
   "parent":{
-    "name":"Tile Sets",
-    "path":"folders/Tile Sets.yy",
+    "name":"Forest",
+    "path":"folders/Tile Sets/Forest.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

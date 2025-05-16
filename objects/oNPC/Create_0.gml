@@ -188,8 +188,9 @@ state = "free";
 
 
 personal_relations = [];
-
+identifier = "default";
 identifier = generate_identifier();
+show_debug_message(string(identifier));
 //show_message(identifier);
 
 //array_push(personal_relations, new special_relation("player", relation.enemy));

@@ -73,6 +73,8 @@ function special_relation(_id, _relation) constructor {
 
 function GetNPCRelation(target_id) {
     for (var i = 0; i < array_length(personal_relations); i++) {
+		//if (!instance_exists(target_id)) return relation.neutral;
+		//if (!variable_instance_exists(target_id, "identifier")) return relation.neutral;
         if target_id.identifier == personal_relations[i].identifier {
             return personal_relations[i].relation;
         }

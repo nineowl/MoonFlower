@@ -327,13 +327,24 @@ var nearest_dist = aggro_range;
 //Loop through potential targets
 for (var i=0; i<ds_list_size(target_list);i++){
 	var other_id = target_list[| i];
-		
+	
 	//dont target self. This shouldn't happen regardless considering how the collision circle list works
-	if (other_id = id) continue;
+	if (other_id == id) continue;
+	if (!variable_instance_exists(other_id, "identifier")) continue;
+
+	
+
+	/*
+	//show_message(other_id);
+	if (!variable_instance_exists(other_id, "identifier")) {
+	    show_debug_message("Missing identifier in: " + string(object_get_name(object_index)));
+	    continue; // skip this one so it doesn't crash
 		
+	}  */
+	
 	//Check faction relation
 	var _relation = GetNPCRelation(other_id.id);
-		
+	
 	if(_relation == relation.enemy){
 		var dist = point_distance(x,y,other_id.x,other_id.y);
 		

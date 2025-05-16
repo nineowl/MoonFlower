@@ -8,7 +8,6 @@
   "instanceCreationOrder":[
     {"name":"inst_74D9DC1B","path":"rooms/Room1/Room1.yy",},
     {"name":"inst_4323D778","path":"rooms/Room1/Room1.yy",},
-    {"name":"inst_45CA47","path":"rooms/Room1/Room1.yy",},
     {"name":"inst_544EEA74","path":"rooms/Room1/Room1.yy",},
     {"name":"inst_4D2FF4D","path":"rooms/Room1/Room1.yy",},
     {"name":"inst_200192FB","path":"rooms/Room1/Room1.yy",},
@@ -49,11 +48,12 @@
     {"name":"inst_4F1832CD","path":"rooms/Room1/Room1.yy",},
     {"name":"inst_120319E2","path":"rooms/Room1/Room1.yy",},
     {"name":"inst_290CD69F","path":"rooms/Room1/Room1.yy",},
-    {"name":"inst_31805CDE","path":"rooms/Room1/Room1.yy",},
     {"name":"inst_796B9F2F","path":"rooms/Room1/Room1.yy",},
     {"name":"inst_21FB3AA1","path":"rooms/Room1/Room1.yy",},
     {"name":"inst_28C3A6CC","path":"rooms/Room1/Room1.yy",},
     {"name":"inst_1DDA4F46","path":"rooms/Room1/Room1.yy",},
+    {"name":"inst_31805CDE","path":"rooms/Room1/Room1.yy",},
+    {"name":"inst_45CA47","path":"rooms/Room1/Room1.yy",},
   ],
   "isDnd":false,
   "layers":[
