@@ -133,7 +133,7 @@ switch (state) {
 		player_aerial_attack_command("jump_attack",sPlayerJumpAttackHB,0);
 		
 		
-		INTERACT_MEET = collision_circle(x,y,18,oLife,false,true) //instance_place(x,y,oLife);
+		INTERACT_MEET = collision_circle(x,y,20,oLife,false,true) //instance_place(x,y,oLife);
 		/*
 		if (NPC_MEET && interactKeyPressed && NPC_MEET.text_id != ""){
 			create_textbox(NPC_MEET.text_id);

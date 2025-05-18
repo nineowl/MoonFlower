@@ -1,12 +1,11 @@
 stationary=true;
 
 
-text_id[0] = "002";
-text_id[1] = "003";
+text_id[0] = "Cynic000";
 
-cycle_id[0] = "002";
-cycle_id[1] = "003";
-cycle_id[2] = "000";
+
+cycle_id[0] = "Cynic001";
+;
 
 cycleType = true;
 

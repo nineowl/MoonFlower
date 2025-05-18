@@ -43,5 +43,18 @@ function game_text(_text_id){
 	case "006":
 		scr_text("My dad works at blizzard");
 		break;
+		
+	//The Cynic's Dialogue
+	case "Cynic000":
+		scr_text("Oh? Another nameless unborn...");
+		scr_text("...");
+		break;
+	case "Cynic001":
+		scr_text("Well, if you know what's good for you,");
+		scr_text("You'd find a safe place to perch.");
+		scr_text("This is my spot. I suggest you find another.")
+		scr_text("Please.")
+		break;
+	
 	}
 }
