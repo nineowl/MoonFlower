@@ -172,12 +172,12 @@ switch (state) {
 		//jumpCount=0; // make sure you always have a jump if you are in climbing mode
 		
 		setOnGround(true);
-		yspd = 1*(downKey-upKey);
+		yspd = .7*(downKey-upKey);
 		y+=yspd;
 		
 		sprite_index = sPlayerClimb;
 		var _climbspd = .8;
-		image_speed= max(_climbspd*downKey,_climbspd*upKey);
+		image_speed= max(_climbspd*downKey,_climbspd*upKey,_climbspd*rightKey,_climbspd*leftKey);
 		
 		if (!place_meeting(x,y,oClimb)){
 			state="free";

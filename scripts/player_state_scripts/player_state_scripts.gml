@@ -58,7 +58,7 @@ function player_x_movement(){
 
 function player_x_movement_reduced(){
 	//Move
-		x += (.6) * xspd;
+		x += (.5) * xspd;
 }
 
 function player_y_movement(){
