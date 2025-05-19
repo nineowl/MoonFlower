@@ -101,8 +101,12 @@ if instance_exists(myFloorPlat) && myFloorPlat.xspd != 0 && !place_meeting(x,y+m
 		runType=agileKey;  //can possibly be organized outside of the states
 		xspd = moveDir * moveSpd[runType];	
 
+show_debug_message(state);
 
 
+if (climbJumpTimer<climbJumpTime){
+	climbJumpTimer++;
+}
 
 switch (state) {
 	case "free":
@@ -149,7 +153,107 @@ switch (state) {
 		
 		player_dodge();
 		player_movement_collisions();
+		
+		//Climb code:
+		
+		if (place_meeting(x,y,oClimb) && !downKey){
+			state="climb";
+			
+			//xspd = 0;
+			//yspd = 1*(upKey-downKey);
+		
+		}
+		
+		
 
+	break;
+	
+	case "climb":
+		//jumpCount=0; // make sure you always have a jump if you are in climbing mode
+		
+		setOnGround(true);
+		yspd = 1*(downKey-upKey);
+		y+=yspd;
+		
+		sprite_index = sPlayerClimb;
+		var _climbspd = .8;
+		image_speed= max(_climbspd*downKey,_climbspd*upKey);
+		
+		if (!place_meeting(x,y,oClimb)){
+			state="free";
+			image_speed=1;
+		}
+		
+
+		#region Modified Jump code
+		
+			
+		//Rest/Prepare Jump Variables
+		 if onGround{
+			 jumpCount=0;
+			 jumpHoldTimer=0;
+			 coyoteJumpTimer=coyoteJumpFrames;
+		 }else{
+			//if player is in the air make sure they can't do an extra jump
+			coyoteJumpTimer--;
+			if jumpCount==0&&coyoteJumpTimer<=0{jumpCount=1;};
+		 }
+		 
+		//Prepare to Jump, check if on a platform first
+		var _floorIsSolid=false;
+		if instance_exists(myFloorPlat)
+		&&(myFloorPlat.object_index=oWall||object_is_ancestor(myFloorPlat.object_index,oWall)){
+			_floorIsSolid=true;
+		}
+		
+		if jumpKeyBuffered && jumpCount<jumpMax && (!downKey||_floorIsSolid){
+			state="jump_start";//this might need revision
+			climbJumpTimer=0;
+			//jumpCount=0;
+			image_speed=1;
+			image_index=0;
+			//Reset Buffer
+			jumpKeyBuffered=false;
+			jumpKeyBufferTimer=0;
+		
+			//Increase the number of performed jumps;
+			jumpCount++;
+			//Set the jump hold timer
+			jumpHoldTimer=jumpHoldFrames[jumpCount-1];
+			//Tell ourself we're no longer on the ground
+			setOnGround(false);
+		}
+		
+	//Jump based on the timer/holding the button
+		if jumpHoldTimer > 0 {
+
+			//Constantly set the yspd to be jumping speed
+			//yspd = jspd[clamp(jumpCount-1, 0, 2)];
+			yspd = jspd[jumpCount-1];
+			//Count down the timer
+			jumpHoldTimer--;
+		}
+		//Cut off the jump by releasing the jump button
+
+		if !jumpKey{
+			jumpHoldTimer=0;
+		}
+		
+		//Terminal velocity
+		if yspd>termVel{yspd=termVel;};
+		
+		//Move
+		if !place_meeting(x,y+yspd,oWall){y+=yspd;};
+		
+		#endregion
+		
+		
+		//still need x movement and collisions
+		player_x_collision();
+		player_x_movement_reduced();
+		//player_y_movement();
+		player_y_collision();
+	
 	break;
 	
 	case "attack":
@@ -351,6 +455,15 @@ switch (state) {
 	if (animation_end()||onGround){state="free"};
 	
 	player_movement_collisions();
+	
+	if (place_meeting(x,y,oClimb)&&(climbJumpTimer>=climbJumpTime||upKey)&&!downKey){
+			state="climb";
+			
+			//xspd = 0;
+			//yspd = 1*(upKey-downKey);
+		
+		}
+	
 	break;
 	
 	case "dead":

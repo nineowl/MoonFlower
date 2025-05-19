@@ -1,6 +1,6 @@
 height= 200;
 width =240;
-
+depth= -600;
 
 op_border = 8;
 op_space = 16;

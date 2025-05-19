@@ -1,4 +1,6 @@
-Tileset: szadi Art
+Tilesets and props: 
+Szadi Art
+PenUSBMic
 
 Silhouette characters: zneeke
 

@@ -13,4 +13,4 @@ cycleType = true;
 
 
 //Flower equipped
-equippedFlower = new Flower(4, "Red", 2, false, false, "Slender"); // Example equipped flower
+equippedFlower = new Flower(14, "Red", 2, false, false, "Slender"); // Example equipped flower

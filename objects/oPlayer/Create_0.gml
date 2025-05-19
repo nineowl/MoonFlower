@@ -163,6 +163,9 @@ enum STATE {
 	coyoteJumpFrames=6;
 	coyoteJumpTimer=0;
 
+	climbJumpTimer=30; //starts at max
+	climbJumpTime=30;
+
 
 //Moving Platforms
 myFloorPlat=noone;
