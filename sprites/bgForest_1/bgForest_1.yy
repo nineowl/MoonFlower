@@ -48,7 +48,7 @@
   "origin":0,
   "parent":{
     "name":"Forest",
-    "path":"folders/Sprites/Environment/Backgrounds/Forest.yy",
+    "path":"folders/Tile Sets/Backgrounds/Forest.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

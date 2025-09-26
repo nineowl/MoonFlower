@@ -44,6 +44,11 @@ function game_text(_text_id){
 		scr_text("My dad works at blizzard");
 		break;
 		
+	case "007":
+		scr_text("If you seek the moonflower,");
+		scr_text("Journey to land of trumpets.");
+		break;
+		
 	//The Cynic's Dialogue
 	case "Cynic000":
 		scr_text("Oh? Another nameless unborn...");

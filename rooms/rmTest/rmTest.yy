@@ -22,8 +22,8 @@
   ],
   "name":"rmTest",
   "parent":{
-    "name":"Rooms",
-    "path":"folders/Rooms.yy",
+    "name":"Test Rooms",
+    "path":"folders/Rooms/Test Rooms.yy",
   },
   "parentRoom":null,
   "physicsSettings":{

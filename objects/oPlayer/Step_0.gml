@@ -101,7 +101,7 @@ if instance_exists(myFloorPlat) && myFloorPlat.xspd != 0 && !place_meeting(x,y+m
 		runType=agileKey;  //can possibly be organized outside of the states
 		xspd = moveDir * moveSpd[runType];	
 
-show_debug_message(state);
+//show_debug_message(state);
 
 
 if (climbJumpTimer<climbJumpTime){
