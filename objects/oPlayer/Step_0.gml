@@ -113,7 +113,19 @@ switch (state) {
 		//isAttacking=false;
 		//Sprite Control
 		//Walking
-		if abs(xspd)>0{sprite_index=walkSpr;};
+		if abs(xspd)>0{
+			sprite_index=walkSpr;
+			var currentFrame = floor(image_index);
+			if (currentFrame!=lastFrame){
+				if (currentFrame == 0 || currentFrame == 4){
+						audio_play_sound(sfx_step_dirt,1,false);
+						show_debug_message("step");
+					}
+				lastFrame = currentFrame;
+				}
+			} else{
+				lastFrame = -1; // reset so first frame triggers again
+			}
 		//Running
 		if abs(xspd)>=moveSpd[1]{sprite_index=runSpr;};
 		//Not moving

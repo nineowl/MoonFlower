@@ -187,3 +187,8 @@ identifier = "player";
 //isAttacking=false;
 attackStart=false;
 myHitBox=noone;
+
+
+//Sound delay related
+lastFrame = -1;
+stepLock = false;
