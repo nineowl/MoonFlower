@@ -1,0 +1,1 @@
+audio_play_sound(bgmusic01,0,true);//play music in this room

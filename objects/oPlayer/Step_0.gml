@@ -115,17 +115,41 @@ switch (state) {
 		//Walking
 		if abs(xspd)>0{
 			sprite_index=walkSpr;
+			/*
 			var currentFrame = floor(image_index);
 			if (currentFrame!=lastFrame){
 				if (currentFrame == 0 || currentFrame == 4){
-						audio_play_sound(sfx_step_dirt,1,false);
+						audio_play_sound(sfx_step,1,false);
 						show_debug_message("step");
 					}
 				lastFrame = currentFrame;
-				}
+				} */
 			} else{
-				lastFrame = -1; // reset so first frame triggers again
+				//lastFrame = -1; // reset so first frame triggers again
 			}
+			
+		var moving = abs(xspd) > 0.1;
+
+		// Detect when movement just started
+		if (moving && !wasMoving) {
+		    audio_play_sound(sfx_step, 1, false);
+		}
+
+		// Normal per-frame step logic
+		if (moving) {
+		    var currentFrame = floor(image_index);
+		    if (currentFrame != lastFrame) {
+		        if (currentFrame == 0 || currentFrame == 4) {
+		            audio_play_sound(sfx_step, 1, false);
+		        }
+		        lastFrame = currentFrame;
+		    }
+		} else {
+		    lastFrame = -1;
+		}
+
+		// Update for next frame
+		wasMoving = moving;
 		//Running
 		if abs(xspd)>=moveSpd[1]{sprite_index=runSpr;};
 		//Not moving
@@ -283,7 +307,7 @@ switch (state) {
 		
 		
 		player_x_collision();
-		player_x_movement_reduced();
+		//player_x_movement_reduced();
 		player_y_collision();
 	
 	break;
@@ -302,7 +326,7 @@ switch (state) {
 			};
 	
 		player_x_collision();
-		player_x_movement_reduced();
+		//player_x_movement_reduced();
 		player_y_collision();
 	
 	

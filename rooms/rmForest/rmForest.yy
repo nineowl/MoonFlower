@@ -1,7 +1,7 @@
 {
   "$GMRoom":"v1",
   "%Name":"rmForest",
-  "creationCodeFile":"",
+  "creationCodeFile":"rooms/rmForest/RoomCreationCode.gml",
   "inheritCode":false,
   "inheritCreationOrder":false,
   "inheritLayers":false,
@@ -47,6 +47,7 @@
     {"name":"inst_6FFBBE56","path":"rooms/rmForest/rmForest.yy",},
     {"name":"inst_55FD936C","path":"rooms/rmForest/rmForest.yy",},
     {"name":"inst_72BC73EA","path":"rooms/rmForest/rmForest.yy",},
+    {"name":"inst_2BFC9C85","path":"rooms/rmForest/rmForest.yy",},
   ],
   "isDnd":false,
   "layers":[
@@ -385,6 +386,7 @@
         {"$GMRInstance":"v2","%Name":"inst_14910AB","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_14910AB","objectId":{"name":"oSemiSolidWall","path":"objects/oSemiSolidWall/oSemiSolidWall.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":27.999998,"scaleY":1.0,"x":384.0,"y":480.0,},
         {"$GMRInstance":"v2","%Name":"inst_53031540","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_53031540","objectId":{"name":"oSemiSolidWall","path":"objects/oSemiSolidWall/oSemiSolidWall.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":27.999998,"scaleY":1.0,"x":384.0,"y":448.0,},
         {"$GMRInstance":"v2","%Name":"inst_2C591CF3","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_2C591CF3","objectId":{"name":"oSemiSolidWall","path":"objects/oSemiSolidWall/oSemiSolidWall.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":6.0,"scaleY":1.0,"x":608.0,"y":528.0,},
+        {"$GMRInstance":"v2","%Name":"inst_2BFC9C85","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_2BFC9C85","objectId":{"name":"oRainSet","path":"objects/oRainSet/oRainSet.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":48.0,"y":0.0,},
       ],"layers":[],"name":"Instances_Collisions","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
     {"$GMRTileLayer":"","%Name":"Tiles_Dark_Trees","depth":1000,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"layers":[],"name":"Tiles_Dark_Trees","properties":[],"resourceType":"GMRTileLayer","resourceVersion":"2.0","tiles":{"SerialiseHeight":60,"SerialiseWidth":150,"TileCompressedData":[
           -7246,-2147483648,5,14,15,16,17,18,-145,-2147483648,5,41,42,43,44,45,-141,-2147483648,9,2,3,4,5,68,69,

@@ -192,3 +192,4 @@ myHitBox=noone;
 //Sound delay related
 lastFrame = -1;
 stepLock = false;
+wasMoving = false;

@@ -51,8 +51,8 @@
   },
   "origin":7,
   "parent":{
-    "name":"Specific",
-    "path":"folders/Sprites/NPCs/Specific.yy",
+    "name":"Shout",
+    "path":"folders/Sprites/NPCs/Specific/Shout.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",
