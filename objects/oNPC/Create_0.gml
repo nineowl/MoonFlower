@@ -308,6 +308,10 @@ aggro_timer = 0;
 aggro_time = 200;
 stationary = false; // determines if this NPC will move or not while docile;
 
+faces = 0; //Left, Right, or None. Used to make NPC return to facing a direction if stationary and docil.
+faceresettime = 300;
+faceresettimer = 0;
+
 attack_timer=0;
 attack_cooldown=45;
 

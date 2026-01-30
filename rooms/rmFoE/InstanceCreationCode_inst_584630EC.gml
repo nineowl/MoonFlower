@@ -1,4 +1,5 @@
 stationary = true;
+faces = 1;
 text_id[0] = "Cynic000";
 cycle_id[0] = "Cynic001";
 cycleType = true;

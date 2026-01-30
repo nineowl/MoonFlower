@@ -53,6 +53,7 @@ if (myTextbox){
 			if (creatorID == other.id){
 				instance_destroy();
 			}
+			other.myTextbox = noone;
 		}
 	}
 	
@@ -410,6 +411,18 @@ switch (ai_state) {
 			ai_state = "aggressive";
 			ActionBreak();
 		}
+		
+		if (stationary=true && faces != face && faces !=0 && !instance_exists(myTextbox)){
+			//(stationary && faces != 0 && faces != face)
+			
+			faceresettimer++;
+			if(faceresettimer >faceresettime){
+				face=faces;
+				faceresettimer=0;
+				
+			}
+		}
+		
 		
 	break;
 	
