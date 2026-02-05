@@ -35,5 +35,5 @@
     "path":"sprites/sSlope0/sSlope0.yy",
   },
   "spriteMaskId":null,
-  "visible":true,
+  "visible":false,
 }
